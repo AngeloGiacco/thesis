@@ -1,0 +1,207 @@
+\documentclass[a4paper, oneside]{discothesis}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{CJKutf8}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DOCUMENT METADATA
+
+\thesistype{Towards more data-driven, and less biased decisions in startup investing with AI workflows} % Master's Thesis, Bachelor's Thesis, Semester Thesis, Group Project
+\title{Moon AI: automating VC}
+
+\author{Angelo Giacco}
+\email{agiacco@ethz.ch}
+
+\institute{ETH AI Centre \\[2pt]
+ETH Zürich}
+
+\logo{\includegraphics[width=0.2\columnwidth]{figures/eth_ai_center}}
+
+\supervisors{Isabelle Siegrist\\[2pt] Prof. Dr. Elliott Ash}
+
+% Optionally, keywords and categories of the work can be shown (on the Abstract page)
+%\keywords{Keywords go here.}
+%\categories{ACM categories go here.}
+
+\date{\today}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\frontmatter % do not remove this line
+\maketitle
+
+\cleardoublepage
+
+\begin{acknowledgements}
+	I would like to express my sincere gratitude to several individuals who have been instrumental in the completion of this thesis. First and foremost, I extend my heartfelt thanks to my advisor, Isabelle Siegrist, for her invaluable guidance, and to Professor Elliott Ash for his mentorship. It was only by pure chance that we collaborated, but I am very grateful that we did.
+
+A big thanks to everyone at Beugi that made my year in Switzerland so wonderful and full of hike/ski days.
+
+I owe as always a special debt of gratitude to my family for their love and support.
+
+    \begin{CJK*}{UTF8}{gbsn}
+最后，我要特别感谢我的伴侣萧庭恩。她始终如一的支持和对我的信任是我前进的动力。\clearpage\end{CJK*}
+\end{acknowledgements}
+
+
+
+\begin{abstract}
+    The venture capital (VC) industry has in recent years experienced a significant shift towards a solo General Partner (GP) model, where a single partner, often a successful former founder or early hire at a unicorn, raises a fund to invest in upcoming entrepreneurs. Solo-GPs are more agile but lack the platform services and in depth analysis available to VC firms with large teams. Simultaneously, Large Langauge Models (LLMs) have emerged as powerful multi-task learners. This has led to the emergence of AI-copilots powered by LLMs for multi-task reasoning emerging in various verticals. 
+    
+    This thesis explores the creation of a new product: MoonAI. MoonAI is a venture investing copilot designed to empower solo GPs and traditional VC firms alike, by providing a copilot capable of emulating a team of analysts. By employing large language models for reasoning, structured output to guide agents, and matryoshka embeddings to semantically search the internet, the system extracts relevant signals for startup investing from vast amounts of unstructured data publicly available on the internet. The end result is a tool that helps assist in sourcing startups and generating investment memos.
+    
+    MoonAI can be customized to align with various investment hypotheses, supporting solo GPs in their sourcing and due diligence processes and removing the need for duplicate platform teams at each VC firm. MoonAI aims to evolve into a comprehensive data science and investing platform.
+    
+    By creating this adaptable infrastructure, MoonAI seeks to democratise access to high-quality investment platforms, encourage data-driven investing, and thereby democratise access to capital. The project's core thesis posits that successful VC firms and especially solo-GPs will increasingly rely on automated research analysts to support upcoming entrepreneurs, with MoonAI positioning itself at the forefront of this transformation.
+    
+    This thesis provides an overview of the advances in Natural Language Processing that make MoonAI possible, an overview of the VC industry, and details how the product was built. 
+\end{abstract}
+
+
+\begin{zusammenfassung}
+Die Venture-Capital-Branche (VC) hat in den letzten Jahren eine bedeutende Verlagerung hin zu einem Modell mit einem einzelnen General Partner (GP) erlebt, bei dem erfolgreiche ehemalige Gründer aufstrebende Unternehmer unterstützen.
+Gleichzeitig haben sich Large Language Models (LLMs) als leistungsfähige Multi-Task-Lerner etabliert. Dies hat dazu geführt, dass in verschiedenen Bereichen KI-Copiloten entstanden sind, die sich auf LLMs für Multi-Task-Reasoning stützen.
+CopyDiese Arbeit untersucht die Entwicklung eines neuen Produkts, MoonAI, eines innovativen Venture-Investing-Copiloten, der sowohl einzelne GPs als auch traditionelle VC-Firmen unterstützen soll, indem er als Copilot fungiert, der ein Team von Analysten emulieren kann.
+Durch den Einsatz von Large Language Models für Reasoning, strukturierte Ausgaben zur Steuerung von Agenten und Matryoshka-Embedding für semantische Internetsuchen extrahiert das System relevante Signale für Startup-Investitionen aus großen Mengen unstrukturierter Internetdaten.
+
+Derzeit als Memo-Generierungstool mit einem einfachen CRM-Layout verpackt, strebt MoonAI an, sich zu einer umfassenden Plattform für Data Science und Investitionen zu entwickeln. Das System kann an verschiedene Investitionshypothesen angepasst werden, um einzelne GPs bei ihren Sourcing- und Due-Diligence-Prozessen zu unterstützen und die Notwendigkeit von doppelten Plattform-Teams in jeder VC-Firma zu eliminieren.
+
+Durch die Schaffung dieser anpassungsfähigen Infrastruktur zielt MoonAI darauf ab, den Zugang zu hochwertigen Investitionsplattformen zu demokratisieren, datengetriebenes Investieren zu fördern und dadurch den Zugang zu Kapital zu demokratisieren. Die Kernthese des Projekts postuliert, dass erfolgreiche VC-Firmen und insbesondere einzelne GPs zunehmend auf automatisierte Research-Analysten zurückgreifen werden, um aufstrebende Unternehmer zu unterstützen, wobei sich MoonAI an der Spitze dieser Transformation positioniert.
+
+Diese Arbeit bietet einen Überblick über die Fortschritte in der Natürlichen Sprachverarbeitung, die MoonAI ermöglichen, einen Überblick über die VC-Branche und detaillierte Informationen darüber, wie das Produkt entwickelt wurde.
+\end{zusammenfassung}
+
+\tableofcontents
+
+\mainmatter % do not remove this line
+
+% Start writing here
+\chapter{Introduction}
+
+The venture capital (VC) industry stands at the forefront of innovation, playing a crucial role
+in identifying and nurturing startups that have the potential to disrupt industries and drive
+economic growth. Indeed, Acs et al. ~\cite{acs} find that startups are key catalysts for economic growth, 
+not only creating new markets but also stimulate competition and innovation in existing ones, bringing economic dynamism across multiple sectors. 
+
+The VC industry invests in startups with significant potential to disrupt industries and drive economic growth. 
+VC investments returns follow a power law distribution, with a long tail of successful investments. 
+Indeed, a study of 21,000 financings from 2004-2013 by Correlation Ventures found that 65\% of financings fail to return 1x capital ~\cite{levine2014venture}, 
+thus the remaining 35\% must return significantly more to generate a net-return that is acceptable. 
+VCs rely on a small number of portfolio investments to achieve outstanding paybacks: enough to cover for losses and
+still produce substantial profits. To generate these substantial outcomes, startups rely on the external funding from VCs
+to achieve rapid growth, often depicted by a "hockey stick" growth curve ~\cite{marmer}.
+
+The power law nature of startups means that the competition to get on the best deals is incredibly intense, and those 
+deals are also the only ones that matter. The top 2\% of VC funds capture 95\% of industry
+returns ~\cite{bai}. Particularly at the earliest stage of the investment lifecycle (pre- Series A), there is a scarcity of
+reliable information ~\cite{dellermann}. As a result, VCs often rely heavily on human judgment which is prone to bias. 
+This may yield sub-optimal decisions ~\cite{cummingdai} and could explain why women-led startups only received 2.1\% of all venture capital invested in 2023 ~\cite{pitchbook2024vc}.
+Traditionally, VC firms have relied heavily on human intuition, personal networks, and experience
+to identify promising investment opportunities. While this approach has yielded success, it is
+not without limitations. Human decision-making is susceptible to biases, inconsistencies, and the
+constraints of processing vast amounts of information.
+
+VCs have increasingly adopted data-driven investing practices to combat these biases. 
+Traditional gradient boosting approaches have been used successfully, and in recent years the growth of data volume has ushered deep learning (DL) into the industy ~\cite{eqt}.
+For example, graph neural networks have been used to predict a startup's success based on its links to a wider startup ecosystem ~\cite{korea}. 
+These models can integrate diverse data sources, including structured information about startups, founders, and investors ~\cite{corea}, as well as unstructured data from social networks and web sources. 
+Preliminary findings suggest that data-driven VCs may be more likely to back founders from underrepresented backgrounds, potentially addressing systemic biases in the industry ~\cite{futureVC}.
+
+In recent years, the venture capital landscape has witnessed a significant shift with the emergence of solo general partners (GPs) and difficult fundraising conditions for non-elite VC firms. 
+Unlike traditional VC firms that often require consensus among multiple partners, solo GPs can make investment decisions quickly and independently, which is particularly valuable in competitive deal environments where rapid decision-making can be crucial.
+In contrast, the formation of new traditional VC firms has slowed in recent years. This can be attributed to several factors, including the trend towards larger fund sizes, which makes it challenging for new firms to compete and gain traction with the returns from the VC industry becoming concentrated among well-established firms that enjoy significant advantages in deal flow and fundraising. 
+The difficulty of smaller VCs to raise funds means they will have less resources for research, contributing to their worse performance.
+
+In addition, solo GPs have extremely limited resources which may amplify the issues of bias and incomplete information in the investment process, forcing them to  focus on a narrower pool of potential investments, potentially overlooking promising opportunities outside their immediate network (Huang et al., 2020). 
+Furthermore, without the resources to explore a wide range of sectors or geographies, solo GPs might gravitate towards familiar industries or founder profiles, potentially limiting the diversity of their investment portfolios (Gompers et al., 2021) and limiting opportunities for under represented founders.
+In addition, the agility of solo GPs will intensify the competition and rush to produce term sheets for 'hot' startups. 
+
+In response to these challenges, a project at the ETH AI Center of ETH Zurich aims to introduce automation to VC firms and facilitate the adoption of data-driven investing practices. 
+The project focuses on developing an AI-powered tool for generating investment memoranda. This approach aims to streamline the decision-making process for investment analysts, significantly reducing the time spent on screening potential investments. 
+Utilizing multimodal data and state-of-the-art language models, the system aggregates diverse data sources, including pitch decks, financial data, and web information, to provide a comprehensive analysis of investment opportunities.
+Furthermore, this project introduces tools for data-driven investing that aim to reduce bias in the investment process by incorporating objective insights, broadening investment scope, identifying overlooked startups, informing decisions with diverse data points, and standardizing evaluation processes. Developing the MoonAI product is the first phase of this project; subsequent research will analyse its ability to reduced bias decision making. 
+
+The potential impact of such a tool is multifaceted. First, it addresses the resource disparity
+between solo GPs/smaller VC firms and larger VC firms, potentially democratizing access to high-quality investment
+analysis. Second, it introduces a data-driven approach to complement human intuition in the
+investment process, potentially reducing biases and improving decision-making accuracy
+~\cite{dellermann}. Finally, by streamlining the sourcing and evaluation processes, MoonAI
+could allow VCs to consider a broader range of startups by reducing the cognitive load of analysing a startup, potentially leading to a more diverse
+and inclusive investment landscape (Brush et al., 2019).
+
+While the VC industry has been facing challenges, Large Language Models (LLMs) have emerged as powerful tools capable of multi-task reasoning and processing vast amounts of
+unstructured data (Brown et al., 2020) and transformed the field of Natural Language Processing (NLP). These advancements have led to the development of
+AI-powered copilots in various industries, augmenting human capabilities and decision-making processes.
+ Large Language Models (LLMs) are particularly well-suited to be a venture capital copilot and decision-making support for several key reasons. 
+Firstly, LLMs excel at pattern matching, a crucial skill in the venture capital industry. They can analyze vast amounts of unstructured data from various sources, identifying trends, similarities, and potential success indicators that might not be immediately apparent to human analysts.
+They can rapidly process and synthesize information from a wide range of publicly available sources, including news articles, social media, academic publications, and industry reports. This ability enables a comprehensive understanding of a startup's market position, competitive landscape, and potential growth trajectory without relying solely on information provided by the startup itself.
+Furthermore, LLMs offer simple yet powerful workflow automation capabilities. They can streamline many time-consuming aspects of the venture capital process, such as initial startup screening, report generation, and even preliminary financial analysis. By automating these routine tasks, LLMs free up valuable time for venture capitalists to focus on higher-level strategic decisions and relationship building with promising founders. This efficiency gain is particularly beneficial for solo GPs or smaller VC firms with limited resources, allowing them to compete more effectively with larger, more established firms.
+The combination of these capabilities makes LLMs an ideal tool for augmenting human decision-making in venture capital. They can provide data-driven insights, reduce information asymmetry, and increase the overall efficiency of the investment process. As the venture capital landscape continues to evolve and become more competitive, the integration of LLMs into investment workflows has the potential to significantly enhance the accuracy, speed, and scope of investment decisions, ultimately leading to better outcomes for both investors and entrepreneurs.
+
+The emergence of Large Language Models (LLMs) represents a significant milestone in the fields of artificial intelligence and natural language processing. The development of these models can be traced through several key stages, each marking a crucial advancement in the technology.
+The foundations of natural language processing can be traced back to the 1950s, with Alan Turing's seminal work on the "Turing Test" ~\cite{turing1950computing}. Over the subsequent decades, rule-based systems and statistical methods formed the basis of early NLP research, laying the groundwork for future advancements.
+The early 2010s saw a resurgence of interest in neural networks, thanks to the ability to train on GPUs, leading to breakthroughs such as word2vec ~\cite{mikolov2013efficient}. This innovation allowed words to be represented as dense vectors, capturing semantic relationships in a way that significantly enhanced the capabilities of NLP systems.
+Between 2014 and 2017, the introduction of sequence-to-sequence models ~\cite{sutskever2014sequence} and the attention mechanism ~\cite{bahdanau2014neural} marked another leap forward. These advancements significantly improved machine translation and other NLP tasks.
+A pivotal moment came in 2017 with the publication of "Attention is All You Need" ~\cite{vaswani2017attention}, which introduced the Transformer architecture. This innovation became the foundation for modern LLMs, as the transformer architecture allowed for highly parallel 
+The years 2018 and 2019 saw the emergence of the pre-training and fine-tuning paradigm. Models such as BERT ~\cite{devlin2018bert} and GPT ~\cite{radford2018improving} demonstrated the power of pre-training on large corpora followed by task-specific fine-tuning, setting new benchmarks in NLP performance.
+From 2020 onwards, the focus shifted to scaling up these models. GPT-3 ~\cite{brown2020language} demonstrated that increasing model size and training data could lead to emergent abilities, a trend that has continued with subsequent models such as PaLM, Chinchilla, and GPT-4.
+Most recently, from 2022 onwards, there has been a growing emphasis on instruction tuning and alignment. Models like InstructGPT and ChatGPT have highlighted the importance of aligning LLMs with human intent, often through techniques such as reinforcement learning from human feedback (RLHF) ~\cite{ouyang2022training}.
+The latest developments in the field include the exploration of agent simulacra and agentic workflows, pushing the boundaries of what LLMs can achieve in terms of task completion and decision-making processes.
+
+
+This thesis explores the intersection of these trends through the development of MoonAI, an
+AI-powered venture investing copilot designed to empower both solo GPs and traditional VC firms.
+By leveraging state-of-the-art LLMs, structured output for guided reasoning, advanced
+semantic search capabilities, and agentic workflows, MoonAI aims to speed up the startup evaluation process and remove repetitive tasks from a VC. The
+system is designed to extract relevant signals for startup investing from the vast pool of
+publicly available unstructured data on the internet, assisting in sourcing startups and
+generating comprehensive investment memos. By addressing these questions and developing a practical tool for the VC industry, this thesis
+aims to contribute to the ongoing dialogue about the role of AI in financial decision-making and
+its potential to reshape the startup ecosystem. The following chapters will delve into the
+technical foundations of Large Language Models, a review of the Venture Capital industry, and evaluate the MoonAI platform. 
+
+\chapter{Natural Language Processing}
+\section{Machine Learning Essentials}
+This thesis assumes some familiarity with the basics of machine learning. Nevertheless, a brief summary is provided here. 
+
+
+\section{Embeddings}
+\section{Transformers}
+\section{Language Models}
+\section{Language Model Applications}
+\subsection{Structured Output}
+\subsection{RAG}
+\subsubsection{Efficient Vector Search}
+\subsection{Expanding context lengths}
+\subsection{Agents}
+\subsection{Mutli Modality}
+\subsection{Inference}
+
+
+
+\chapter{Venture Capital}
+\section{Fund Structure}
+\section{Power Law}
+\section{Investment Stages}
+\section{Emerging Trends in VC}
+\subsection{Rise of Solo GPs}
+\subsection{Data-Driven Investing}
+
+\chapter{Moon AI}
+
+\chapter{Conclusion}
+
+
+% This displays the bibliography for all cited external documents. All references have to be defined in the file references.bib and can then be cited from within this document.
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+% This creates an appendix chapter, comment if not needed.
+\appendix
+\chapter{First Appendix Chapter Title}
+
+\end{document}
