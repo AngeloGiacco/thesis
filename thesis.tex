@@ -139,10 +139,18 @@ While the VC industry has been facing challenges, Large Language Models (LLMs) h
 unstructured data (Brown et al., 2020) and transformed the field of Natural Language Processing (NLP). These advancements have led to the development of
 AI-powered copilots in various industries, augmenting human capabilities and decision-making processes.
  Large Language Models (LLMs) are particularly well-suited to be a venture capital copilot and decision-making support for several key reasons. 
-Firstly, LLMs excel at pattern matching, a crucial skill in the venture capital industry. They can analyze vast amounts of unstructured data from various sources, identifying trends, similarities, and potential success indicators that might not be immediately apparent to human analysts.
-They can rapidly process and synthesize information from a wide range of publicly available sources, including news articles, social media, academic publications, and industry reports. This ability enables a comprehensive understanding of a startup's market position, competitive landscape, and potential growth trajectory without relying solely on information provided by the startup itself.
-Furthermore, LLMs offer simple yet powerful workflow automation capabilities. They can streamline many time-consuming aspects of the venture capital process, such as initial startup screening, report generation, and even preliminary financial analysis. By automating these routine tasks, LLMs free up valuable time for venture capitalists to focus on higher-level strategic decisions and relationship building with promising founders. This efficiency gain is particularly beneficial for solo GPs or smaller VC firms with limited resources, allowing them to compete more effectively with larger, more established firms.
-The combination of these capabilities makes LLMs an ideal tool for augmenting human decision-making in venture capital. They can provide data-driven insights, reduce information asymmetry, and increase the overall efficiency of the investment process. As the venture capital landscape continues to evolve and become more competitive, the integration of LLMs into investment workflows has the potential to significantly enhance the accuracy, speed, and scope of investment decisions, ultimately leading to better outcomes for both investors and entrepreneurs.
+Firstly, LLMs excel at pattern matching, a crucial skill in the venture capital industry. They can analyze vast amounts of unstructured data from various sources, 
+identifying trends, similarities, and potential success indicators that might not be immediately apparent to human analysts.
+They can rapidly process and synthesize information from a wide range of publicly available sources, including news articles, social media, academic publications, 
+and industry reports. This ability enables a comprehensive understanding of a startup's market position, competitive landscape, and potential growth trajectory 
+without relying solely on information provided by the startup itself.
+Furthermore, LLMs offer simple yet powerful workflow automation capabilities. They can streamline many time-consuming aspects of the venture capital process, 
+such as initial startup screening, report generation, and even preliminary financial analysis. By automating these routine tasks, LLMs free up valuable time 
+for venture capitalists to focus on higher-level strategic decisions and relationship building with promising founders. This efficiency gain is particularly 
+beneficial for solo GPs or smaller VC firms with limited resources, allowing them to compete more effectively with larger, more established firms.
+The combination of these capabilities makes LLMs an ideal tool for augmenting human decision-making in venture capital. They can provide data-driven insights,
+ reduce information asymmetry, and increase the overall efficiency of the investment process. As the venture capital landscape continues to evolve and 
+ become more competitive, the integration of LLMs into investment workflows has the potential to significantly enhance the accuracy, speed, and scope of investment decisions, ultimately leading to better outcomes for both investors and entrepreneurs.
 
 The emergence of Large Language Models (LLMs) represents a significant milestone in the fields of artificial intelligence and natural language processing. The development of these models can be traced through several key stages, each marking a crucial advancement in the technology.
 The foundations of natural language processing can be traced back to the 1950s, with Alan Turing's seminal work on the "Turing Test" ~\cite{turing1950computing}. Over the subsequent decades, rule-based systems and statistical methods formed the basis of early NLP research, laying the groundwork for future advancements.
@@ -169,11 +177,9 @@ technical foundations of Large Language Models, a review of the Venture Capital 
 \chapter{Natural Language Processing}
 
 In this section, the recent in advances in Natural Language Processing will be discussed. First, we will consider the basics of machine learning, 
-consider the standard, non-deep learning approaches to NLP used in the past and discuss the advances that have been made in recent years.
+consider the standard, non-deep learning approaches to NLP used in the past and discuss the advances that have been made in recent years that have enabled large language models to become state of the art at virtually all tasks in the field of NLP.
 
-Many of these advances have been possible due to the parallelizability of training thanks to the Transformer architecture which make use of advances in GPUs. 
-How GPUs are able to parallelize the training of large language models is beyond the scope of this overview, but it is important to note that this is a significant
-advance that has revolutionized the field of NLP. It can be summarised as follows: GPUs have significantly accelerated the training of transformer-based models by leveraging their ability to perform massive parallel computations, which make them ideal for matrix multiplications, the operation underpinning the self-attention mechanism in transformers and the feed-forward layers. 
+Many of these advances have been possible due to the parallelizability of training thanks to the Transformer architecture which make use of advances in GPUs. How GPUs are able to parallelize the training of large language models is beyond the scope of this overview, but it is important to note that this is a significant advance that has revolutionized the field of NLP. It can be summarised as follows: GPUs have significantly accelerated the training of transformer-based models by leveraging their ability to perform massive parallel computations, which make them ideal for matrix multiplications, the operation underpinning the self-attention mechanism in transformers and the feed-forward layers. 
 GPUs excel at these tasks due to their architecture, which is designed to handle many simple calculations simultaneously.
 This GPU-driven acceleration has been a key factor in enabling the training of increasingly large and complex language models, pushing the boundaries of what's possible in NLP.
 
@@ -199,19 +205,22 @@ With the objective of crafting a model able to learn this function p in mind, le
 This thesis assumes some familiarity with the basics of machine learning. Nevertheless, a brief summary is provided here to establish a foundation for the subsequent discussions.
 
 In classical computer programming, humans define a set of explicit rules and provide input data. The computer then processes this data according to the predefined rules to produce an output. 
-This approach works well for problems with clear, unchanging rules and predictable inputs.
-Machine learning, on the other hand, inverts this paradigm. Instead of explicitly programming rules, humans provide a large dataset of input-output pairs (often referred to as training data). 
-The machine learning algorithm then attempts to learn the underlying patterns or rules that map the inputs to the outputs. 
+This approach works well for problems with clear, unchanging rules and predictable inputs ~\cite{russell2010artificial}.
+
+Machine learning, on the other hand, inverts this paradigm. It can be broadly categorized into two main types: supervised and unsupervised learning ~\cite{murphy2012machine}.In supervised learning, humans provide a large dataset of input-output pairs (often referred to as training data). 
+The machine learning algorithm then attempts to learn the underlying patterns or rules that map the inputs to the outputs ~\cite{hastie2009elements}. 
 This learned model can then be used to make predictions or decisions on new, unseen data.
-The key advantage of machine learning is its ability to handle complex, non-linear relationships in data and to adapt to new patterns without being explicitly reprogrammed. 
-This makes it particularly useful for tasks like natural language processing, where the rules governing language use are clearly too complex and nuanced to be explicitly coded.
+Supervised learning is particularly useful for tasks such as classification and regression ~\cite{bishop2006pattern}.
+In unsupervised learning, the algorithm is given input data without corresponding output labels. The goal is to discover hidden patterns or structures within the data ~\cite{ghahramani2004unsupervised}. Common unsupervised learning tasks include clustering, dimensionality reduction, and anomaly detection ~\cite{hinton2006reducing}.
+The key advantage of machine learning is its ability to handle complex, non-linear relationships in data and to adapt to new patterns without being explicitly reprogrammed ~\cite{goodfellow2016deep}. 
+This makes it particularly useful for tasks like natural language processing, where the rules governing language use are clearly too complex and nuanced to be explicitly coded ~\cite{jurafsky2009speech}.
 
 \subsection{Losses}
 To begin our search for a model that best describes the underlying patterns in our data, it is necessary to find a way of describing how accurate our model's predictions are.
-This is done by defining a loss function that measures the difference between the model's predictions and the ground-truth values.
+This is done by defining a loss function that measures the difference between the model's predictions and the ground-truth values ~\cite{goodfellow2016deep}.
 
-In the context of natural langauge processing where have the option of predicting multiple labels for a single input, an evident choice for the loss function is cross-entropy which 
-has its basis in information theory as a measure of the difference between two probability distributions.
+In the context of natural language processing where we have the option of predicting multiple labels for a single input, an evident choice for the loss function is cross-entropy, which 
+has its basis in information theory as a measure of the difference between two probability distributions ~\cite{shannon1948mathematical}.
 
 The cross-entropy loss, denoted as $H(p,q)$, for a classification task with $C$ classes is defined as:
 
@@ -219,7 +228,7 @@ The cross-entropy loss, denoted as $H(p,q)$, for a classification task with $C$ 
     H(p,q) = -\sum_{i=1}^C p(i) \log q(i)
 \end{equation}
 
-where $p(i)$ is the true probability distribution (usually a one-hot encoded vector for the true class) and $q(i)$ is the predicted probability distribution from the model.
+where $p(i)$ is the true probability distribution (usually a one-hot encoded vector for the true class) and $q(i)$ is the predicted probability distribution from the model ~\cite{murphy2012machine}.
 
 For binary classification, this simplifies to:
 
@@ -227,7 +236,7 @@ For binary classification, this simplifies to:
     H(p,q) = -[y \log(\hat{y}) + (1-y) \log(1-\hat{y})]
 \end{equation}
 
-where $y$ is the true label (0 or 1) and $\hat{y}$ is the predicted probability of the positive class.
+where $y$ is the true label (0 or 1) and $\hat{y}$ is the predicted probability of the positive class ~\cite{bishop2006pattern}.
 
 In the context of language modeling, where we're predicting the next token in a sequence, the cross-entropy loss is calculated over the entire vocabulary at each step:
 
@@ -235,11 +244,11 @@ In the context of language modeling, where we're predicting the next token in a 
     L = -\sum_{t=1}^T \sum_{v=1}^V y_{t,v} \log(\hat{y}_{t,v})
 \end{equation}
 
-where $T$ is the sequence length, $V$ is the vocabulary size, $y_{t,v}$ is 1 if token $v$ is the true next token at position $t$ and 0 otherwise, and $\hat{y}_{t,v}$ is the model's predicted probability for token $v$ at position $t$.
+where $T$ is the sequence length, $V$ is the vocabulary size, $y_{t,v}$ is 1 if token $v$ is the true next token at position $t$ and 0 otherwise, and $\hat{y}_{t,v}$ is the model's predicted probability for token $v$ at position $t$ ~\cite{jurafsky2009speech}.
 
-Minimizing this loss encourages the model to assign higher probabilities to the correct next tokens in the training data, thus learning the underlying patterns of the language.
+Minimizing this loss encourages the model to assign higher probabilities to the correct next tokens in the training data, thus learning the underlying patterns of the language ~\cite{bengio2003neural}.
 
-Given a neural network architecture $\mathcal{A}$, it induces a parameter space $\Theta \subset \mathbb{R}^d$, where $d$ is the total number of parameters in the network. Each point $\theta \in \Theta$ represents a specific configuration of the network's parameters.
+Given a neural network architecture $\mathcal{A}$, it induces a parameter space $\Theta \subset \mathbb{R}^d$, where $d$ is the total number of parameters in the network. Each point $\theta \in \Theta$ represents a specific configuration of the network's parameters ~\cite{lecun2015deep}.
 
 Let $\mathcal{L}: \Theta \rightarrow \mathbb{R}$ be the loss function that measures the performance of the model on the given task. The goal of training the neural network can then be formally expressed as an optimization problem:
 
@@ -247,7 +256,7 @@ Let $\mathcal{L}: \Theta \rightarrow \mathbb{R}$ be the loss function that measu
     \theta^* = \arg\min_{\theta \in \Theta} \mathcal{L}(\theta)
 \end{equation}
 
-where $\theta^*$ represents the optimal set of parameters that minimizes the loss function over the entire parameter space $\Theta$. This optimization problem encapsulates the essence of training a neural network: finding the configuration of parameters that yields the best performance according to the chosen loss function.
+where $\theta^*$ represents the optimal set of parameters that minimizes the loss function over the entire parameter space $\Theta$. This optimization problem encapsulates the essence of training a neural network: finding the configuration of parameters that yields the best performance according to the chosen loss function ~\cite{rumelhart1986learning}.
 
 
 \subsection{Optimising Parameters}
@@ -266,7 +275,7 @@ Stochastic Gradient Descent (SGD) is a variant that computes the gradient using 
 
 \subsubsection{Automatic Differentiation}
 
-Automatic Differentiation (AutoDiff) allows for efficient and accurate computation of gradients, which are essential for optimization algorithms like gradient descent.
+Automatic Differentiation (AutoDiff) allows for efficient and accurate computation of gradients, which are essential for optimization algorithms like gradient descent ~\cite{baydin2018automatic}.
 
 Mathematically, for a composite function $f(g(x))$, the chain rule states:
 
@@ -274,16 +283,18 @@ Mathematically, for a composite function $f(g(x))$, the chain rule states:
     \frac{df}{dx} = \frac{df}{dg} \cdot \frac{dg}{dx}
 \end{equation}
 
-AutoDiff systems leverage this principle to compute gradients through arbitrarily complex computational graphs. Modern deep learning frameworks like PyTorch and TensorFlow have built-in AutoDiff capabilities, which greatly simplify the implementation of new models and training procedures. These systems maintain a computational graph of operations and use it to automatically compute gradients, enabling efficient training of large-scale neural networks, allows researchers to focus on designing network architectures and loss functions, while the AutoDiff system handles the intricate details of gradient computation.
+AutoDiff systems leverage this principle to compute gradients through arbitrarily complex computational graphs ~\cite{griewank2008evaluating}. Modern deep learning frameworks like PyTorch and TensorFlow have built-in AutoDiff capabilities, which greatly simplify the implementation of new models and training procedures ~\cite{paszke2019pytorch, abadi2016tensorflow}. These systems maintain a computational graph of operations and use it to automatically compute gradients, enabling efficient training of large-scale neural networks, allows researchers to focus on designing network architectures and loss functions, while the AutoDiff system handles the intricate details of gradient computation ~\cite{baydin2018automatic}.
 
-Several advanced optimization algorithms have been developed to improve upon basic SGD. Momentum adds a fraction of the previous update to the current one, helping to accelerate convergence and reduce oscillations:
+Several advanced optimization algorithms have been developed to improve upon basic SGD. Momentum adds a fraction of the previous update to the current one, helping to accelerate convergence and reduce oscillations ~\cite{sutskever2013importance}:
 \begin{equation}
     v_{t+1} = \gamma v_t + \eta \nabla \mathcal{L}(\theta_t)
 \end{equation}
 \begin{equation}
     \theta_{t+1} = \theta_t - v_{t+1}
 \end{equation}
-where $\gamma$ is the momentum coefficient.RMSprop adapts the learning rate for each parameter based on the historical gradient magnitudes:
+where $\gamma$ is the momentum coefficient.
+
+RMSprop adapts the learning rate for each parameter based on the historical gradient magnitudes ~\cite{tieleman2012lecture}:
 \begin{equation}
     s_{t+1} = \beta s_t + (1-\beta)(\nabla \mathcal{L}(\theta_t))^2
 \end{equation}
@@ -291,7 +302,8 @@ where $\gamma$ is the momentum coefficient.RMSprop adapts the learning rate for 
     \theta_{t+1} = \theta_t - \frac{\eta}{\sqrt{s_{t+1} + \epsilon}} \nabla \mathcal{L}(\theta_t)
 \end{equation}
 where $\beta$ is the decay rate and $\epsilon$ is a small constant for numerical stability.
-The most widely adopted optimizer in practice, Adam, combines ideas from momentum and RMSprop, maintaining both a running average of gradients and their squared values:
+
+The most widely adopted optimizer in practice, Adam, combines ideas from momentum and RMSprop, maintaining both a running average of gradients and their squared values ~\cite{kingma2014adam}:
 \begin{equation}
     m_{t+1} = \beta_1 m_t + (1-\beta_1)\nabla \mathcal{L}(\theta_t)
 \end{equation}
@@ -303,7 +315,7 @@ The most widely adopted optimizer in practice, Adam, combines ideas from momentu
 \end{equation}
 where $\hat{m}_{t+1}$ and $\hat{v}_{t+1}$ are bias-corrected estimates of $m_{t+1}$ and $v_{t+1}$ respectively.
 
-These advanced optimizers often lead to faster convergence and better generalization in practice.
+These advanced optimizers often lead to faster convergence and better generalization in practice ~\cite{ruder2016overview}.
 
 \subsubsection{Initialisation}
 
@@ -373,18 +385,18 @@ These regularisation techniques, often used in combination, help in training mor
 
 \section{Historical Language Representations}
 
-Natural Language Processing (NLP) has evolved significantly over the years, with various techniques developed to represent and analyze textual data. This section explores the historical approaches to language representation that laid the foundation for modern NLP methods. We will discuss three key techniques that were widely used before the advent of deep learning and neural network-based models: N-grams, Word Document Frequency, and Topic Modelling. These methods played crucial roles in tasks such as text classification, information retrieval, and document analysis, and their principles continue to influence contemporary NLP approaches.
+Natural Language Processing (NLP) has evolved significantly over the years, with various techniques developed to represent and analyze textual data. This section explores the historical approaches to language representation that laid the foundation for modern NLP methods. We will discuss three key techniques that were widely used before the advent of deep learning and neural network-based models: N-grams, Word Document Frequency, and Topic Modelling. These methods played crucial roles in tasks such as text classification, information retrieval, and document analysis, and their principles continue to influence contemporary NLP approaches \cite{manning1999foundations}.
 
 \subsection{N-grams}
-N-grams are contiguous sequences of n items from a given sample of text or speech. In the context of natural language processing, these items are typically words or characters. N-grams have been a fundamental technique in language modeling and various NLP tasks for several decades.
+N-grams are contiguous sequences of n items from a given sample of text or speech. In the context of natural language processing, these items are typically words or characters. N-grams have been a fundamental technique in language modeling and various NLP tasks for several decades \cite{jurafsky2000speech}.
 
-The concept of n-grams was introduced in the early days of computational linguistics. One of the seminal papers that popularized the use of n-grams in language modeling is "A Mathematical Theory of Communication" by Claude Shannon (1948), which laid the foundation for information theory and introduced the idea of using probabilistic models for language.
+The concept of n-grams was introduced in the early days of computational linguistics. One of the seminal papers that popularized the use of n-grams in language modeling is "A Mathematical Theory of Communication" by Claude Shannon (1948), which laid the foundation for information theory and introduced the idea of using probabilistic models for language \cite{shannon1948mathematical}.
 
-N-grams achieved state-of-the-art performance in many NLP tasks throughout the 1990s and 2000s. For instance, the paper "An Empirical Study of Smoothing Techniques for Language Modeling" by Chen and Goodman (1996) demonstrated the effectiveness of various n-gram models for language modeling tasks. Another influential work, "A Bit of Progress in Language Modeling" by Goodman (2001), showed how n-gram models could be extended and improved for better performance.
+N-grams achieved state-of-the-art performance in many NLP tasks throughout the 1990s and 2000s. For instance, the paper "An Empirical Study of Smoothing Techniques for Language Modeling" by Chen and Goodman (1996) demonstrated the effectiveness of various n-gram models for language modeling tasks \cite{chen1996empirical}. Another influential work, "A Bit of Progress in Language Modeling" by Goodman (2001), showed how n-gram models could be extended and improved for better performance \cite{goodman2001bit}.
 
-Google Translate, one of the most widely used machine translation systems, initially relied heavily on n-gram models. Specifically, it used a 5-gram language model, as described in the paper "Large Language Models in Machine Translation" by Brants et al. (2007). This approach allowed Google Translate to capture local context and produce more fluent translations compared to earlier rule-based systems.
+Google Translate, one of the most widely used machine translation systems, initially relied heavily on n-gram models. Specifically, it used a 5-gram language model, as described in the paper "Large Language Models in Machine Translation" by Brants et al. (2007). This approach allowed Google Translate to capture local context and produce more fluent translations compared to earlier rule-based systems \cite{brants2007large}.
 
-However, despite their historical success, n-grams have limitations that make them less suitable for modern language models. One significant limitation is their restricted context, as n-grams can only capture local context within a fixed window size. This constraint makes it challenging to model long-range dependencies in language, which are crucial for understanding complex sentences and maintaining coherence across paragraphs. Another issue is sparsity; as n increases, the number of possible n-grams grows exponentially, leading to data sparsity issues. This makes it difficult to estimate probabilities for rare or unseen n-grams accurately. N-gram models also lack semantic understanding, treating words as discrete symbols without considering their meaning or relationships. This limitation hinders their ability to capture semantic similarities between words or phrases. Additionally, traditional n-gram models operate on a fixed vocabulary, making it difficult to handle out-of-vocabulary words or adapt to new domains. Lastly, the memory requirements for n-gram models can be substantial, as storing probabilities for all possible n-grams can be memory-intensive, especially for large values of n.
+However, despite their historical success, n-grams have limitations that make them less suitable for modern language models. One significant limitation is their restricted context, as n-grams can only capture local context within a fixed window size. This constraint makes it challenging to model long-range dependencies in language, which are crucial for understanding complex sentences and maintaining coherence across paragraphs \cite{bengio2003neural}. Another issue is sparsity; as n increases, the number of possible n-grams grows exponentially, leading to data sparsity issues. This makes it difficult to estimate probabilities for rare or unseen n-grams accurately \cite{katz1987estimation}. N-gram models also lack semantic understanding, treating words as discrete symbols without considering their meaning or relationships. This limitation hinders their ability to capture semantic similarities between words or phrases \cite{mikolov2013distributed}. Additionally, traditional n-gram models operate on a fixed vocabulary, making it difficult to handle out-of-vocabulary words or adapt to new domains \cite{jelinek1980interpolated}. Lastly, the memory requirements for n-gram models can be substantial, as storing probabilities for all possible n-grams can be memory-intensive, especially for large values of n \cite{heafield2011kenlm}.
 
 \begin{tikzpicture}[
     box/.style={draw, rectangle, minimum width=2cm, minimum height=1cm},
@@ -413,7 +425,7 @@ However, despite their historical success, n-grams have limitations that make th
 };
 
 % Highlighting the issue
-\draw[red, thick, dashed] (sentence.north west) -- ++(1.8cm,0.3cm) -- ++(10.2cm,0) -- ++(-0.5cm,-0.3cm);
+\draw[red, thick, dashed] ($(sentence.north west)+(0.2cm,1)$) -- ++(1.6cm,0.3cm) -- ++(6.2cm,0) -- ++(-0.5cm,-0.3cm);
 
 \end{tikzpicture}
 
@@ -675,18 +687,34 @@ However, BERT has limitations, such as a fixed-length context window and potenti
 Despite these, BERT's impact on NLP has been profound, inspiring numerous follow-up works and improvements that have further advanced the field of natural language understanding and generation.
 Models like RoBERTa (larger training data and no NSP) \cite{liu2019roberta}, ALBERT (significant parameter reduction) \cite{lan2019albert}, and DistilBERT (knowledge distillation) \cite{sanh2019distilbert} improved upon BERT, however they won't be discussed in the interest of time. 
 
-\subsection{GPT-2 and GPT-3: A Journey of Scale}
-The Generative Pre-trained Transformer (GPT) series of models are a pivotal development in Natural Language Processing (NLP), utilizing a decoder-only architecture. 
-Unlike typical Transformer models that include both encoder and decoder components, GPT models exclusively use the decoder part. 
-This design choice simplifies the architecture and focuses on generating text based on the learned context, making it highly effective for tasks like text completion and generation.
-This makes it the perfect choice of architecture for a language modelling task.
+
 
 \subsubsection{GPT-2: Setting the Stage}
-GPT-2, introduced by Radford et al. in 2019 \cite{radford2019language}, was a groundbreaking language model that demonstrated the potential of large-scale unsupervised pre-training. 
-With 1.5 billion parameters, GPT-2 was trained on a diverse dataset of 8 million web pages, aiming to predict the next word in a given sequence of text. 
-This model showed remarkable zero-shot task transfer abilities, performing well on various NLP tasks without specific fine-tuning.
+GPT-2, introduced by Radford et al. in 2019 \cite{radford2019language}, was a groundbreaking language model that demonstrated the potential of large-scale unsupervised pre-training. With 1.5 billion parameters, GPT-2 was trained on a diverse dataset of 8 million web pages, aiming to predict the next word in a given sequence of text. This model showed remarkable zero-shot task transfer abilities, performing well on various NLP tasks without specific fine-tuning.
+
+Unlike typical Transformer models that include both encoder and decoder components, GPT-2 exclusively uses the decoder part. This design choice focuses on generating text based on the learned context, making it highly effective for tasks like text completion and generation. This architecture is particularly well-suited for language modeling tasks.
+
 The success of GPT-2 highlighted a crucial insight: increasing model size and training data volume could lead to significant improvements in performance and generalization. 
 This observation set the stage for the development of its successor, GPT-3.
+
+\subsubsection{Scaling Laws}
+The progression from GPT-2 to GPT-3 was guided by insights into the scaling behavior of language models. Kaplan et al. \cite{kaplan2020scaling} conducted a comprehensive study on the scaling laws for language models, published concurrently with the development of GPT-3. Their research revealed that performance scales as a power-law with model size, dataset size, and computational budget. Furthermore, they found that models are significantly more sample-efficient the larger they are, requiring fewer training steps to achieve the same performance as smaller models. In addition, they observed a trade-off between compute-optimal and data-optimal scaling, with different optimal strategies depending on the available resources.
+
+A prominent scaling law called "Chinchilla scaling" emerged from subsequent research by Hoffmann et al. \cite{hoffmann2022training}. This law states that for optimal performance, model size (N) and dataset size (D) should be scaled in approximately equal proportions as the compute budget increases. This is expressed mathematically as:
+
+\begin{equation}
+C = C_0ND
+\end{equation}
+
+\begin{equation}
+L = AN^\alpha + BD^\beta + L_0
+\end{equation}
+
+Where C is compute, L is loss, and the other terms are constants.
+
+Chinchilla scaling provides a more nuanced understanding of the relationship between model size, dataset size, and computational resources. It suggests that simply increasing model size without a corresponding increase in dataset size may not yield optimal results, challenging the "bigger is always better" assumption.
+
+These scaling laws have provided a theoretical foundation for the development of GPT-3 and continue to influence the design of subsequent language models. They offer valuable guidance for researchers and developers in making decisions about model architecture, dataset size, and allocation of computational resources, ultimately driving the field towards more efficient and powerful AI systems.
 
 \subsubsection{GPT-3: A Leap in Scale}
 Building upon the foundations laid by GPT-2, Brown et al. introduced GPT-3 in 2020 \cite{brown2020language}. 
@@ -695,27 +723,18 @@ This substantial increase in model size was accompanied by a correspondingly lar
 GPT-3's architecture remained similar to GPT-2, utilizing the decoder-only transformer architecture. 
 However, its unprecedented scale led to remarkable improvements in performance across a wide range of tasks. Notably, GPT-3 demonstrated strong few-shot and zero-shot learning capabilities, often matching or surpassing the performance of models specifically fine-tuned for particular tasks.
 
-\subsubsection{Scaling Laws: The Driving Force}
-The progression from GPT-2 to GPT-3 was guided by insights into the scaling behavior of language models. Kaplan et al. \cite{kaplan2020scaling} conducted a comprehensive study on the scaling laws for language models, published concurrently with the development of GPT-3. Their research revealed several key findings:
-
-1. Performance scales as a power-law with model size, dataset size, and computational budget.
-2. Larger models are significantly more sample-efficient, requiring fewer training steps to achieve the same performance as smaller models.
-3. There is a trade-off between compute-optimal and data-optimal scaling, with different optimal strategies depending on the available resources.
-
-These scaling laws provided a theoretical foundation for the development of GPT-3 and continue to influence the design of subsequent language models. They suggest that further improvements in performance can be achieved by increasing model size, dataset size, and computational resources, albeit with diminishing returns.
-
 \subsection{Emergent Behaviour in Language Models}
-The development of large language models like GPT-3 has revealed intriguing emergent behaviors, capabilities that were not explicitly programmed or anticipated. These behaviors often become apparent only as models are scaled up in size and complexity.
+GPT-3 revealed intriguing emergent behaviors, capabilities that were not explicitly programmed or anticipated. These behaviors often become apparent only as models are scaled up in size and complexity.
 
-One key aspect of emergent behavior is captured by the aforementioned scaling laws described by Kaplan et al. \cite{kaplan2020scaling}. These laws suggest that model performance improves predictably with increases in model size, dataset size, and computational resources. This observation aligns with the "bitter lesson" articulated by Rich Sutton \cite{sutton2019bitter}, which posits that methods leveraging computation tend to outperform those based on human knowledge engineering.
+One key aspect of emergent behavior is captured by the aforementioned scaling laws described by Kaplan et al. \cite{kaplan2020scaling}. These laws suggest that model performance improves predictably with increases in model size, dataset size, and computational resources. This observation aligns with the "bitter lesson" articulated by Rich Sutton \cite{sutton2019bitter}, which posits that methods leveraging increased amounts of computation tend to outperform those with intricate new architectures.
 
 A particularly interesting emergent phenomenon is "grokking," first described by Power et al. \cite{power2022grokking}. Grokking refers to a sudden performance improvement after a long period of stagnation during training. This phenomenon suggests that large language models might undergo phase transitions in their learning process, suddenly grasping underlying patterns in ways that are not yet fully understood.
 
 These emergent behaviors highlight the potential for continued improvements as we scale up language models, but also underscore the challenges in understanding and controlling these complex systems.
 
 \subsection{InstructGPT: Aligning Language Models with Human Intent}
-While GPT-3 demonstrated impressive capabilities, it wasn't specifically trained to follow instructions or assist users in a helpful manner. 
-InstructGPT, developed by Ouyang et al. \cite{ouyang2022training}, addressed this limitation through a process of fine-tuning.
+GPT-3 wasn't specifically trained to follow instructions or assist users in a helpful manner. InstructGPT, developed by Ouyang et al. 
+\cite{ouyang2022training}, addressed this limitation through a process of fine-tuning.
 The process involves several steps:
 
 1. Supervised Fine-Tuning (SFT): The model is fine-tuned on a dataset of human-written demonstrations of desired behavior. The optimization objective for SFT can be expressed as:
@@ -727,61 +746,51 @@ The process involves several steps:
 2. Reward Modeling (RM): A reward model is trained to predict human preferences between model outputs.
 
 3. Reinforcement Learning from Human Feedback (RLHF): The SFT model is further optimized using Proximal Policy Optimization (PPO) 
-with the reward model as the reward function \cite{schulman2017proximal}. It operates by iteratively refining the model's policy—its strategy for generating responses—in a controlled manner.
-The core principle of PPO is to improve the model's performance while maintaining stability. It achieves this by collecting a batch of interactions using the current policy, then estimating the advantage of each action taken. 
-The advantage represents how much better an action is compared to the average action in that state. 
-PPO then updates the policy to favor actions with positive advantages. A key feature of PPO is its use of a 'trust region', which prevents the new policy from deviating too far from the old one. 
-This is crucial for stable learning, as it avoids drastic changes that could lead to performance collapse. 
-The algorithm implements this constraint through a clipped objective function, which balances the impulse to improve with the need for consistency.The PPO objective can be mathematically expressed as:
+with the reward model as the reward function \cite{schulman2017proximal}. PPO iteratively refines the model's policy while maintaining stability through a 'trust region' approach that keeps updates to within a specified boundary. It uses a clipped objective function to balance improvement with consistency:
 
    \[\mathcal{L}_{\text{PPO}} = \mathbb{E}_t[\min(r_t(\theta)\hat{A}_t, \text{clip}(r_t(\theta), 1-\epsilon, 1+\epsilon)\hat{A}_t)]\]
 
-   where $r_t(\theta) = \frac{\pi_\theta(a_t|s_t)}{\pi_{\theta_\text{old}}(a_t|s_t)}$ is the probability ratio, which compares the likelihood of taking action $a_t$ in state $s_t$ under the current policy $\pi_\theta$ to the likelihood under the old policy $\pi_{\theta_\text{old}}$ which helps measure how much the policy has changed.
-  $\hat{A}_t$ is the estimated advantage, and $\epsilon$ is a hyperparameter that controls the clipping range.
+   where $r_t(\theta)$ is the probability ratio comparing current and old policies, $\hat{A}_t$ is the estimated advantage, and $\epsilon$ controls the clipping range.
 
-This process results in a model that is more aligned with human intentions, capable of following specific instructions, and generally more helpful and safe in its outputs. 
-InstructGPT demonstrated improved performance on instruction-following tasks while reducing unwanted behaviors like making up facts or producing harmful content.
-This approach of fine tuning is now ingrained in the development of subsequent, comercially-available models.
+PPO also incorporates a Kullback-Leibler (KL) divergence penalty to further ensure the new policy doesn't deviate too far from the old one. The Kullback-Leibler divergence is an information theoretical measure of the difference between two probability distributions.
+
+This process results in a model more aligned with human intentions, capable of following specific instructions, and generally more helpful and safe in its outputs. InstructGPT demonstrated improved performance on instruction-following tasks while reducing unwanted behaviors.
 
 An alternative to PPO-based RLHF is Direct Preference Optimization (DPO), introduced by Rafailov et al. \cite{rafailov2023direct}. 
 DPO simplifies the process by directly optimizing the policy to match human preferences without the need for a separate reward model or reinforcement learning. 
 The DPO objective can be expressed as:
 \[\mathcal{L}_{\text{DPO}} = -\mathbb{E}_{(x,y_w,y_l)\sim \mathcal{D}}[\log \sigma(\beta(\log p_\theta(y_w|x) - \log p_\theta(y_l|x)))]\]
-where $y_w$ and $y_l$ are the preferred and non-preferred outputs respectively, $\sigma$ is the sigmoid function, and $\beta$ is a temperature parameter. DPO offers a more stable and computationally efficient approach to aligning language models with human preferences.
+where $y_w$ and $y_l$ are the preferred and non-preferred outputs respectively, $\sigma$ is the sigmoid function, and $\beta$ is a temperature parameter. DPO offers a more stable and computationally efficient approach to aligning language models with human preferences. Although DPO reduces complexity by removing the need for a reward model, it has been shown to have limitations. \cite{dposuperiortoppo_xu}
 
 \subsection{Few-Shot and Zero-Shot Learning}
 Large Language Models have an extraordinary ability to perform few-shot and zero-shot learning. These capabilities allow LLMs to adapt to new tasks with minimal or no task-specific training examples \cite{brown2020language}.
-Few-shot learning refers to the model's ability to perform a new task after seeing only a small number of examples \cite{wang2020generalizing}. This approach has shown remarkable success in various NLP tasks, including text classification, named entity recognition, and question answering \cite{gao2021making}. 
-For instance, Brown et al. \cite{brown2020language} demonstrated that GPT-3 could achieve competitive performance on various tasks with just a few examples in the prompt.
+Few-shot learning denotes the model's ability to perform a new task after seeing only a small number of examples \cite{wang2020generalizing}. This approach has shown remarkable success in various NLP tasks, including text classification, named entity recognition, and question answering \cite{gao2021making}. 
 Zero-shot learning, on the other hand, involves the model's capacity to perform tasks without any task-specific examples \cite{xian2018zero}. 
 This capability relies heavily on the model's pre-training and the formulation of the task in natural language. 
-Radford et al. \cite{radford2019language} showed that language models can perform zero-shot task transfer, demonstrating the potential for models to generalize to unseen tasks.
+Radford et al. \cite{radford2019language} demonstrated zero-shot task transfer with GPT-2 already. For instance, when given a news article and prompted with "TL;DR:" the model was able to generate a summary of the article without any specific training for summarization tasks. This showcases the model's ability to understand and perform a new task based solely on the context provided in the prompt, illustrating the potential for language models to generalize to unseen tasks. This capability enables models to perform tasks without explicit fine-tuning, making them highly versatile and adaptable to new scenarios \cite{min2022rethinking}.
 
-Prompt engineering techniques play a crucial role in optimizing few-shot and zero-shot performance \cite{liu2021pre}. 
-These techniques involve carefully crafting input prompts to elicit the desired behavior from the model. 
-Strategies such as chain-of-thought prompting \cite{wei2022chain} and self-consistency \cite{wang2022self} have shown significant improvements in model performance across various tasks.
+Few and zero shot learning are especially promising in low resource domains, where task-specific labeled data is scarce \cite{hedderich2021survey}, for example low-resource language translation \cite{garcia2020multilingual} and domain adaptation \cite{gururangan2020don}. These capabilities of LLMs greatly diminish the cost required to create 'intelligent' applications, by allowing developers to craft prompts which activate latent spaces of an LLM's distribution to perform well at a novel task, without the requirement of having a propreitary dataset to fine tune on.
 
-In-context learning, a key feature of large language models, allows them to adapt to new tasks within the context of a single prompt \cite{brown2020language}. This capability enables models to perform tasks without explicit fine-tuning, making them highly versatile and adaptable to new scenarios \cite{min2022rethinking}.
+\subsubsection{Prompting}
 
-The applications of few-shot and zero-shot learning are particularly promising in low-resource domains, where task-specific labeled data is scarce \cite{hedderich2021survey}. 
-These techniques have been successfully applied in areas such as low-resource language translation \cite{garcia2020multilingual}, cross-lingual transfer learning \cite{liu2020multilingual}, and domain adaptation \cite{gururangan2020don}.
+Prompt engineering techniques play an important role in optimizing few-shot and zero-shot capabilities \cite{liu2021pre}. 
+Prompt engineerings consists of carefully crafting input prompts to elicit the desired behavior from the model. 
+Strategies such as chain-of-thought prompting \cite{wei2022chain}, self-consistency \cite{wang2022self}, and ReAct \cite{yao2023react} have shown significant improvements in model performance across various tasks. Chain-of-thought prompting encourages the model to break down complex problems into intermediate steps, mimicking human reasoning. Self-consistency involves generating multiple independent reasoning paths and aggregating their results to improve reliability. ReAct (Reasoning and Acting) interleaves reasoning traces and task-specific actions, allowing models to plan, reason, and interact with external environments more effectively.
 
-Few- and zero- shot capabilities of LLMs greatly diminish the cost required to create 'intelligent' applications, by allowing developers to craft prompts which activate latent spaces of an LLM's distribution which performs well at a novel task.
 
 \subsection{Multimodal Models}
-Large Language Models (LLMs) have expanded beyond text-only processing to incorporate multiple modalities, including images, audio, and video. This integration allows for more comprehensive understanding and generation of content across different media types. A significant advancement in multimodal processing is the development of CLIP (Contrastive Language-Image Pre-training) by Radford et al. \cite{radford2021learning}. CLIP represents a breakthrough in connecting visual and textual information through a joint embedding space. The model is trained on a diverse dataset of image-text pairs from the internet, learning to associate images with their textual descriptions.
-The CLIP architecture consists of two main components: an image encoder, typically a vision transformer or a convolutional neural network, and a text encoder, usually a transformer-based model. These encoders are trained to maximize the cosine similarity between the embeddings of matching image-text pairs while minimizing it for non-matching pairs. This training approach enables CLIP to perform zero-shot classification and open-ended image recognition tasks without specific fine-tuning.
-CLIP embeddings have found wide applications in various domains. These include image retrieval, where large image databases can be searched using natural language queries; cross-modal generation, which involves generating images from text descriptions or vice versa; visual question answering, allowing the model to answer questions about images without task-specific training; and content moderation, identifying inappropriate or unsafe visual content.
-The integration of CLIP-like models into LLMs has led to the development of more sophisticated multimodal systems. For instance, models like DALL-E 2 \cite{ramesh2022hierarchical} and Stable Diffusion \cite{rombach2022high} leverage similar principles to generate high-quality images from textual descriptions. These multimodal capabilities significantly enhance the versatility of LLMs, enabling them to process and generate content that more closely mimics human-like understanding of the world, where information is often presented across multiple sensory modalities.
+Large Language Models (LLMs) have expanded from text-only processing to incorporate multiple modalities. This integration allows for more comprehensive understanding and generation of content across different media types. A significant advancement in multimodal processing is the development of CLIP (Contrastive Language-Image Pre-training) by Radford et al. \cite{radford2021cliplearning}. CLIP connects visual and textual information through a joint embedding space. The model is trained on a diverse dataset of image-text pairs from the internet, learning to associate images with their textual descriptions. It consists an image encoder, typically a vision transformer and a text encoder, usually a transformer-based model. These encoders are trained to maximize the cosine similarity between the embeddings of matching image-text pairs while minimizing it for non-matching pairs. This training approach enables CLIP to perform zero-shot classification and open-ended image recognition tasks without specific fine-tuning.
 
 \section{Language Model Applications}
 
 \subsection{Structured Output}
-The ability to generate structured output is a crucial application of language models, addressing various needs in modern data processing and information management systems. This capability extends the utility of language models beyond mere text generation to more specialized and format-specific tasks.
-One significant application is the generation of structured data formats such as JSON (JavaScript Object Notation) and XML (eXtensible Markup Language) for APIs (Application Programming Interfaces). As noted by Kalyan et al. \cite{kalyan2021ammus}, language models can be fine-tuned to produce these structured formats, enabling seamless integration with existing software systems and facilitating automated data exchange.
-Automated report writing is another key application of structured output generation. Language models can be trained to produce reports in specific formats, incorporating relevant data and adhering to predefined structures. This capability has been demonstrated in various domains, including financial reporting \cite{muralidhar2021using} and medical documentation \cite{zhang2022generating}.
-Furthermore, language models excel at data extraction from unstructured text, a process often referred to as information extraction. This application is particularly valuable in scenarios where large volumes of unstructured data need to be converted into structured, machine-readable formats. For instance, Yadav and Bethard \cite{yadav2018survey} provide a comprehensive survey of deep learning methods for information extraction, highlighting the potential of language models in this domain.
-The ability to generate and manipulate structured output not only enhances the versatility of language models but also bridges the gap between human-readable text and machine-processable data, opening up new possibilities for automation and data-driven decision-making across various industries.
+The ability to generate structured output is a crucial application of language models, extending them beyond mere text generation to more specialized and format-specific tasks. Recent research emphasizes the importance of implementing structured output constraints in LLMs to enhance their integration into developer workflows and improve user experience. These constraints ensure outputs adhere to specific formats and semantic guidelines, facilitating more reliable and predictable results when chaining multiple LLM calls together. This approach streamlines development processes and makes LLM-powered applications more user-friendly and dependable.
+
+LangChain, a common LLM chaining framework, implements structured output generation using Pydantic models to guide LLMs through prompts. This approach involves defining a Pydantic model, incorporating the schema into prompts, and parsing the LLM's response. While flexible, this method has limitations, with increased costs due to longer prompts and lack of guaranteed conformity to the specified structure.
+
+Logit processing is an alternative for guaranteeing structured generation in language models \cite{chaudhari2023logit}. A key component of this approach is selective multiplication, which computes logits only for tokens allowed by the structure, thereby guaranteeing conformity. This process can be formalized as $W_uX[:,\ell]$, where $W_u \in \mathbb{R}^{N_V \times d_e}$ represents the unembedding matrix, $X$ denotes the encoded token sequence, and $\ell$ is the sequence length.
+
+This method has demonstrated the potential to make structured generation faster than its unstructured counterpart, with particular efficacy when the number of allowed next tokens is small. The implementation of this technique occurs through model-level integration, ensuring seamless incorporation into existing language model architectures \cite{chaudhari2023logit}. This approach effectively addresses a fundamental computational inefficiency in traditional language model inference, where logits are computed for the entire vocabulary, even when many tokens are impossible given the structure \cite{willard2023efficient}. Empirical studies have shown consistent speed improvements across both simple and complex schemas. For instance, in the case of a simple JSON schema, structured generation utilizing selective multiplication consistently outperformed traditional methods in terms of speed. Similarly, for more complex schemas, significant time savings were observed, although the frequency of optimization application was reduced \cite{chaudhari2023logit}.
 
 \subsection{RAG (Retrieval-Augmented Generation)}
 Retrieval-Augmented Generation (RAG) is a powerful technique that combines the strengths of large language models (LLMs) with external knowledge retrieval systems to enhance the quality and reliability of generated responses \cite{lewis2020retrieval}. This approach addresses several key challenges in LLM applications, particularly in scenarios requiring up-to-date or specialized information.
@@ -793,20 +802,16 @@ Recent advancements in RAG include the development of more sophisticated retriev
 
 
 \subsubsection{Efficient Vector Search}
-Retrieval-Augmented Generation (RAG) systems heavily rely on efficient vector search mechanisms, particularly approximate nearest neighbor (ANN) search algorithms \cite{johnson2019billion}. These algorithms are crucial for quickly identifying the most relevant information from large datasets to augment language model outputs. The efficiency of vector search directly impacts the performance and usability of RAG systems, especially in real-time applications where response time is critical \cite{lewis2020retrieval}.
-One of the primary challenges in implementing efficient vector search is balancing the trade-off between accuracy and speed. While exhaustive search methods can provide the most accurate results, they become impractical for large-scale datasets due to their linear time complexity. This necessitates the use of approximate methods that can deliver sufficiently accurate results at a fraction of the computational cost \cite{andoni2018approximate}.
-Various indexing strategies have been developed to optimize vector search for large-scale datasets. These strategies often involve preprocessing the data to create efficient data structures that facilitate faster search operations. Common approaches include tree-based methods (e.g., KD-trees, Ball trees) and graph-based methods \cite{malkov2018efficient}.
+Retrieval-Augmented Generation (RAG) systems heavily rely on efficient vector search mechanisms, particularly approximate nearest neighbor (ANN) search algorithms \cite{johnson2019billion}. These algorithms are crucial for quickly identifying the most relevant information to augment language model outputs. The efficiency of vector search directly impacts the performance and usability of RAG systems, especially in real-time applications where response time is critical \cite{lewis2020retrieval}. Exhaustive search methods quickly become impractical for large-scale datasets due to their linear time complexity. This necessitates the use of approximate methods that can deliver sufficiently accurate results at a fraction of the computational cost \cite{andoni2018approximate}.
+Various indexing strategies have been developed to optimize vector search for large-scale datasets. These strategies often involve preprocessing the data to create efficient data structures that facilitate faster search operations. Common approaches include tree-based methods (e.g., KD-trees, Ball trees) and graph-based methods \cite{malkov2018efficient}. Two innovations used by Moon AI are detailed belowed.
 
 \subsubsubsection{Matryoshka Embeddings}
-Matryoshka Embeddings, introduced by Hoffer et al. \cite{hoffer2018deep}, represent an innovative approach to improving the efficiency of vector search operations. This technique introduces an auxiliary objective during the training of embedding models, resulting in a hierarchical representation of semantic information.
-The key feature of Matryoshka Embeddings is that truncated versions of these embeddings maintain similarity relationships. This property allows for a unique search strategy: starting with a low-dimensional (and thus computationally cheaper) version of the embedding, and progressively increasing the dimensionality only for the most promising candidates. This approach can significantly speed up retrieval through successive embedding model calls, effectively reducing the computational cost of similarity search without substantially sacrificing accuracy \cite{hoffer2018deep}.
-The hierarchical nature of Matryoshka Embeddings also provides flexibility in balancing computational resources and search accuracy. Depending on the specific requirements of an application, one can choose to use more or fewer dimensions of the embedding, dynamically adjusting the trade-off between speed and precision \cite{hoffer2018deep}.
+Matryoshka Embeddings, introduced by Hoffer et al. \cite{hoffer2018deep}, represent an innovative approach to improving the efficiency of vector search operations. This technique introduces an auxiliary objective during the training of embedding models, resulting in a hierarchical representation of semantic information. With Matryoshka Embeddings, the truncated versions of the embeddings are trained to maintain the similarity relationship through the auxiliary objective. This property allows for a unique search strategy: starting with a low-dimensional (and thus computationally cheaper) version of the embedding, and progressively increasing the dimensionality only for the most promising candidates. This approach can significantly speed up retrieval through successive embedding model calls, effectively reducing the computational cost of similarity search without substantially sacrificing accuracy \cite{hoffer2018deep}.The hierarchical nature of Matryoshka Embeddings also provides flexibility in balancing computational resources and search a ccuracy. Depending on the specific requirements of a search, more or fewer dimensions of the embedding can be used, dynamically adjusting the trade-off between speed and precision \cite{hoffer2018deep}.
 
 \subsubsubsection{HNSW (Hierarchical Navigable Small World)}
-The Hierarchical Navigable Small World (HNSW) algorithm, proposed by Malkov and Yashunin \cite{malkov2018efficient}, is a state-of-the-art approach to efficient ANN search. HNSW constructs a multi-layer graph structure where each layer is a "navigable small world" - a graph with both local connections and long-range shortcuts. This structure allows for logarithmic complexity in search operations, making it particularly suitable for large-scale similarity search tasks.
-The HNSW algorithm begins a search at the top layer (which contains the fewest nodes) and progressively refines the search in lower, more detailed layers. This hierarchical approach allows HNSW to quickly narrow down the search space, resulting in high-speed query processing even for very large datasets \cite{malkov2018efficient}.
-One of the key strengths of HNSW is its ability to balance search quality and memory usage. By adjusting parameters such as the number of layers and the number of connections per node, users can fine-tune the algorithm to meet specific performance requirements. This flexibility makes HNSW applicable to a wide range of scenarios, from memory-constrained environments to high-performance computing systems \cite{malkov2018efficient}.
-HNSW has found widespread application in large-scale similarity search tasks, including image retrieval, recommendation systems, and, notably, in RAG systems for efficient information retrieval \cite{johnson2019billion}. Its combination of speed, accuracy, and scalability makes it a popular choice for vector search in production environments where performance is critical \cite{malkov2018efficient}.
+The Hierarchical Navigable Small World (HNSW) algorithm \cite{malkov2018efficient} is a state of the art method for efficient ANN search, which is commonly used in vector search applications. HNSW constructs a multi-layer graph structure of "navigable small worlds," enabling logarithmic complexity in search operations. The algorithm begins at the top layer with the fewest nodes and refines the search in lower, more detailed layers, quickly narrowing down the search space.
+
+In vector search applications, HNSW excels at finding similar vectors in high-dimensional spaces, making it ideal for tasks like semantic similarity search in RAG systems \cite{johnson2019billion}. Its ability to balance search quality and memory usage through parameter tuning (e.g., number of layers, connections per node) allows for optimization in various scenarios, from memory-constrained environments to high-performance systems.
 
 \subsection{Inference: Expanding Context Lengths and Decreasing Costs}
 The field of language model inference has seen significant advancements in expanding context lengths and reducing computational costs. These developments are crucial for improving the performance and applicability of large language models (LLMs) across various domains.
@@ -837,7 +842,123 @@ These systems leverage the collective intelligence of multiple LLM-based agents,
 - Portfolio construction strategies
 - Risk management in high-risk, high-reward environments
 
-\section{Data-Driven Investing}
+\section{Data-Driven Venture Capital}
+
+\subsubsection{Network-Based Approach to Predicting Venture Capital Investments}
+
+As part of our series on network-based machine learning algorithms, we examine a study that applies link prediction techniques to bipartite graphs for identifying potential investment opportunities in venture capital networks \cite{predictVCbipartite}. This research models the investment landscape as a bipartite graph, with investors and companies as nodes, and investments as edges. The study utilizes Crunchbase data from 2005-2015, comprising approximately 55,000 nodes and 105,000 edges.
+
+The methodology involves implementing and comparing three link prediction models: Random Link Prediction (baseline), Preferential Attachment (PA), and Segmented Preferential Attachment (SPA), a novel approach incorporating assortative matching. These models are evaluated using precision, recall, and F1 scores on a held-out test set of future investments.
+
+Results indicate that both PA and SPA significantly outperformed random prediction, with PA achieving better overall F1 scores. SPA demonstrated higher maximum precision, effectively filtering out unlikely investment-company links. However, it is noteworthy that absolute precision and recall levels were low across all models.
+
+%TODO: mention felske work
+
+This research contributes to our understanding of network-based machine learning applications in finance, highlighting both the potential and current limitations of using graph-based approaches for predicting venture capital investments. The study's findings suggest that while preferential attachment behavior in the network structure provides some insight into local dynamics, the proposed models have limited practical significance for predicting new links. Nevertheless, the evaluation framework shows promise for testing more sophisticated prediction models in future research.
+
+\subsubsection{Investment Specific Language Models}
+Recent advancements in language models have led to the development of investment-specific models designed to enhance financial analysis and decision-making. Yang et al. introduced InvestLM, a model that fine-tunes LLaMA-65B using a curated corpus of financial documents \cite{yang2023investlm}. The model employs Low Rank Adaptation (LoRA) for efficient parameter tuning and Linear Rope Scaling to handle large input lengths. Evaluation by domain experts and financial NLP benchmarks demonstrated InvestLM's strong capabilities in comprehending financial text and responding to investment-related queries.
+
+The development of InvestLM contributes to the growing field of financial domain language models, which aim to process extensive financial texts and improve investment decision-making. However, it is noted that many of these models, including BloombergGPT and InvestLM, primarily focus on "high finance" applications \cite{yang2023investlm}. The study also provides support for the superficial alignment hypothesis, suggesting that knowledge acquired during pre-training and fine-tuning primarily aligns output with specific formats.
+
+Other notable contributions in this field include FinBERT, a financial language model based on BERT architecture; FinMA, which fine-tunes language models on financial NLP benchmarks with instruction-formatted questions; and FinGPT, which focuses on news and tweet sentiment analysis, albeit with limited generalizability to other tasks \cite{araci2019finbert, liu2023finma, yang2023fingpt}. These models represent the ongoing efforts to adapt large language models to specific financial applications, although challenges remain in achieving broad applicability across various financial tasks.
+
+\subsubsection{Deciphering Entrepreneurial Pitches}
+
+The process of deciphering entrepreneurial pitches has gained significant attention in recent years, with researchers applying advanced techniques to predict investment probabilities. A notable study in this field employs a multimodal deep learning approach to analyze both audio and language components of pitches \cite{multimodal_pitch_analysis}. This innovative method utilizes a combination of hand-crafted features and deep feature sets, experimenting with both early and late fusion strategies to optimize prediction accuracy.
+
+The importance of pitching in the entrepreneurial process cannot be overstated, as it serves as a crucial step in securing investment. The application of multimodal deep learning to this domain opens up new avenues for understanding the nuances of successful pitches \cite{pitch_importance}. However, it is essential to consider potential biases that may arise from such automated analysis systems.
+
+Decision-making in entrepreneurship is characterized by high levels of uncertainty \cite{uncertainty_entrepreneurship}. Berner et al. \cite{berner_entrepreneurship} argue that the fundamental premise of entrepreneurship involves accepting significant risks when investing or producing goods. In entrepreneurial contexts, decision-makers often rely on heuristics due to the lack or limitation of factual information \cite{heuristics_entrepreneurship}.
+
+Huang and Pierce \cite{huang_pierce} have observed that investors employ both intuition and formal analysis in their decision-making processes. Their research indicates that this intuition is largely based on the perception of the founding entrepreneur. Several studies have demonstrated that this perception is shaped by both verbal and non-verbal cues in the pitch, including storytelling techniques and hand gestures \cite{verbal_nonverbal_cues}.
+
+An interesting finding from the multimodal analysis is that the best acoustic model, when used independently, outperforms the best language model. This suggests that non-verbal aspects of communication play a crucial role in pitch effectiveness \cite{acoustic_vs_language}.
+
+Future research in this area could benefit from incorporating visual modality into the analysis, potentially providing a more comprehensive understanding of pitch dynamics and their impact on investment decisions \cite{visual_modality_potential}.
+
+\subsubsection{Success Prediction}
+
+This section examines a study on Web-based Startup Success Prediction by Sharchilev et al., which presents an innovative approach to predicting startup success. The research enriches structured data from the startup ecosystem with information from business-oriented social networking services and general web presence. The study employs a robust machine learning pipeline, utilizing multiple base models and gradient boosting techniques.
+
+The authors address the challenge of defining startup success, acknowledging the limitations of various metrics such as revenue, mergers and acquisitions, and funding rounds. They also discuss alternative modeling approaches in the literature, including portfolio optimization and link prediction, noting that these methods introduce additional uncertainty compared to direct discriminative success prediction.
+
+The study's problem statement focuses on predicting whether a startup that has received seed or angel funding will secure a Series A or larger funding round within the next year. The dataset encompasses general company information, previous investment details, team information, and web mentions.
+
+Methodologically, the researchers developed a robust and diversified prediction pipeline called WBSSP, which combines several machine learning models. The pipeline utilizes CatBoost, a gradient boosting decision tree modification, with features derived from dense neural network outputs, logistic regression, and a neural network fed by a sparse neural network.
+
+The results demonstrate state-of-the-art performance, with a significant finding being the importance of a company's web presence. While individual web mentions may not be significant, their aggregation provides a representative picture of a company's perception by its target audience, substantially improving prediction quality compared to using only structured data from the startup ecosystem.
+
+Title: Choosing the Right Friends: Social Network Analysis for Entrepreneurial Success
+Key Points:
+
+The study analyzes the relationship between social networks and success for entrepreneurs and academics, focusing on Swiss startups and networking organizations.
+Proximity to key influencers (e.g., directors, advisors) in social networks like LinkedIn, Facebook, and email correlates with business success.
+Participation in entrepreneurship programs (VentureKick and venture leaders) is mutually reinforcing and associated with higher success rates.
+Entrepreneurs with profiles on professional networking sites (e.g., XING) tend to be more successful.
+ETH Zurich alumni are significantly more successful and better connected in entrepreneurial networks compared to graduates from other Swiss universities.
+The study found positive correlations between network centrality (both degree and betweenness) and success, particularly within the ETH alumni network.
+Geographic proximity and face-to-face relationships still play a crucial role in business success, despite increasing virtual connections.
+The research suggests a positive feedback loop: better-connected individuals become more successful, and successful individuals become better connected.
+Recommendations for entrepreneurs include:
+
+Studying at selective universities like ETH Zurich
+Building strong links with fellow students and alumni
+Participating in startup coaching programs
+Engaging with business networking organizations
+Utilizing social media for business networking
+
+
+The study emphasizes the importance of pre-existing social capital acquired through university and entrepreneurship programs for later business success.
+
+The research provides insights into the value of social networks and networking organizations for startup entrepreneurs, highlighting the role of both online and offline connections in fostering business success.
+
+Graph Neural Network Based VC Investment Success Prediction
+Shiwei Lyu
+This paper presents a novel approach to predicting the success of early-stage startups using graph neural networks and incremental learning techniques. The key points are:
+
+Problem: Predicting whether a startup will succeed (defined as IPO or acquisition within 5 years) based on early-stage venture capital investment data.
+Data: The authors use a comprehensive dataset from PitchBook covering VC investments globally from 1977-2019, including information on startups, investors, and investment details.
+Method: The authors propose an incremental graph representation learning approach with several key components:
+
+Construction of a bipartite graph network representing relationships between people (investors/founders) and startups
+Graph Self-Attention (GST) for node-level representation learning
+Incremental updating of representations as the network grows over time
+Supervised fine-tuning using link prediction and node classification tasks
+Sequential modeling of node representations over time using LSTM
+Final success prediction using the learned representations and node attributes
+
+
+Experiments:
+
+Data split into training (2007-2008), validation (2008-2013), and test (2014) sets
+Compared against baselines including human investors, traditional ML (GBDT), and other graph neural network approaches
+Evaluated using Average Precision at K (AP@K) metric
+
+
+Results:
+
+The proposed method outperforms all baselines, achieving up to 1.94x better performance than human investors
+Particularly strong performance for startups in IT, healthcare, and B2C industries
+Better results for nodes in the largest connected component of the graph
+
+
+Analysis:
+
+People associated with positively predicted startups tend to have more advanced education, higher female representation, and higher network centrality
+Results suggest the importance of academic training, gender diversity, and networking in startup success
+
+
+Contributions:
+
+Novel incremental graph learning approach for dynamic VC networks
+State-of-the-art performance on startup success prediction
+Insights into factors associated with startup success
+
+
+
+The paper demonstrates the potential of graph-based machine learning techniques to improve venture capital investment decisions and provides insights that could be valuable for investors, entrepreneurs, and policymakers in the startup ecosystem.
+
 - Use of AI and machine learning in deal sourcing
 - Predictive analytics for startup success
 - Alternative data sources for market intelligence
