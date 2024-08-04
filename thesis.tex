@@ -689,7 +689,7 @@ Models like RoBERTa (larger training data and no NSP) \cite{liu2019roberta}, ALB
 
 
 
-\subsubsection{GPT-2: Setting the Stage}
+\subsubsection{GPT-2}
 GPT-2, introduced by Radford et al. in 2019 \cite{radford2019language}, was a groundbreaking language model that demonstrated the potential of large-scale unsupervised pre-training. With 1.5 billion parameters, GPT-2 was trained on a diverse dataset of 8 million web pages, aiming to predict the next word in a given sequence of text. This model showed remarkable zero-shot task transfer abilities, performing well on various NLP tasks without specific fine-tuning.
 
 Unlike typical Transformer models that include both encoder and decoder components, GPT-2 exclusively uses the decoder part. This design choice focuses on generating text based on the learned context, making it highly effective for tasks like text completion and generation. This architecture is particularly well-suited for language modeling tasks.
@@ -716,7 +716,7 @@ Chinchilla scaling provides a more nuanced understanding of the relationship bet
 
 These scaling laws have provided a theoretical foundation for the development of GPT-3 and continue to influence the design of subsequent language models. They offer valuable guidance for researchers and developers in making decisions about model architecture, dataset size, and allocation of computational resources, ultimately driving the field towards more efficient and powerful AI systems.
 
-\subsubsection{GPT-3: A Leap in Scale}
+\subsubsection{GPT-3}
 Building upon the foundations laid by GPT-2, Brown et al. introduced GPT-3 in 2020 \cite{brown2020language}. 
 GPT-3 represented a massive increase in scale, boasting 175 billion parameters—more than 100 times larger than its predecessor. 
 This substantial increase in model size was accompanied by a correspondingly large training dataset, comprising approximately 500 billion tokens.
@@ -732,7 +732,7 @@ A particularly interesting emergent phenomenon is "grokking," first described by
 
 These emergent behaviors highlight the potential for continued improvements as we scale up language models, but also underscore the challenges in understanding and controlling these complex systems.
 
-\subsection{InstructGPT: Aligning Language Models with Human Intent}
+\subsection{Aligning Language Models with Human Intent}
 GPT-3 wasn't specifically trained to follow instructions or assist users in a helpful manner. InstructGPT, developed by Ouyang et al. 
 \cite{ouyang2022training}, addressed this limitation through a process of fine-tuning.
 The process involves several steps:
@@ -829,32 +829,70 @@ One notable contribution to this field is the "Simulacra" paper by Li et al. \ci
 Multi-agent systems have shown promise in addressing complex tasks that are beyond the scope of single-agent approaches. Dafoe et al. \cite{dafoe2020open} discuss the potential of multi-agent AI systems in solving intricate, economically valuable problems across various domains.
 These systems leverage the collective intelligence of multiple LLM-based agents, often leading to more robust and creative solutions.The integration of reinforcement learning (RL) with LLMs has opened new avenues for creating more adaptive and goal-oriented agents. Luketina et al. \cite{luketina2019survey} provide a comprehensive survey of the intersection between deep learning, reinforcement learning, and natural language processing, highlighting how RL can enhance LLM-based agents' ability to learn from interaction and optimize for specific objectives.
 
-\chapter{Venture}
-\section{Fund Structure and Investment Stages}
-- Limited Partners (LPs) and General Partners (GPs)
-- Fund lifecycle and management fees
-- Seed, Series A, B, C, and later stage investments
-- Due diligence process and term sheets
+\chapter{Venture Capital}
+\section{Overview}
+Venture capital (VC) plays a crucial role in fostering innovation and economic growth by providing funding to high-potential startups and early-stage companies \cite{gompers2001venture}. This form of private equity investment is particularly relevant to the dynamism of an economy, as it fuels entrepreneurship and technological advancements \cite{kortum2000assessing_contribution_venture_capital}.
+
+The VC ecosystem primarily consists of two key players: Limited Partners (LPs) and General Partners (GPs). LPs, typically institutional investors or high-net-worth individuals, provide the capital, while GPs manage the fund and make investment decisions \cite{metrick2010venture}. This structure allows for a pooling of resources and expertise to support promising ventures.
+
+VC funds operate on a lifecycle model, usually spanning 7-10 years \cite{gompers2004venture}. During this period, GPs actively manage the fund, making investments and nurturing portfolio companies. Management fees, typically around 2\% of committed capital annually, compensate GPs for their operational expenses \cite{gompers2016structure}.
+
+Investments in startups are often categorized into stages: Seed, Series A, B, C, and later stages. Each stage represents a different phase of a company's growth and involves varying levels of capital and risk \cite{hellmann2002venture}. Seed funding supports early concept development, while later stages focus on scaling and expansion.
+
+The venture capital investment lifecycle encompasses several critical stages, each contributing to the strategic deployment of capital in high-potential startups \cite{gompers2004venture}. Initially, deal sourcing involves identifying promising investment opportunities through various channels, including industry networks and proprietary databases \cite{sorenson2001syndication}. Subsequently, initial screening filters potential investments based on predetermined criteria aligned with the VC firm's investment thesis \cite{petty1994harvesting}. The due diligence phase then entails a comprehensive evaluation of selected startups, scrutinizing their business models, market potential, team capabilities, and financial projections \cite{fried2003venture}. Following a positive assessment, term sheet negotiation and deal closing formalize the investment structure \cite{kaplan2003financial, cumming2006contracts}. Post-investment, VCs typically provide ongoing support to portfolio companies, leveraging their expertise and networks to enhance value \cite{sapienza1996venture}. The lifecycle culminates in an exit event, such as an IPO or acquisition, realizing returns on the investment \cite{cumming2008preplanned}. This systematic approach underscores the rigorous and strategic nature of venture capital investing, from initial opportunity identification to final value realization.
+
+\section{VC fund structure}
+
+
+The structure of a typical venture capital (VC) fund is designed to align the interests of investors (Limited Partners or LPs) and fund managers (General Partners or GPs). This structure can be formalized using several key parameters, which we define as follows:
+
+Let f ∈ (0, ∞) represent the Fund Size, which specifically refers to paid-in-capital, the net amount that LPs commit to a given fund inclusive of all fees. The Lifespan of the fund in years is denoted by l ∈ (0, ∞). The annual Management Fee, charged to the GPs for each year of the fund's lifespan, is represented by p ∈ [0, 1]. Often VC funds require a GP Commit, a percentage of the fund f that the GPs must personally commit. The Carry Fee, c ∈ [0, 1], is calculated as a percentage of LP distributions that GPs are entitled to after returning the principal. Finally, we define the Expected Multiple, m ∈ [0, ∞), as the distributions to paid-in capital (DPI) that a GP expects to return.
+
+The investment cycle of a VC fund typically consists of two main periods: the Investment Period, usually spanning the first 3-5 years of the fund's life, during which GPs make new investments; and the Harvest Period, comprising the remaining years, focused on managing and exiting investments.
+
+The distribution of returns is governed by a Distribution Waterfall, which often includes a "hurdle rate" that must be met before GPs can claim carried interest. Additionally, a Clawback Provision ensures that GPs do not receive more than their agreed-upon share of profits over the fund's lifetime.
+
+The most prevalent structure is a "2 and 20" model (2\% management fee and 20\% carried interest) which is designed to incentivize GPs to maximize returns while providing a stable operational base. 
+
+The utility function for a GP in this model can be expressed as the sum of the carry incentive and the management fee incentive:
+
+\begin{equation}
+U_{GP} = U_{GPc} + U_{GPm}
+\end{equation}
+
+\begin{equation}
+U_{GPm} = \sum_{L=0}^l fp
+\end{equation}
+
+\begin{equation}
+U_{GPc} = ((f - U_{GP}^p)m - (f - U_{GP}^p))c
+\end{equation}
+
+Under this model, assuming a GP simply wants to maximise their utility, the "highest leverage action is to increase the size of the fund or increase the management fee, rather than improve the value of the underlying equity" \cite{Jafri_distributed_vc}. MoonAI's goal of building autonomous sourcing and due diligence in VC can help to solve this dislocation of incentives. Reducing the capital needed to run a VC fund through intelligent automations puts negative pressure on management fees. Therfore, it helps align incentives with founders and LPs by forcing GPs to be incentivised by their carry and thus the underlying equity. 
+
+Before considering how MoonAI is structured, it is important to consider that the carry is generated by power law startups. 
 
 \section{Power Law}
-- Concept of power law returns in venture capital
-- Importance of outlier investments
-- Portfolio construction strategies
-- Risk management in high-risk, high-reward environments
 
-\section{Data-Driven Venture Capital}
+The concept of power law returns in venture capital has profound implications for portfolio construction strategies. This phenomenon, characterized by a small number of investments generating the majority of returns, fundamentally shapes how venture capitalists approach fund management and investment decisions \cite{peter2015power}.
 
-\subsubsection{Network-Based Approach to Predicting Venture Capital Investments}
+In venture capital, returns typically follow a power law distribution, which can be mathematically expressed as:
 
-As part of our series on network-based machine learning algorithms, we examine a study that applies link prediction techniques to bipartite graphs for identifying potential investment opportunities in venture capital networks \cite{predictVCbipartite}. This research models the investment landscape as a bipartite graph, with investors and companies as nodes, and investments as edges. The study utilizes Crunchbase data from 2005-2015, comprising approximately 55,000 nodes and 105,000 edges.
+\begin{equation}
+P(x) \propto x^{-\alpha}
+\end{equation}
 
-The methodology involves implementing and comparing three link prediction models: Random Link Prediction (baseline), Preferential Attachment (PA), and Segmented Preferential Attachment (SPA), a novel approach incorporating assortative matching. These models are evaluated using precision, recall, and F1 scores on a held-out test set of future investments.
+Where $P(x)$ is the probability of an investment returning $x$ times the initial investment, and $\alpha$ is the power law exponent, typically between 2 and 3 for venture capital returns \cite{clauset2009power}. This distribution implies that the probability of extremely high returns, while low, is significantly higher than what would be expected in a normal distribution.
 
-Results indicate that both PA and SPA significantly outperformed random prediction, with PA achieving better overall F1 scores. SPA demonstrated higher maximum precision, effectively filtering out unlikely investment-company links. However, it is noteworthy that absolute precision and recall levels were low across all models.
+A crucial aspect of VC portfolio construction is the concept of "returning the fund." VCs typically look for each investment to have the potential to return the entire fund, meaning that a single successful exit could provide returns equal to or greater than the total size of the fund \cite{feld2016venture}. This approach is directly informed by the power law distribution of returns.
 
-%TODO: mention felske work
+For example, in a \$100 million fund promising a 3x return with 20 investments, VCs are not looking for each company to return \$5 million. Instead, they're hoping that at least one company of the twenty investments might return \$300 million or more, effectively "returning the fund" on its own. This strategy acknowledges that many investments will fail or provide modest returns, but seeks to capture the rare outliers that can deliver outsized returns and drive overall fund performance.
 
-This research contributes to our understanding of network-based machine learning applications in finance, highlighting both the potential and current limitations of using graph-based approaches for predicting venture capital investments. The study's findings suggest that while preferential attachment behavior in the network structure provides some insight into local dynamics, the proposed models have limited practical significance for predicting new links. Nevertheless, the evaluation framework shows promise for testing more sophisticated prediction models in future research.
+This "return the fund" mentality leads VCs to focus on companies with massive potential markets and scalable business models. It also explains why VCs are often willing to accept high valuations for promising startups - the potential upside of a fund-returning investment can justify taking on significant risk and paying a premium price.
+
+
+\section{Data-Driven Investing}
+The venture capital industry has shifted from a bespoke asset class at its inception in the 1940s to a commoditised institution on the whole. This heightened competition has led to a shift towards more data-driven strategies as VCs seek to gain an edge in the market by leveraging analytics in the sourcing and due diligence of investment cases, as well as management of portfolio startups. In the following subsections, we will provide an overview of some data-driven methods currently employed in the venture capital industry. These approaches demonstrate how the field is evolving to incorporate more quantitative and technological solutions to address the challenges of startup evaluation and investment decision-making.
 
 \subsubsection{Investment Specific Language Models}
 Recent advancements in language models have led to the development of investment-specific models designed to enhance financial analysis and decision-making. Yang et al. introduced InvestLM, a model that fine-tunes LLaMA-65B using a curated corpus of financial documents \cite{yang2023investlm}. The model employs Low Rank Adaptation (LoRA) for efficient parameter tuning and Linear Rope Scaling to handle large input lengths. Evaluation by domain experts and financial NLP benchmarks demonstrated InvestLM's strong capabilities in comprehending financial text and responding to investment-related queries.
@@ -863,19 +901,19 @@ The development of InvestLM contributes to the growing field of financial domain
 
 Other notable contributions in this field include FinBERT, a financial language model based on BERT architecture; FinMA, which fine-tunes language models on financial NLP benchmarks with instruction-formatted questions; and FinGPT, which focuses on news and tweet sentiment analysis, albeit with limited generalizability to other tasks \cite{araci2019finbert, liu2023finma, yang2023fingpt}. These models represent the ongoing efforts to adapt large language models to specific financial applications, although challenges remain in achieving broad applicability across various financial tasks.
 
-\subsubsection{Deciphering Entrepreneurial Pitches}
+\subsubsection{Network-Based Approach to Predicting Success}
 
-The process of deciphering entrepreneurial pitches has gained significant attention in recent years, with researchers applying advanced techniques to predict investment probabilities. A notable study in this field employs a multimodal deep learning approach to analyze both audio and language components of pitches \cite{multimodal_pitch_analysis}. This innovative method utilizes a combination of hand-crafted features and deep feature sets, experimenting with both early and late fusion strategies to optimize prediction accuracy.
+Venture capital ecosystems can be modelled as complex graphs, and research has focused on using graph structure to infer success likelihood. Two notable approaches in this area are bipartite link prediction and graph neural networks.
 
-The importance of pitching in the entrepreneurial process cannot be overstated, as it serves as a crucial step in securing investment. The application of multimodal deep learning to this domain opens up new avenues for understanding the nuances of successful pitches \cite{pitch_importance}. However, it is essential to consider potential biases that may arise from such automated analysis systems.
+One study applied link prediction techniques to bipartite graphs for identifying potential investment opportunities in venture capital networks \cite{predictVCbipartite}. It modeled the investment landscape as a bipartite graph, with investors and companies as nodes, and investments as edges. The study compared three link prediction models: Random Link Prediction (baseline), Preferential Attachment (PA), and Segmented Preferential Attachment (SPA). Results showed that PA and SPA significantly outperformed random prediction, with PA achieving better overall F1 scores and SPA demonstrating higher maximum precision.
 
-Decision-making in entrepreneurship is characterized by high levels of uncertainty \cite{uncertainty_entrepreneurship}. Berner et al. \cite{berner_entrepreneurship} argue that the fundamental premise of entrepreneurship involves accepting significant risks when investing or producing goods. In entrepreneurial contexts, decision-makers often rely on heuristics due to the lack or limitation of factual information \cite{heuristics_entrepreneurship}.
+In contrast, a more recent study by Lyu et al. \cite{lyu2023graph} employed graph neural networks for predicting startup success. This approach utilized a comprehensive dataset from PitchBook and proposed an incremental graph representation learning method. The key components of this method were multifaceted. Firstly, it involved the construction of a bipartite graph network that represented the intricate relationships between individuals and startups. Secondly, the method incorporated Graph Self-Attention (GST) for node-level representation learning, enabling the capture of complex interactions within the network. Thirdly, it implemented an incremental updating mechanism for representations as the network evolved over time, ensuring the model's adaptability to dynamic ecosystems. Fourthly, the approach employed supervised fine-tuning using link prediction and node classification tasks, enhancing the model's predictive capabilities. Lastly, it utilized sequential modeling of node representations over time using Long Short-Term Memory (LSTM) networks, allowing for the capture of temporal dependencies in startup trajectories.
 
-Huang and Pierce \cite{huang_pierce} have observed that investors employ both intuition and formal analysis in their decision-making processes. Their research indicates that this intuition is largely based on the perception of the founding entrepreneur. Several studies have demonstrated that this perception is shaped by both verbal and non-verbal cues in the pitch, including storytelling techniques and hand gestures \cite{verbal_nonverbal_cues}.
+The graph neural network approach outperformed all baselines, including human investors and traditional machine learning methods, achieving up to 1.94x better performance than human investors. It showed particularly strong results for startups in IT, healthcare, and B2C industries.
 
-An interesting finding from the multimodal analysis is that the best acoustic model, when used independently, outperforms the best language model. This suggests that non-verbal aspects of communication play a crucial role in pitch effectiveness \cite{acoustic_vs_language}.
+Comparing the two approaches, the graph neural network method appears to be more sophisticated and effective. While the bipartite link prediction study focused solely on predicting potential investments, the graph neural network approach aimed to predict startup success (defined as IPO or acquisition within 5 years). The latter also incorporated more complex features and temporal dynamics, leading to superior performance.
 
-Future research in this area could benefit from incorporating visual modality into the analysis, potentially providing a more comprehensive understanding of pitch dynamics and their impact on investment decisions \cite{visual_modality_potential}.
+Both studies highlight the potential of graph-based machine learning techniques in venture capital, but the graph neural network approach demonstrates a more comprehensive and powerful method for leveraging network structures in startup success prediction.
 
 \subsubsection{Success Prediction}
 
@@ -913,57 +951,16 @@ The study emphasizes the importance of pre-existing social capital acquired thro
 
 The research provides insights into the value of social networks and networking organizations for startup entrepreneurs, highlighting the role of both online and offline connections in fostering business success.
 
-Graph Neural Network Based VC Investment Success Prediction
-Shiwei Lyu
-This paper presents a novel approach to predicting the success of early-stage startups using graph neural networks and incremental learning techniques. The key points are:
+\subsection{Hypothesis Extraction}
 
-Problem: Predicting whether a startup will succeed (defined as IPO or acquisition within 5 years) based on early-stage venture capital investment data.
-Data: The authors use a comprehensive dataset from PitchBook covering VC investments globally from 1977-2019, including information on startups, investors, and investment details.
-Method: The authors propose an incremental graph representation learning approach with several key components:
-
-Construction of a bipartite graph network representing relationships between people (investors/founders) and startups
-Graph Self-Attention (GST) for node-level representation learning
-Incremental updating of representations as the network grows over time
-Supervised fine-tuning using link prediction and node classification tasks
-Sequential modeling of node representations over time using LSTM
-Final success prediction using the learned representations and node attributes
+Many VC funds operate on the basis of specific theses or industry focus. Investment professionals within these funds aim to identify promising companies that align with their predetermined sectors or theses. Consequently, the automated inference of sector compatibility and thesis alignment for potential investment targets is a critical factor in the success of thematic VC strategies.
 
 
-Experiments:
+A team at EQT, a well known player in the data driven VC industry, developed a novel methodology for extracting industry hypotheses and investment theses from company descriptions utilizing generative language models ~\cite{lele_cao_infer_industry_sector}. The authors propose a scalable and adaptive system that employs prompt engineering and fine-tuning of medium-sized generative language models. It utilized a hierarchical sector framework for multi-granular representation and it also implemented a hybrid approach combining both prompt tuning and model fine-tuning.
 
-Data split into training (2007-2008), validation (2008-2013), and test (2014) sets
-Compared against baselines including human investors, traditional ML (GBDT), and other graph neural network approaches
-Evaluated using Average Precision at K (AP@K) metric
+The proposed system demonstrated superior performance compared to classification baselines, achieving an accuracy exceeding 80\%. Furthermore, it exhibits generalization capabilities to previously unseen sectors absent from the training data. The system also demonstrates robustness in handling dynamic sector frameworks and evolving annotations.
 
-
-Results:
-
-The proposed method outperforms all baselines, achieving up to 1.94x better performance than human investors
-Particularly strong performance for startups in IT, healthcare, and B2C industries
-Better results for nodes in the largest connected component of the graph
-
-
-Analysis:
-
-People associated with positively predicted startups tend to have more advanced education, higher female representation, and higher network centrality
-Results suggest the importance of academic training, gender diversity, and networking in startup success
-
-
-Contributions:
-
-Novel incremental graph learning approach for dynamic VC networks
-State-of-the-art performance on startup success prediction
-Insights into factors associated with startup success
-
-
-
-The paper demonstrates the potential of graph-based machine learning techniques to improve venture capital investment decisions and provides insights that could be valuable for investors, entrepreneurs, and policymakers in the startup ecosystem.
-
-- Use of AI and machine learning in deal sourcing
-- Predictive analytics for startup success
-- Alternative data sources for market intelligence
-- Quantitative approaches to valuation and risk assessment
-
+This research first showed the potential of generative language models in extracting structured industry hypotheses from unstructured company data at scale, with the possibility of expanding it to extract other tags that are relevant to a VC. 
 
 \chapter{Moon AI}
 \subsection{Architecture}
