@@ -4,6 +4,8 @@
 \usepackage[T1]{fontenc}
 \usepackage{CJKutf8}
 \usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{subcaption}
 \usetikzlibrary{shapes,arrows,positioning}
 
 
@@ -837,12 +839,12 @@ The venture capital investment lifecycle encompasses several critical stages, ea
 
 The structure of a typical venture capital (VC) fund is set up to align the interests of LPs and GPs. The investment cycle of a VC fund typically consists of two main periods: the Investment Period, usually spanning the first 3-5 years of the fund's life, during which GPs make new investments, deploying the capital made available to them by GPs; and the Harvest Period, comprising the remaining years, focused on managing and exiting investments. We will denote the entire lifetime as l. 
 
-The structure of a typical venture capital fund is defined by several key parameters. The Fund Size (f) refers to the total amount of capital that Limited Partners (LPs) commit to the fund, including all fees. This is also known as paid-in-capital. Management Fee (p), also Performance Fee, is an annual percentage charged for managing the fund throughout its lifespan. Many VC funds also require a GP Commit, which is a portion of the fund that the GPs must personally invest. Finally, the Carry Fee (c) is a percentage of the profits that GPs receive after returning the initial investment to LPs. This fee is typically only paid out once the fund has achieved a certain level of returns, known as the hurdle rate, but we will omit this for simplicity. The most prevalent structure is a "2 and 20" model (2\% management fee and 20\% carried interest) which is designed to incentivize GPs to maximize returns while providing a stable operational base, with a 1\% GP commit typically used. 
+The structure of a typical venture capital fund is defined by several key parameters. The Fund Size (f) refers to the total amount of capital that Limited Partners (LPs) commit to the fund, including all fees. This is also known as paid-in-capital. Management Fee (p), also Performance Fee, is an annual percentage charged for managing the fund throughout its lifespan. Many VC funds also require a GP Commit, which is a portion of the fund that the GPs must personally invest. Finally, the Carry Fee (c) is a percentage of the profits that GPs receive after returning the initial investment to LPs. This fee is typically only paid out once the fund has achieved a certain level of returns, known as the hurdle rate, but we will omit this for simplicity. The most prevalent structure is a "2 and 20" model (2\% management fee and 20\% carried interest) which is designed to incentivize GPs to maximize returns while providing a stable operational base, with a 1\% GP commit (l) typically used. 
 
-The utility function for a GP in this model can be expressed as the sum of the carry incentive and the management fee incentive:
+The utility function for a GP in this model can be expressed as the sum of the carry incentive, the management fee incentive and return on the GP commit:
 
 \begin{equation}
-U_{GP} = U_{GPc} + U_{GPm}
+U_{GP} = U_{GPc} + U_{GPm} + U_{GPr}
 \end{equation}
 
 \begin{equation}
@@ -856,9 +858,45 @@ U_{GPc} = \begin{cases}
     \end{cases}
 \end{equation}
 
-Under this model, assuming a GP simply wants to maximise their utility, the "highest leverage action is to increase the size of the fund or increase the management fee, rather than improve the value of the underlying equity" \cite{Jafri_distributed_vc}. MoonAI's goal of building autonomous sourcing and due diligence in VC can help to solve this dislocation of incentives. Reducing the capital needed to run a VC fund through intelligent automations puts negative pressure on management fees. Therfore, it helps align incentives with founders and LPs by forcing GPs to be incentivised by their carry and thus the underlying equity. 
+\begin{equation}
+U_{GPr} = fl(r-1)
+\end{equation}
 
-Before considering how MoonAI is structured, it is important to consider that VCs seek to generate returns and earn carry by identifying power law startups. 
+Jafri et al showed that the "highest leverage action is to increase the size of the fund or increase the management fee, rather than improve the value of the underlying equity" \cite{Jafri_distributed_vc} in a simple model without hurdle rates. We expand on this by showing that even with the hurdle rates and GP commit considered, the incentive for GPs remains to increase management fees or increase AUM, rather than improving the underlying equity value.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.32\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{figures/h=1.5.png}
+      \caption{h = 1}
+      \label{fig:h1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.32\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{figures/h=1.5.png}
+      \caption{h = 1.5}
+      \label{fig:h1.5}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.32\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{figures/h2.png}
+      \caption{h = 2}
+      \label{fig:h2}
+    \end{subfigure}
+    \caption{GP utility in various scenarios assuming a base case of 1\% GP commit and 2\% management fee with 20\% carry. The x-axis represents the fund's return multiple, and the y-axis shows the GP's utility. The blue line represents the total GP utility, the green line represents the utility from management fees, and the red line represents the utility from carried interest.}
+    \label{fig:gp_utility_scenarios}
+    \end{figure}
+
+Whilst in the previous chapter on NLP we have noted that the intelligence of AI systems is scaling according to a power law and costs are decreasing due to large investment in enterprise and academia, due to the incentive structures prevalent in VC, the management fees paid to GPs are only increasing. This persists, despite the fact that the cost of coordination, tooling and intelligence are coming down. Given that even top-quartile VC funds struggle to achieve a DPI of 2x \cite{gompers1994riseandfallofvc}, this raises questions over the integrity of the industry. 
+
+We have shown that GPs' utility can most easily be maximised by increasing AUM and management fees, however this provides no utility to both startup founders and LPs. Removing entirely a management fee and increasing the carry to 25\% ensures the incentives are aligned between all parties. However, there is no incentive to do this currently as this is the only situation in which the utility for GPs can be negative, in all other the cases the supposed "skin in the game" through a 1\% GP commit is outweighed by the anuual management fees. The thesis behind MoonAI is that the bariers to adopting a 0\% management fee are eroding. For example, SeedLabs has pioneered a solution that makes the marginal cost of executing a deal close to 0 and uses software to automate fund administration. 
+
+MoonAI's goal of building autonomous sourcing and due diligence in VC provides another avenue in the quest to solve this dislocation of incentives. Reducing the capital needed to run a VC fund through intelligent automations puts negative pressure on management fees and enables VC funds to take fixed management fees that do not scale linearly with assets under management. The innovations of MoonAI make it possible to create a VC fund offering LPs a 0\% management fee through automated deal sourcing and due diligence, as well as automated fund administration through a partnership with SeedLabs. 
+
+Before outlining the architecture of the MoonAI platform, the power law that dictates returns in the VC industry is briefly touched upon and data driven investing currently adopted in the VC industry is overviewed.  the innovations used 
 
 \section{Power Law}
 
@@ -908,29 +946,13 @@ Methodologically, the researchers developed a robust and diversified prediction 
 
 The results demonstrate state-of-the-art performance, with a significant finding being the importance of a company's web presence. While individual web mentions may not be significant, their aggregation provides a representative picture of a company's perception by its target audience, substantially improving prediction quality compared to using only structured data from the startup ecosystem.
 
-Title: Choosing the Right Friends: Social Network Analysis for Entrepreneurial Success
-Key Points:
+STARTUP SUCCESS PREDICTION AND VC PORTFOLIO
+SIMULATION USING CRUNCHBASE DATA
+Mark Potanin∗
+potanin.m.st@gmail.com
 
-The study analyzes the relationship between social networks and success for entrepreneurs and academics, focusing on Swiss startups and networking organizations.
-Proximity to key influencers (e.g., directors, advisors) in social networks like LinkedIn, Facebook, and email correlates with business success.
-Participation in entrepreneurship programs (VentureKick and venture leaders) is mutually reinforcing and associated with higher success rates.
-Entrepreneurs with profiles on professional networking sites (e.g., XING) tend to be more successful.
-ETH Zurich alumni are significantly more successful and better connected in entrepreneurial networks compared to graduates from other Swiss universities.
-The study found positive correlations between network centrality (both degree and betweenness) and success, particularly within the ETH alumni network.
-Geographic proximity and face-to-face relationships still play a crucial role in business success, despite increasing virtual connections.
-The research suggests a positive feedback loop: better-connected individuals become more successful, and successful individuals become better connected.
-Recommendations for entrepreneurs include:
-
-Studying at selective universities like ETH Zurich
-Building strong links with fellow students and alumni
-Participating in startup coaching programs
-Engaging with business networking organizations
-Utilising social media for business networking
-
-
-The study emphasizes the importance of pre-existing social capital acquired through university and entrepreneurship programs for later business success.
-
-The research provides insights into the value of social networks and networking organizations for startup entrepreneurs, highlighting the role of both online and offline connections in fostering business success.
+Predicting the Outcome of Startups: Less Failure, More Success
+Amar Krishna
 
 \subsection{Hypothesis Extraction}
 
@@ -943,13 +965,159 @@ The proposed system demonstrated superior performance compared to classification
 
 This research first showed the potential of generative language models in extracting structured industry hypotheses from unstructured company data at scale, with the possibility of expanding it to extract other tags that are relevant to a VC. 
 
+\subsection{Conclusion}
+-conclude by figuring out that stuff can be replaced by LLMs
+
 \chapter{Moon AI}
-\subsection{User Research}
-\subsection{Goal}
+-previously worked at Raized to build sourcing technology 
+-realised that sourcing wasnt the issue, VCs think that their network is their secret sauce, whereas due diligence is just a sunk cost and they struggle to get to term sheet taking 2 hours
+\section{User Research}
+-VCs that wrote their phd on ai for vc werent using it in practice 
+-
+spoke to 30, 1 was using AI in sourcing, none in due diligence
+average time in due diligence of 8 hours 
+
+-extraction of asks and KPIs from portfolio asks is time consuming
+-use perplexity to enhance hypotheses
+
+\section{Application}
+
+The MoonAI application breaks down the processes of venture capital into the fundamental components we seek to automate, offering specific solutions for three critical areas: sourcing, due diligence, and portfolio management.
+
+In each of these areas, VCs are expected to digest vast amounts of unstructured data, a process which can be done effortlessly by LLMs. In addition, the use of LLMs makes possible reasoning that would be considered far too onerous otherwise. In each case, these tasks can be done in real time with negligible latency.
+
 \subsection{Architecture}
-\subsection{Results}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{architecture_diagram.png}
+    \caption{Architecture diagram of MoonAI platform}
+    \label{fig:architecture}
+\end{figure}
+
+\noindent Figure \ref{fig:architecture} illustrates the architecture of the MoonAI platform. The system architecture is composed of several interconnected components, each serving a specific function in the overall ecosystem.
+
+The frontend layer, constructed using React and JavaScript technologies, provides a responsive and interactive user interface. This layer facilitates user interactions and data presentation, ensuring an intuitive experience for venture capital professionals.
+
+The backend infrastructure is built upon the Django framework, which handles the core business logic and exposes API endpoints. This robust backend system manages data processing, authentication, and serves as the intermediary between the frontend and other system components.
+
+Data persistence is achieved through a PostgreSQL database system. This relational database in PostgreSQL not only stores structured data but also incorporates a vector store by enabling the pgvector extension. This allows for efficient similarity searches necessary in RAG pipelines. A third party provider of website embeddings is used in order to semantically query web data.
+
+To manage asynchronous operations and background tasks, the architecture employs RabbitMQ as a message queue system. This component ensures that time-consuming processes do not impede the responsiveness of the user interface, thereby enhancing overall system performance. This is in particular necessary due to the low latency of calls to LLMs.
+
+The frontend communicates with the backend via RESTful API calls, ensuring a clear separation of concerns and enabling scalability. The backend, in turn, interacts with the PostgreSQL database for data persistence and retrieval operations. When required, it initiates calls to external LLMs for advanced NLP tasks. Asynchronous and computationally intensive operations are delegated to background workers through the RabbitMQ system, maintaining system responsiveness.
+
+This architectural design facilitates scalability, efficient data processing, and seamless integration of AI capabilities into a VC's workflow.
+
+\subsection{Sourcing}
+The MoonAI platform enables venture capitalists to define their own investment hypotheses. 
+This feature serves as the basis for subsequent sourcing activities, allowing for a more focused and strategic approach to identifying potential investment opportunities.
+
+Upon defining these hypotheses, the system presents users with a curated selection of relevant events, news, and academic papers pertinent to their specified hypotheses. This functionality is designed to enhance the VC's understanding of their investment thesis, providing nuanced insights and contextual information, and assist the VC in finding key individuals in the sector that may help refine their perspective.
+
+Users can conduct startup searches either based on their predefined investment hypotheses or through custom queries. This flexibility allows for both structured, hypothesis-driven sourcing and more exploratory, ad-hoc discovery of potential investments.
+
+These advanced search and curation features are facilitated through an integration with a third-party web embedding provider. This integration enables semantic search capabilities, allowing for more intelligent and context-aware sourcing of information and potential investment targets.
+
+For each startup identified through the platform, MoonAI generates a comprehensive summary derived from the content of the company's website. This automated summarization process provides VCs with concise, relevant information about potential investments, streamlining the initial screening process. In addition, startups that match a hypothesis but do not meet a VC's investment criteria are automatically filtered out. 
+
+Looking ahead, we can enhance the platform's capabilities by implementing scheduling queries with a cron job. This would allow for continuous, proactive sourcing of potential investment opportunities, further augmenting the efficiency and effectiveness of the VC sourcing process.
+
+\subsection{Due Diligence}
+
+The due diligence process in MoonAI is designed to be comprehensive and efficient, leveraging advanced natural language processing techniques to extract and analyze relevant information. Figure \ref{fig:due_diligence_arch} illustrates the architecture of this process.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{arch.png}
+    \caption{Architecture of MoonAI's Due Diligence Process}
+    \label{fig:due_diligence_arch}
+\end{figure}
+
+The process begins with the input of a pitch deck (typically in PDF format) and the startup's website URL. The system extracts all the text from a website, and also extracts all the text from the pdf. Much information is stored graphically in a pitch deck, which necessitates using a vision model to describe the key insights from figures in the pdf. All this textual information is then chunked, embedded and stored in a vector store. We use a relational PostgreSQL database to power the CRM, and so opted to enable the pgvector plugin to create the vector store.
+
+The extracted information is used to create an overview memo which grounds the generation of subsequent memos related to the competitive environment, the founder-market fit etc. it is chunked and embedded to create a comprehensive overview memo. 
+
+-talk about how this info is used to call other extraction tools, like a linkedin scraper and web visit count api
+
+
+\subsubsection{Competitor Analysis}
+MoonAI uses web embeddings from a 3rd party provider to find startups operating in the same market or with a similar profile. Based on the overview memo, we prompt an LLM to generate queries for startups that could be similar. The web embedding provider embeds that query, and retrieves the most similar results with a matryoshka embedding based approximate nearest neighbour search. In addition, we query the vector store directly to see if url of the company is in their index, and if so, retrieve the nearest neighbours of the startup's embedding, again with approximate matryoshka embedding search, which we find empirically approximates well finding similar startups. 
+
+The schema of a single response is:
+
+We pass all retrieved responses into an LLM and ask the LLM to filter which competitors retrieved are competitors in the same space and are actually companies or startups rather than consultancies or non-profits which should be excluded from the analysis. 
+
+Thus the structured output model of this call to the LLM is:
+
+\subsubsection{Market Analysis}
+The market analysis component of MoonAI leverages advanced web embedding techniques to gather and synthesize comprehensive market research. This process involves several key steps:
+
+Using the same third-party web embedding provider as in the competitor analysis, we generate queries for market research related to the key drivers of a startup's market. These queries are designed to retrieve relevant market research reports, industry analyses, and economic forecasts, and ground the reasoning of an LLM that considers all this information in its context. We constrain the number of queries to 4. This is a hyperparameter of the system that could be tuned further to improve results. 
+
+We pass the content from the retrieved reports, as well as the overview memo of the startup, to an LLM that generates structured output. This strucuted output starts with a thinkpad for the LLM to "think out loud" and ground its reasoning, a memo in markdown on the market potential and market sizing estimates. 
+
+\subsubsection{Founder Analysis}
+The founder analysis in MoonAI is a crucial component of the due diligence process, providing insights into the team behind the startup. This analysis is primarily based on the founders' LinkedIn profiles and other publicly available information. The process involves several steps:
+
+We use an LLM to summarise each founder's profile. This summary includes key information such as:
+   - Educational background
+   - Professional experience
+
+Following the founders' profiles, a Founder-Market Fit memo is generated, which still has the full context of the linkedin profiles and is encouraged to anlyse the team's composition as well. 
+
+This could be expanded to include Red Flag Detection, such as
+   - Frequent job changes
+   - Gaps in employment
+   - Lack of relevant experience
+   - Inconsistencies in the information provided. 
+
+   \subsubsection{Product Analysis}
+- rag 
+\subsubsection{Compatibility Analysis}
+The compatibility analysis component of MoonAI assesses the alignment between a startup and a venture capital firm's investment criteria. This process involves inputting the startup's overview memo into a Large Language Model (LLM), along with a natural language specification of the VC's investment criteria. The LLM then analyzes the compatibility and generates a structured output.
+
+The LLM evaluates various aspects such as market fit, stage appropriateness, potential return on investment, and alignment with the VC's focus areas. The structured output schema for this analysis is designed to provide a comprehensive and quantitative assessment of the startup's compatibility with the VC's investment strategy.
+
+The schema includes an overall compatibility score, ranging from 0.0 to 1.0, which provides a high-level indication of the startup's fit with the VC's criteria. Additionally, the schema incorporates a detailed breakdown of alignment for each specific investment criterion. This breakdown includes individual alignment scores and explanations, offering granular insights into the startup's strengths and potential areas of concern relative to the VC's requirements.
+
+Furthermore, the schema encompasses lists of the startup's strengths and potential misalignments or concerns, providing qualitative context to supplement the quantitative scores. Finally, a brief recommendation based on the overall compatibility analysis is included, serving as a succinct summary of the LLM's assessment.
+
+This structured approach to compatibility analysis facilitates more informed decision-making in the investment process by providing a clear, quantitative, and qualitative assessment of the startup's fit with the VC's investment strategy. The use of an LLM in this process allows for nuanced interpretation of both the startup's characteristics and the VC's criteria, potentially capturing subtle aspects of compatibility that might be overlooked in more rigid, rule-based systems.
+
+\begin{verbatim}
+{
+    "overall_compatibility_score": float,
+    "criteria_alignment": [
+        {
+            "criterion": string,
+            "alignment_score": float,
+            "explanation": string
+        }
+    ],
+    "strengths": [string],
+    "concerns": [string],
+    "recommendation": string
+}
+\end{verbatim}
+
+This structured output schema represents a systematic approach to evaluating startup-VC compatibility, potentially enhancing the efficiency and effectiveness of the venture capital due diligence process.
+
+\subsubsection{Hypothesis Extraction}
+A key aspect of Venture Capital we have touched upon is thesis-driven investing. The MoonAI platforms allows VCs to define hierarchical hypotheses which form a structure akin to a list of trees. To extract the associated hypothesis from a startup's information, we pass the overview memo generated during the intial generation phase a textual representation of the firms various hypothesis hierarchies, and then prompt the LLM to select if there is a hypothesis which matches the overview memo, if one does at all, encouraging as granular a selection as possible. 
+
+\subsection{Portfolio Management}
 
 \chapter{Conclusion}
+
+This thesis has explored the complex landscape of venture capital, focusing on the application of the leading techniques in NLP to address key challenges in the industry. 
+
+We provided a comprehensive overview of recent advances in Natural Language Processing (NLP) that have made the development of the MoonAI platform possible. These technological breakthroughs have opened new avenues for automating and enhancing various aspects of the venture capital process.
+
+We have examined and clarified the issue of incentive misalignment between Limited Partners (LPs), General Partners (GPs), and founders in the venture capital ecosystem. This misalignment can lead to suboptimal outcomes and inefficiencies in the investment process. We also reviewed existing attempts to address these challenges.
+
+We presented a detailed outline of the development of MoonAI platform's architecture. This innovative system leverages AI to automate crucial aspects of due diligence and sourcing, potentially revolutionizing how VCs operate. This development effort has laid the foundation for subsquent research at ETH Zurich to consider how solutions like MoonAI can contribute to democratised access to capital. 
+
+In conclusion, this thesis has highlighted the transformative potential of AI in addressing long-standing challenges in the venture capital industry. By leveraging advanced NLP techniques and a deep understanding of VC dynamics, platforms like MoonAI offer a promising path towards a more efficient,and aligned venture capital ecosystem. As these technologies continue to evolve, they hope is that they will fundamentally reshape how venture capital operates, benefiting investors, founders, and the broader innovation ecosystem. Incentivising adoption of such technology will no doubt be a challenge, as VCs currently act like incumbents with little incentive to change their mode of operating. Perhaps, a startup VC fund using this technology is necessary to disrupt them...
 
 
 % This displays the bibliography for all cited external documents. All references have to be defined in the file references.bib and can then be cited from within this document.
@@ -958,6 +1126,6 @@ This research first showed the potential of generative language models in extrac
 
 % This creates an appendix chapter, comment if not needed.
 \appendix
-\chapter{First Appendix Chapter Title}
+\chapter{GP Utility Simulation}
 
 \end{document}
