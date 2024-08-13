@@ -58,9 +58,9 @@ I owe as always a special debt of gratitude to my family for their love and supp
     
     This thesis explores the creation of a new product: MoonAI. MoonAI is a venture investing copilot designed to empower solo GPs and traditional VC firms alike, by providing a copilot capable of emulating a team of analysts. By employing large language models for reasoning, structured output to guide agents, and matryoshka embeddings to semantically search the internet, the system extracts relevant signals for startup investing from vast amounts of unstructured data publicly available on the internet. The end result is a tool that helps assist in sourcing startups and generating investment memos.
     
-    MoonAI can be customised to align with various investment hypotheses, supporting solo GPs in their sourcing and due diligence processes and removing the need for duplicate platform teams at each VC firm. MoonAI aims to evolve into a comprehensive data science and investing platform.
+    MoonAI can be customised to align with various investment hypotheses, supporting solo GPs in their sourcing and due diligence processes and removing the need for duplicate platform teams at each VC firm. In the future, we aim for MoonAI to evolve into a comprehensive data science and investing platform.
     
-    By creating this adaptable infrastructure, MoonAI seeks to democratise access to high-quality investment platforms, encourage data-driven investing, and thereby democratise access to capital. The project's core thesis posits that successful VC firms and especially solo-GPs will increasingly rely on automated research analysts to support upcoming entrepreneurs, with MoonAI positioning itself at the forefront of this transformation.
+    By creating this adaptable infrastructure, MoonAI seeks to democratise access to high-quality investment platforms, encourage data-driven investing, and thereby democratise access to capital. The project's core thesis posits that successful VC firms and especially solo-GPs will increasingly rely on automated research analysts to identify, analyse and support upcoming entrepreneurs, with MoonAI positioning itself at the forefront of this transformation.
     
     This thesis provides an overview of the advances in Natural Language Processing that make MoonAI possible, an overview of the VC industry, and details how the product was built. 
 \end{abstract}
@@ -524,14 +524,14 @@ On the other hand, the skip-gram model does the opposite, predicting the context
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{cbow_diagram.png}
-        \caption{Continuous Bag-of-Words (CBOW) Model}
+        \includegraphics[width=\textwidth]{figures/cbow.png}
+        \caption{Continuous Bag-of-Words Model}
         \label{fig:cbow}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{skipgram_diagram.png}
+        \includegraphics[width=\textwidth]{figures/skipgram.png}
         \caption{Skip-gram Model}
         \label{fig:skipgram}
     \end{subfigure}
@@ -545,8 +545,8 @@ A striking feature of word2vec embeddings is their ability to capture semantic r
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.6\textwidth]{word2vec_analogy.png}
-    \caption{Word2Vec Analogy: king - man + woman ≈ queen}
+    \includegraphics[width=0.5\textwidth]{figures/word2vec_analogy.png}
+    \caption{Embeddings support maths operations: king - man + woman $\approx$ queen}
     \label{fig:word2vec_analogy}
 \end{figure}
 
@@ -611,7 +611,7 @@ Where:
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/nmt_self_attention.png}
+    \includegraphics[width=0.5\textwidth]{figures/attention.webp}
     \caption{Visualization of the atttention mechanism in the Neural Machine Translation model. Lighter colors indicate stronger attention weights.}
     \label{fig:nmt_self_attention}
 \end{figure}
@@ -625,7 +625,7 @@ The field of NLP underwent a revolutionary change with the introduction of the T
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.9\textwidth]{figures/transformer_architecture.png}
+    \includegraphics[width=0.5\textwidth]{figures/transformer.png}
     \caption{The Transformer architecture, showing the encoder and decoder stacks with their respective components including multi-head attention layers, feed-forward networks, and normalization layers.}
     \label{fig:transformer_architecture}
 \end{figure}
@@ -786,22 +786,26 @@ Matryoshka Embeddings, introduced by Hoffer et al. \cite{hoffer2018deep}, repres
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.8\textwidth]{matryoshka_embeddings.png}
+\includegraphics[width=0.5\textwidth]{figures/matryoshka.png}
 \caption{Illustration of Matryoshka Embeddings. The embedding vector is structured hierarchically, with each nested level representing a higher-dimensional embedding. This allows for efficient search by starting with the lowest dimension and progressively increasing as needed.}
 \label{fig:matryoshka_embeddings}
 \end{figure}
 
 \subsubsubsection{HNSW (Hierarchical Navigable Small World)}
-The Hierarchical Navigable Small World (HNSW) algorithm \cite{malkov2018efficient} is a state of the art method for efficient ANN search, which is commonly used in vector search applications. HNSW constructs a multi-layer graph structure of "navigable small worlds," enabling logarithmic complexity in search operations. The algorithm begins at the top layer with the fewest nodes and refines the search in lower, more detailed layers, quickly narrowing down the search space.
+The Hierarchical Navigable Small World (HNSW) algorithm \cite{malkov2018efficient} is another approximate nearest neighbour search. It is used by the pgvector extension - which allows a relational postgres database to include a vector store - that we enable in order to store embeddings. HNSW constructs an index over the embeddings stored in it as a multi-layer graph structure of "navigable small worlds," enabling logarithmic complexity in search operations.
 
-In vector search applications, HNSW excels at finding similar vectors in high-dimensional spaces, making it ideal for tasks like semantic similarity search in RAG systems \cite{johnson2019billion}. Its ability to balance search quality and memory usage through parameter tuning (e.g., number of layers, connections per node) allows for optimization in various scenarios, from memory-constrained environments to high-performance systems.
+The algorithm's search process is characterized by a hierarchical traversal of the multi-layer graph structure. It commences at the topmost layer, which contains the fewest nodes, and employs a greedy approach to navigate to the nearest neighbor within that layer. Upon reaching a local minimum, the search mechanism transitions to the subsequent, more detailed layer. This iterative refinement continues through progressively more granular layers, with each transition augmenting the search precision. The process culminates at the bottommost layer (layer 0), where the final nearest neighbor is identified. This hierarchical strategy facilitates rapid convergence on the most relevant vectors by efficiently narrowing the search space through successive approximations.
 
 \begin{figure}[h]
-\centering
-\includegraphics[width=0.8\textwidth]{hnsw_structure.png}
-\caption{Illustration of the HNSW (Hierarchical Navigable Small World) structure. The multi-layer graph shows how search begins at the top layer with fewer nodes and progressively refines through lower, more detailed layers.}
-\label{fig:hnsw_structure}
-\end{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/HNSW.png}
+    \caption{Illustration of HNSW approximate nearest neighbour search}
+    \label{fig:hnsw_structure}
+    \end{figure}
+
+The HNSW graph construction process is iterative, using a dynamic candidate list to efficiently create connections between nodes. The layer at which to insert a node is determined probabilistically for each node, and all nodes are inserted to all layers equal to or below their assigned layer. When adding a new node, a search starts from an entry point in the top layer, performing a greedy search through the graph layers to update a list of promising nodes with which to connect the current node. At each layer, the algorithm selects the best connections from the candidate list, with the bottom layer allowing more connections; $M_{max0}$ and $M_{max}$ are hyperparameters that define the permitted number of connections in the bottom layer and other layers respectively, with more connections permitted in the bottom layer usually. This process results in a hierarchical structure with sparse upper layers that allow long-range traversals and denser lower layers with shorter-range connections.
+
+In vector search applications, HNSW excels at finding similar vectors in high-dimensional spaces, making it ideal for tasks like semantic similarity search in RAG systems \cite{johnson2019billion}. Its ability to balance search quality and memory usage through parameter tuning allows for optimization in various scenarios, making it very popular. 
 
 \subsection{Inference: Expanding Context Lengths and Decreasing Costs}
 In addition to improving RAG pipelines, expanding context lengths can help reduce the risk of hallucination by grounding the output with more context. The computational cost associated with inference is continuing to decrease, further contributing to the viability of language model applications. 
@@ -936,23 +940,12 @@ Both studies highlight the potential of graph-based machine learning techniques 
 
 \subsubsection{Success Prediction}
 
-This section examines a study on Web-based Startup Success Prediction by Sharchilev et al., which presents an innovative approach to predicting startup success. The research enriches structured data from the startup ecosystem with information from business-oriented social networking services and general web presence. The study employs a robust machine learning pipeline, utilising multiple base models and gradient boosting techniques.
+Retterath benchmarked the screening performances between 111 Vcs and a gradient boosted tree classification algorithm, finding that the algorithm performed 29\% better than the average invesotr. 
 
-The authors address the challenge of defining startup success, acknowledging the limitations of various metrics such as revenue, mergers and acquisitions, and funding rounds. They also discuss alternative modeling approaches in the literature, including portfolio optimization and link prediction, noting that these methods introduce additional uncertainty compared to direct discriminative success prediction.
+Sharchilev et al present an innovative approach to predicting startup success enriching structured data from the startup ecosystem with information from business-oriented social networking services and general web presence. The study employs a robust machine learning pipeline, utilising multiple base models and gradient boosting techniques. They focused on predicting whether a startup that has received seed or angel funding will secure a Series A or larger funding round within the next year. The trian dataset encompasses general company information, previous investment details, team information, and web mentions. The researchers developed a prediction pipeline called WBSSP, which combined several machine learning models. The pipeline utilizes CatBoost, a gradient boosting decision tree modification, with features derived from dense neural network outputs, logistic regression, and a neural network fed by a sparse neural network. The results demonstrate state-of-the-art performance, with a significant finding being the importance of a company's web presence. While individual web mentions may not be significant, their aggregation provides a representative picture of a company's perception by its target audience, substantially improving prediction quality compared to using only structured data from the startup ecosystem.
 
-The study's problem statement focuses on predicting whether a startup that has received seed or angel funding will secure a Series A or larger funding round within the next year. The dataset encompasses general company information, previous investment details, team information, and web mentions.
+A common strategy in ML for VC has been to create gradient boosted algorithms using crunchbase data to predict startup success. This has been done by Arroyo et al as well as Potanin al. 
 
-Methodologically, the researchers developed a robust and diversified prediction pipeline called WBSSP, which combines several machine learning models. The pipeline utilizes CatBoost, a gradient boosting decision tree modification, with features derived from dense neural network outputs, logistic regression, and a neural network fed by a sparse neural network.
-
-The results demonstrate state-of-the-art performance, with a significant finding being the importance of a company's web presence. While individual web mentions may not be significant, their aggregation provides a representative picture of a company's perception by its target audience, substantially improving prediction quality compared to using only structured data from the startup ecosystem.
-
-STARTUP SUCCESS PREDICTION AND VC PORTFOLIO
-SIMULATION USING CRUNCHBASE DATA
-Mark Potanin∗
-potanin.m.st@gmail.com
-
-Predicting the Outcome of Startups: Less Failure, More Success
-Amar Krishna
 
 \subsection{Hypothesis Extraction}
 
@@ -965,48 +958,52 @@ The proposed system demonstrated superior performance compared to classification
 
 This research first showed the potential of generative language models in extracting structured industry hypotheses from unstructured company data at scale, with the possibility of expanding it to extract other tags that are relevant to a VC. 
 
-\subsection{Conclusion}
--conclude by figuring out that stuff can be replaced by LLMs
-
 \chapter{Moon AI}
--previously worked at Raized to build sourcing technology 
--realised that sourcing wasnt the issue, VCs think that their network is their secret sauce, whereas due diligence is just a sunk cost and they struggle to get to term sheet taking 2 hours
 \section{User Research}
--VCs that wrote their phd on ai for vc werent using it in practice 
--
-spoke to 30, 1 was using AI in sourcing, none in due diligence
-average time in due diligence of 8 hours 
 
--extraction of asks and KPIs from portfolio asks is time consuming
--use perplexity to enhance hypotheses
+The start of this thesis commenced working at Raized, a company focused on building sourcing technology for VCs. This experience provided valuable insights into the VC ecosystem and brought me to a critical realization: sourcing was not the primary challenge faced by VCs. Instead, it became apparent that many VCs considered their network to be their primary competitive advantage for sourcing. Many VCs we spoke to had enough on their plate analysing the startups they were finding through their networks and so sourcing tools were not an immediate priority. If anything, their biggest wish was to find interesting people in startup communities. Due diligence, on the other hand, was viewed as a a costly but necessary process.
+
+After departing from Raized, I conducted further customer research with professionals from 30 venture capital firms, interviewing staff ranging from investment analysts, to in-house machine learning engineers. yielded significant insights into the current state of technology adoption in the industry. Approximately 75\% of the surveyed firms reported using traditional (non-AI) sourcing tools. However, many of these firms again indicated that they received sufficient deal flow from their existing networks, reducing their bandwidth to vet deals from external sourcing tools. In addition, at the time of writing there are already four or five notable players in the AI startup sourcing space so I decided 
+
+Of the 30 VCs interviewed, only one was actively using AI in their sourcing process (and that came from a quant VC firm that employed more machine learning engineers than investment analysts), and again only one had implemented AI solutions in their due diligence procedures. This highlighted a significant gap in the application of AI technologies across the full spectrum of VC activities.
+
+The research also uncovered specific pain points in the VC workflow. For instance, the extraction of key performance indicators (KPIs) and specific requests from portfolio companies was identified as a time-consuming task. Additionally, there was notable interest in tools like Perplexity for enhancing understanding of investment hypotheses, although these tools lacked context-specific information about individual VC firms. VCs often mentioned how tools like perplexity, not only make it difficult to analyse a startup with the lense of a specific VC investment hypothesis, but are also not well suited to comparing certain startups. 
+
+Based on these findings, an idea developed to create a verticalised application for VCs using AI to automated parts of the screening process and incorporating elements of website embedding search to create a novel sourcing proposition. The application would be packaged as a CRM capable of tracking all startups a company was analysing regardless of the stage, that also provided a sourcing tools to find startups to add to the CRM.
+
+This product would have several benefits. Firstly, it would increase efficiency, allowing VCs to evaluate a larger number of potential deals. Secondly, it would reduce cognitive load by automating routine and less engaging aspects of the process. Finally, it would improve decision making by helping VCs to better find research and competitors relating to a specific startup.
+
+This application, MoonAI, is complementary to existing research at ETH Zurich into whether automatically generating investment memoranda can decrease investor bias. 
 
 \section{Application}
 
-The MoonAI application breaks down the processes of venture capital into the fundamental components we seek to automate, offering specific solutions for three critical areas: sourcing, due diligence, and portfolio management.
+The MoonAI application breaks down the processes of venture capital into the fundamental components we seek to automate, offering specific solutions for three critical areas: sourcing, due diligence, and portfolio management. At the time of writing of this thesis, the portfolio management offering is still under construction.
 
-In each of these areas, VCs are expected to digest vast amounts of unstructured data, a process which can be done effortlessly by LLMs. In addition, the use of LLMs makes possible reasoning that would be considered far too onerous otherwise. In each case, these tasks can be done in real time with negligible latency.
+In each of these areas, VCs are expected to digest vast amounts of unstructured data, particularly in early stage investing, a process which can be performed well by LLMs. In addition, the use of LLMs makes possible reasoning that would be considered far too onerous otherwise. In each case, these tasks can be done in real time with negligible latency.
+
+\noindent Figure \ref{fig:architecture} below illustrates the architecture of the MoonAI platform.
 
 \subsection{Architecture}
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth]{architecture_diagram.png}
-    \caption{Architecture diagram of MoonAI platform}
+    \includegraphics[width=0.6\textwidth]{figures/arch.png}
+    \caption{Architecture diagram of the MoonAI platform}
     \label{fig:architecture}
 \end{figure}
-
-\noindent Figure \ref{fig:architecture} illustrates the architecture of the MoonAI platform. The system architecture is composed of several interconnected components, each serving a specific function in the overall ecosystem.
 
 The frontend layer, constructed using React and JavaScript technologies, provides a responsive and interactive user interface. This layer facilitates user interactions and data presentation, ensuring an intuitive experience for venture capital professionals.
 
 The backend infrastructure is built upon the Django framework, which handles the core business logic and exposes API endpoints. This robust backend system manages data processing, authentication, and serves as the intermediary between the frontend and other system components.
 
-Data persistence is achieved through a PostgreSQL database system. This relational database in PostgreSQL not only stores structured data but also incorporates a vector store by enabling the pgvector extension. This allows for efficient similarity searches necessary in RAG pipelines. A third party provider of website embeddings is used in order to semantically query web data.
+We use PostgreSQL as the relationsal database, however it not only stores structured data but also incorporates a vector store by enabling the pgvector extension. This allows for efficient similarity searches necessary in RAG pipelines. A third party provider of website embeddings is used in order to semantically query web data.
 
-To manage asynchronous operations and background tasks, the architecture employs RabbitMQ as a message queue system. This component ensures that time-consuming processes do not impede the responsiveness of the user interface, thereby enhancing overall system performance. This is in particular necessary due to the low latency of calls to LLMs.
+Celery is used to manage asynchronous operations and background tasks, as well as using RabbitMQ as a message queue system. This ensures that high-latency processes, for example that call to chains of LLMs and web embedding searchs, do not impede the responsiveness of the user interface.
 
-The frontend communicates with the backend via RESTful API calls, ensuring a clear separation of concerns and enabling scalability. The backend, in turn, interacts with the PostgreSQL database for data persistence and retrieval operations. When required, it initiates calls to external LLMs for advanced NLP tasks. Asynchronous and computationally intensive operations are delegated to background workers through the RabbitMQ system, maintaining system responsiveness.
+The frontend communicates with the backend via RESTful API calls, as is standard. The backend, in turn, interacts with the PostgreSQL database for data persistence and vector search operations. When required, it initiates calls to external LLMs through functions which  are delegated to celery  as background task through the RabbitMQ message passing system.
 
-This architectural design facilitates scalability, efficient data processing, and seamless integration of AI capabilities into a VC's workflow.
+The goal of this architecture is to be simple to extend for future development of MoonAI, both comercially and for research at ETH, as well as offering scalability.
+
+A key requirement of making calls to an LLM as discussed previously structured output. We use langchain and pydantic in order to create python models that are generated by an LLM, in order to be able to describe the output on a granular level and due to ease of integration with the python codebase. 
 
 \subsection{Sourcing}
 The MoonAI platform enables venture capitalists to define their own investment hypotheses. 
@@ -1024,12 +1021,12 @@ Looking ahead, we can enhance the platform's capabilities by implementing schedu
 
 \subsection{Due Diligence}
 
-The due diligence process in MoonAI is designed to be comprehensive and efficient, leveraging advanced natural language processing techniques to extract and analyze relevant information. Figure \ref{fig:due_diligence_arch} illustrates the architecture of this process.
+The due diligence process in MoonAI is designed extract and analyze relevant information about a startup in order to generate various memoranda of interest to an early stage venture capitalist, for example, a memo on the founders, another on the product etc. Figure \ref{fig:due_diligence_arch} illustrates the pipeline that the information goes through to generate these analyses.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth]{arch.png}
-    \caption{Architecture of MoonAI's Due Diligence Process}
+    \includegraphics[width=0.6\textwidth]{figures/pipeline.png}
+    \caption{Pipeline used to execute MoonAI's due diligence Process}
     \label{fig:due_diligence_arch}
 \end{figure}
 
@@ -1037,15 +1034,12 @@ The process begins with the input of a pitch deck (typically in PDF format) and 
 
 The extracted information is used to create an overview memo which grounds the generation of subsequent memos related to the competitive environment, the founder-market fit etc. it is chunked and embedded to create a comprehensive overview memo. 
 
--talk about how this info is used to call other extraction tools, like a linkedin scraper and web visit count api
-
-
 \subsubsection{Competitor Analysis}
 MoonAI uses web embeddings from a 3rd party provider to find startups operating in the same market or with a similar profile. Based on the overview memo, we prompt an LLM to generate queries for startups that could be similar. The web embedding provider embeds that query, and retrieves the most similar results with a matryoshka embedding based approximate nearest neighbour search. In addition, we query the vector store directly to see if url of the company is in their index, and if so, retrieve the nearest neighbours of the startup's embedding, again with approximate matryoshka embedding search, which we find empirically approximates well finding similar startups. 
 
 The schema of a single response is:
 
-We pass all retrieved responses into an LLM and ask the LLM to filter which competitors retrieved are competitors in the same space and are actually companies or startups rather than consultancies or non-profits which should be excluded from the analysis. 
+We pass all retrieved responses into an LLM and ask the LLM to filter which competitors retrieved are indeed competitors in the same space and are actually companies/startups rather than consultancies or non-profits which should be excluded from the analysis. In addition, we prompt the LLM to generate a concise summary of the startup and synthesise an explanation of the key difference between the competitor and the startup being analysed. This was a key feature request from multiple VCs.
 
 Thus the structured output model of this call to the LLM is:
 
@@ -1071,53 +1065,43 @@ This could be expanded to include Red Flag Detection, such as
    - Lack of relevant experience
    - Inconsistencies in the information provided. 
 
-   \subsubsection{Product Analysis}
+\subsubsection{Product Analysis}
 - rag 
-\subsubsection{Compatibility Analysis}
-The compatibility analysis component of MoonAI assesses the alignment between a startup and a venture capital firm's investment criteria. This process involves inputting the startup's overview memo into a Large Language Model (LLM), along with a natural language specification of the VC's investment criteria. The LLM then analyzes the compatibility and generates a structured output.
 
-The LLM evaluates various aspects such as market fit, stage appropriateness, potential return on investment, and alignment with the VC's focus areas. The structured output schema for this analysis is designed to provide a comprehensive and quantitative assessment of the startup's compatibility with the VC's investment strategy.
+\subsubsection{Go To Market Analysis}
+- rag 
 
-The schema includes an overall compatibility score, ranging from 0.0 to 1.0, which provides a high-level indication of the startup's fit with the VC's criteria. Additionally, the schema incorporates a detailed breakdown of alignment for each specific investment criterion. This breakdown includes individual alignment scores and explanations, offering granular insights into the startup's strengths and potential areas of concern relative to the VC's requirements.
-
-Furthermore, the schema encompasses lists of the startup's strengths and potential misalignments or concerns, providing qualitative context to supplement the quantitative scores. Finally, a brief recommendation based on the overall compatibility analysis is included, serving as a succinct summary of the LLM's assessment.
-
-This structured approach to compatibility analysis facilitates more informed decision-making in the investment process by providing a clear, quantitative, and qualitative assessment of the startup's fit with the VC's investment strategy. The use of an LLM in this process allows for nuanced interpretation of both the startup's characteristics and the VC's criteria, potentially capturing subtle aspects of compatibility that might be overlooked in more rigid, rule-based systems.
+\subsubsection{Criteria Compatability}
+Another aspect of our platform designed to free time for VCs is automated compatability extraction. The compatibility analysis component of MoonAI assesses the alignment between a startup and a venture capital firm's investment criteria. MoonAI allows VCs to specify their investment criteria along several dimnesions (geography, stage, industry) each of which is defined in natural language. Again, we use the zero-shot ability of LLMs to make a decision on a startup's criteria compatability by passing the overview memo and the criteria of the VC fund to an LLM asking it to make a decision on the compatability with an explanation. In order to constrain the output to a specific binary, we model the output as an enumeration, whilst also adding output fields for a scrathpad to allow the LLM to "think out loud" and also explain its decision which can be surfaced to the VC in the app. 
 
 \begin{verbatim}
-{
-    "overall_compatibility_score": float,
-    "criteria_alignment": [
-        {
-            "criterion": string,
-            "alignment_score": float,
-            "explanation": string
-        }
-    ],
-    "strengths": [string],
-    "concerns": [string],
-    "recommendation": string
-}
+
 \end{verbatim}
 
 This structured output schema represents a systematic approach to evaluating startup-VC compatibility, potentially enhancing the efficiency and effectiveness of the venture capital due diligence process.
 
 \subsubsection{Hypothesis Extraction}
-A key aspect of Venture Capital we have touched upon is thesis-driven investing. The MoonAI platforms allows VCs to define hierarchical hypotheses which form a structure akin to a list of trees. To extract the associated hypothesis from a startup's information, we pass the overview memo generated during the intial generation phase a textual representation of the firms various hypothesis hierarchies, and then prompt the LLM to select if there is a hypothesis which matches the overview memo, if one does at all, encouraging as granular a selection as possible. 
-
-\subsection{Portfolio Management}
+A key aspect of Venture Capital we have touched upon is thesis-driven investing. The MoonAI platforms allows VCs to define hierarchical hypotheses which form a structure akin to a list of trees. To extract the associated hypothesis from a startup's information, we pass the overview memo generated during the intial generation phase and a textual representation of the firms various hypothesis hierarchies, and then prompt the LLM to select if there is a hypothesis which matches the overview memo. Again, we use the zero-shot  ability of LLMs to achieve this and prompt the LLM to make as granular a selection as possible. 
 
 \chapter{Conclusion}
 
-This thesis has explored the complex landscape of venture capital, focusing on the application of the leading techniques in NLP to address key challenges in the industry. 
+This thesis has provided an overview of recent advances in Natural Language Processing (NLP) that have made the development of the MoonAI platform possible. These technological breakthroughs have opened new avenues for automating and enhancing various aspects of the Venture Capital process.
 
-We provided a comprehensive overview of recent advances in Natural Language Processing (NLP) that have made the development of the MoonAI platform possible. These technological breakthroughs have opened new avenues for automating and enhancing various aspects of the venture capital process.
+We have examined and clarified the issue of incentive misalignment between Limited Partners (LPs), General Partners (GPs), and founders in the venture capital ecosystem. This misalignment leads to suboptimal outcomes and inefficiencies in the investment process. 
 
-We have examined and clarified the issue of incentive misalignment between Limited Partners (LPs), General Partners (GPs), and founders in the venture capital ecosystem. This misalignment can lead to suboptimal outcomes and inefficiencies in the investment process. We also reviewed existing attempts to address these challenges.
+We presented a detailed outline of the development of MoonAI platform's architecture. This system uses LLMs and other cutting edge aspects of NLP to automate crucial aspects of due diligence and sourcing, with the goal of changing the underlying model VCs use to operate. This development effort has laid the foundation for subsquent research at ETH Zurich to consider how solutions like MoonAI can contribute to democratised access to capital and reduce the role of biases and stereotypes in venture investing. 
 
-We presented a detailed outline of the development of MoonAI platform's architecture. This innovative system leverages AI to automate crucial aspects of due diligence and sourcing, potentially revolutionizing how VCs operate. This development effort has laid the foundation for subsquent research at ETH Zurich to consider how solutions like MoonAI can contribute to democratised access to capital. 
-
-In conclusion, this thesis has highlighted the transformative potential of AI in addressing long-standing challenges in the venture capital industry. By leveraging advanced NLP techniques and a deep understanding of VC dynamics, platforms like MoonAI offer a promising path towards a more efficient,and aligned venture capital ecosystem. As these technologies continue to evolve, they hope is that they will fundamentally reshape how venture capital operates, benefiting investors, founders, and the broader innovation ecosystem. Incentivising adoption of such technology will no doubt be a challenge, as VCs currently act like incumbents with little incentive to change their mode of operating. Perhaps, a startup VC fund using this technology is necessary to disrupt them...
+In conclusion, this thesis has highlighted the transformative potential of AI in
+addressing long-standing challenges in the venture capital industry. By leveraging
+advanced NLP techniques and a deep understanding of VC dynamics, platforms
+like MoonAI offer a promising path towards a more efficient,and aligned venture
+capital ecosystem. As these technologies continue to evolve, they hope is that they
+will fundamentally reshape how venture capital operates, benefiting investors,
+founders, and the broader innovation ecosystem. Incentivising adoption of such
+technology will no doubt be a challenge, as VCs currently act like incumbents
+with little incentive to change their mode of operating. Perhaps, a startup VC
+fund using this technology is necessary to disrupt them...
+50
 
 
 % This displays the bibliography for all cited external documents. All references have to be defined in the file references.bib and can then be cited from within this document.
@@ -1127,5 +1111,73 @@ In conclusion, this thesis has highlighted the transformative potential of AI in
 % This creates an appendix chapter, comment if not needed.
 \appendix
 \chapter{GP Utility Simulation}
+
+\begin{verbatim}
+import numpy as np
+import matplotlib.pyplot as plt
+
+FUND_LIFETIME = 10
+HURDLE_RATE = 1
+
+
+def calculate_utility(r, f=10, h=HURDLE_RATE, p=0.02, c=0.20, l=0.01):
+    """
+    r: fund return (DPI)
+    f: fund size
+    h: hurdle rate
+    p: management fee (as a decimal)
+    c: carry (as a decimal)
+    l: GP commitment (as a decimal)
+    """
+
+    # GP utility from management fees
+    U_GPm = p * f * FUND_LIFETIME
+
+    # GP utility from carried interest
+    U_GPc = max(0, c * (r - h) * f)
+
+    # GP commit return
+    GP_commit_return = l * f * (r - 1)
+
+    # Total GP utility
+    U_GP = U_GPm + U_GPc + GP_commit_return
+
+    return U_GP
+
+
+# Generate DPI (r) range
+r_range = np.linspace(0, 5, 100)
+
+# Base case
+base_utility = [calculate_utility(r) for r in r_range]
+
+# Variations
+utility_3pct_mgmt = [calculate_utility(r, p=0.03) for r in r_range]
+utility_1pct_mgmt = [calculate_utility(r, p=0.01) for r in r_range]
+utility_10pct_carry = [calculate_utility(r, c=0.10) for r in r_range]
+utility_30pct_carry = [calculate_utility(r, c=0.30) for r in r_range]
+utility_2x_fund = [calculate_utility(r, f=20) for r in r_range]
+utility_1_5x_fund = [calculate_utility(r, f=15) for r in r_range]
+utility_25pct_carry_no_perf = [calculate_utility(r, c=0.25, p=0) for r in r_range]
+
+# Plotting
+plt.figure(figsize=(12, 8))
+plt.plot(r_range, base_utility, label="Base Case")
+plt.plot(r_range, utility_3pct_mgmt, label="3% Mgmt Fee")
+plt.plot(r_range, utility_1pct_mgmt, label="1% Mgmt Fee")
+plt.plot(r_range, utility_30pct_carry, label="30% Carry")
+plt.plot(r_range, utility_2x_fund, label="2x Fund Size")
+plt.plot(r_range, utility_1_5x_fund, label="1.5x Fund Size")
+plt.plot(r_range, utility_25pct_carry_no_perf, label="25% Carry, No Mgmt Fee")
+
+plt.xlabel("r (Fund Return / DPI)")
+plt.ylabel("GP Utility")
+plt.title("GP Utility vs Fund Return for Various Scenarios")
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+plt.show()
+    
+\end{verbatim}
 
 \end{document}
