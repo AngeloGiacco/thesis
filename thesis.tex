@@ -977,17 +977,20 @@ This application, MoonAI, is complementary to existing research at ETH Zurich in
 
 \section{Application}
 
+\subsection{Overview}
+
 The MoonAI application breaks down the processes of venture capital into the fundamental components we seek to automate, offering specific solutions for three critical areas: sourcing, due diligence, and portfolio management. At the time of writing of this thesis, the portfolio management offering is still under construction.
 
 In each of these areas, VCs are expected to digest vast amounts of unstructured data, particularly in early stage investing, a process which can be performed well by LLMs. In addition, the use of LLMs makes possible reasoning that would be considered far too onerous otherwise. In each case, these tasks can be done in real time with negligible latency.
 
-\noindent Figure \ref{fig:architecture} below illustrates the architecture of the MoonAI platform.
-
 \subsection{Architecture}
+
+\noindent The architecture that supports the MoonAI platform is detailed in Figure \ref{fig:architecture} below.
+
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.6\textwidth]{figures/arch.png}
-    \caption{Architecture diagram of the MoonAI platform}
+    \caption{Architecture of the MoonAI platform}
     \label{fig:architecture}
 \end{figure}
 
@@ -1009,13 +1012,13 @@ A key requirement of making calls to an LLM as discussed previously structured o
 The MoonAI platform enables venture capitalists to define their own investment hypotheses. 
 This feature serves as the basis for subsequent sourcing activities, allowing for a more focused and strategic approach to identifying potential investment opportunities.
 
-Upon defining these hypotheses, the system presents users with a curated selection of relevant events, news, and academic papers pertinent to their specified hypotheses. This functionality is designed to enhance the VC's understanding of their investment thesis, providing nuanced insights and contextual information, and assist the VC in finding key individuals in the sector that may help refine their perspective.
+Upon defining these hypotheses, the system presents users with a curated selection of relevant events, news, and academic papers pertinent to their specified hypotheses. This is designed to enhance the VC's understanding of their investment thesis by providing novel insights and assisting the VC in finding key individuals in the sector that can help refine their perspective or act as sources of future deal-flow.
 
 Users can conduct startup searches either based on their predefined investment hypotheses or through custom queries. This flexibility allows for both structured, hypothesis-driven sourcing and more exploratory, ad-hoc discovery of potential investments.
 
-These advanced search and curation features are facilitated through an integration with a third-party web embedding provider. This integration enables semantic search capabilities, allowing for more intelligent and context-aware sourcing of information and potential investment targets.
+These advanced search and curation features are facilitated through an integration with a third-party web embedding provider. This integration enables semantic search capabilities based off publicly available information on the internet. Current sourcing startups are mainly powered by combining large web scraping runs with classification by LLMs, so constraining ourselves to startups with a web presence does not lead to decreased quality compared to current solutions. On the contrary, this solution is able to find any startup with a web presence, works well empirically and natively allows for vector search, rather than having to construct a vector store from the scraped results. In the future, for better defensibility, creating a proprietary, continuously updated, vector store of startups would be desirable. 
 
-For each startup identified through the platform, MoonAI generates a comprehensive summary derived from the content of the company's website. This automated summarization process provides VCs with concise, relevant information about potential investments, streamlining the initial screening process. In addition, startups that match a hypothesis but do not meet a VC's investment criteria are automatically filtered out. 
+For each startup identified through vector search, MoonAI generates a comprehensive summary derived from the content of the company's website. This automated summarization process provides VCs with concise, relevant information about potential investments, streamlining the initial screening process. In addition, startups that match the search parameters but do not meet a VC's investment criteria are automatically filtered out. Furthermore, during the structured output generation, we also prompt the LLM to confirm whether the startup found is indeed a startup, as the system sometimes incorrectly identifies consultancies/charities operating in a sector as a potential investment case. 
 
 Looking ahead, we can enhance the platform's capabilities by implementing scheduling queries with a cron job. This would allow for continuous, proactive sourcing of potential investment opportunities, further augmenting the efficiency and effectiveness of the VC sourcing process.
 
@@ -1044,26 +1047,18 @@ We pass all retrieved responses into an LLM and ask the LLM to filter which comp
 Thus the structured output model of this call to the LLM is:
 
 \subsubsection{Market Analysis}
-The market analysis component of MoonAI leverages advanced web embedding techniques to gather and synthesize comprehensive market research. This process involves several key steps:
+The market analysis component of MoonAI uses advanced web embedding techniques to gather relevant comprehensive market research and synthesise the information. 
 
-Using the same third-party web embedding provider as in the competitor analysis, we generate queries for market research related to the key drivers of a startup's market. These queries are designed to retrieve relevant market research reports, industry analyses, and economic forecasts, and ground the reasoning of an LLM that considers all this information in its context. We constrain the number of queries to 4. This is a hyperparameter of the system that could be tuned further to improve results. 
+Using the same third-party web embedding provider as in the competitor analysis, we generate queries for market research related to the key drivers of a startup's market. These queries are designed to retrieve relevant market research reports, industry analyses, and economic forecasts. We constrain the number of queries for research to 4. This is a hyperparameter of the system that could be tuned further to improve results. 
 
-We pass the content from the retrieved reports, as well as the overview memo of the startup, to an LLM that generates structured output. This strucuted output starts with a thinkpad for the LLM to "think out loud" and ground its reasoning, a memo in markdown on the market potential and market sizing estimates. 
+We use the retreived information to ground the reasoning of an LLM. We also pass the overview memo of the startup and use structured output in order to obtain estimates of market sizes and a memo about the market size all in one LLM call. This strucuted output starts with a thinkpad for the LLM to "think out loud" to improve its reasoning.
 
 \subsubsection{Founder Analysis}
-The founder analysis in MoonAI is a crucial component of the due diligence process, providing insights into the team behind the startup. This analysis is primarily based on the founders' LinkedIn profiles and other publicly available information. The process involves several steps:
+Analysing founder-market fit is a key part of the due diligence process. MoonAI generates this analysis primarily based on the founders' LinkedIn profiles and other publicly available information. 
 
-We use an LLM to summarise each founder's profile. This summary includes key information such as:
-   - Educational background
-   - Professional experience
+We use structured output to summarise each founder's profile (highlighting their educational background and professional experience) and  a 'Founder-Market Fit' memo is generated, which still has the full context of the linkedin profiles and is encouraged to anlyse the team's composition as well. As usual, we add a scratchpad at the start of the output for the model to "think out loud" in order to improve the reasoning of the LLM. 
 
-Following the founders' profiles, a Founder-Market Fit memo is generated, which still has the full context of the linkedin profiles and is encouraged to anlyse the team's composition as well. 
-
-This could be expanded to include Red Flag Detection, such as
-   - Frequent job changes
-   - Gaps in employment
-   - Lack of relevant experience
-   - Inconsistencies in the information provided. 
+In the future, this will be expanded to automatically potential 'red flags' in a founders background such as frequent job changes, lack of relevant experience, and inconsistencies in the information provided. These red flags could be automatically flagged for the VC's attention, allowing for a quicker evaluation of the founders' backgrounds.
 
 \subsubsection{Product Analysis}
 - rag 
@@ -1074,11 +1069,7 @@ This could be expanded to include Red Flag Detection, such as
 \subsubsection{Criteria Compatability}
 Another aspect of our platform designed to free time for VCs is automated compatability extraction. The compatibility analysis component of MoonAI assesses the alignment between a startup and a venture capital firm's investment criteria. MoonAI allows VCs to specify their investment criteria along several dimnesions (geography, stage, industry) each of which is defined in natural language. Again, we use the zero-shot ability of LLMs to make a decision on a startup's criteria compatability by passing the overview memo and the criteria of the VC fund to an LLM asking it to make a decision on the compatability with an explanation. In order to constrain the output to a specific binary, we model the output as an enumeration, whilst also adding output fields for a scrathpad to allow the LLM to "think out loud" and also explain its decision which can be surfaced to the VC in the app. 
 
-\begin{verbatim}
-
-\end{verbatim}
-
-This structured output schema represents a systematic approach to evaluating startup-VC compatibility, potentially enhancing the efficiency and effectiveness of the venture capital due diligence process.
+This allows a VC to quickly triage their deal flow, removing the need to analyse all inbound startups. Adding an explanation of the LLM's output was helpful to create trust with the product, by allowing the VC to quickly verify the reasoning of the LLM, for example by comparing the explanation with the overview memo. 
 
 \subsubsection{Hypothesis Extraction}
 A key aspect of Venture Capital we have touched upon is thesis-driven investing. The MoonAI platforms allows VCs to define hierarchical hypotheses which form a structure akin to a list of trees. To extract the associated hypothesis from a startup's information, we pass the overview memo generated during the intial generation phase and a textual representation of the firms various hypothesis hierarchies, and then prompt the LLM to select if there is a hypothesis which matches the overview memo. Again, we use the zero-shot  ability of LLMs to achieve this and prompt the LLM to make as granular a selection as possible. 
