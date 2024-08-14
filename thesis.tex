@@ -1123,11 +1123,8 @@ We use structured output to summarise each founder's profile (highlighting their
 
 In the future, this will be expanded to automatically potential 'red flags' in a founders background such as frequent job changes, lack of relevant experience, and inconsistencies in the information provided. These red flags could be automatically flagged for the VC's attention, allowing for a quicker evaluation of the founders' backgrounds.
 
-\subsubsection{Product Analysis}
-- rag 
-
-\subsubsection{Go To Market Analysis}
-- rag 
+\subsubsection{Product \& Go To Market Analysis}
+These components of the analysis are completed with a simple prompt to an LLM to think out loud about its reasoning and then create a memo in markdown.
 
 \subsubsection{Criteria Compatability}
 Another aspect of our platform designed to free time for VCs is automated compatability extraction. The compatibility analysis component of MoonAI assesses the alignment between a startup and a venture capital firm's investment criteria. MoonAI allows VCs to specify their investment criteria along several dimnesions (geography, stage, industry) each of which is defined in natural language. Again, we use the zero-shot ability of LLMs to make a decision on a startup's criteria compatability by passing the overview memo and the criteria of the VC fund to an LLM asking it to make a decision on the compatability with an explanation. In order to constrain the output to a specific binary, we model the output as an enumeration, whilst also adding output fields for a scrathpad to allow the LLM to "think out loud" and also explain its decision which can be surfaced to the VC in the app. 
@@ -1137,10 +1134,21 @@ This allows a VC to quickly triage their deal flow, removing the need to analyse
 \subsubsection{Hypothesis Extraction}
 A key aspect of Venture Capital we have touched upon is thesis-driven investing. The MoonAI platforms allows VCs to define hierarchical hypotheses which form a structure akin to a list of trees. To extract the associated hypothesis from a startup's information, we pass the overview memo generated during the intial generation phase and a textual representation of the firms various hypothesis hierarchies, and then prompt the LLM to select if there is a hypothesis which matches the overview memo. Again, we use the zero-shot  ability of LLMs to achieve this and prompt the LLM to make as granular a selection as possible. 
 
-\section{Future Work}
-- proprietary vector store of startups
-- ability to adapt to a startups growth
+\subsection{Customer Feedback}
 
+The initial customer feedback for the MoonAI platform has been very positive. Multiple potential clients have expressed interest and are currently in various stages of the onboarding pipeline. This enthusiasm from the venture capital community underscores the perceived value and potential impact of our solution.
+
+Notably, half of our design partners, VCs with whom we have closely collaborated to design the software, have committed to doing a paid trial of the software upon its official launch in September. Their usage and feedback will be invaluable in refining and optimizing the platform for broader market deployment.
+
+\section{Future Work}
+
+The development of MoonAI has established a good foundation for automating various aspects of the venture capital process. However, there are several promising avenues for future research and development that could still improve its capabilities and value proposition.
+
+One of the most promising areas for future development is the creation of a proprietary vector store of startups. This would involve continuously collecting and updating information on a wide range of startups, embedding this information into a high-dimensional vector space, and developing efficient search and retrieval mechanisms for this data. Such a vector store would enable more accurate competitor analysis, hypothesis-driven search and potentially even talent identification.
+
+Another crucial area for improvement is the ability to adapt the analysis to a startup's growth over time. Currently analysis is based on a single snapshot of the startup and is not able to respond to getting new information about a startup. This adaptive capability would allow MoonAI to provide more nuanced and relevant insights as startups evolve, which is especially important as speed of iteration is a key indicator to the future success of a startup. 
+
+The goal of MoonAI is to act also as a second brain of a VC, to massively augment what is possible for them. To that extent, activities that aren't necessarily specific to a particular startup can still be interesting to implement as features of the product. For example, a large component of work a VC has to do revolves around maintaining relationships with other VCs who could co-invest. This requires remembering who at which firm is focussed on what kind of deal. This complicated retrieval task is an ideal candidate for an LLM application. The same can be said with helping portfolio companies to hire promising talent or experienced hires. These personal relationships, with investors or people in the startup community, will most likely always be nurtured through non-AI agent communication, but connecting the information around them to an LLM application offers the possibility of augmenting the capabilities of a VC. 
 
 \chapter{Conclusion}
 
