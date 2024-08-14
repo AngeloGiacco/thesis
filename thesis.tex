@@ -907,15 +907,78 @@ Before outlining the architecture of the MoonAI platform, the power law that dic
 In venture capital, returns typically follow a power law distribution, which can be mathematically expressed as:
 
 \begin{equation}
-P(x) \propto x^{-\alpha}
+f(x) = \frac{\alpha - 1}{x_{\text{min}}} \left(\frac{x}{x_{\text{min}}}\right)^{-\alpha} \quad \text{for } x \geq x_{\text{min}}
 \end{equation}
 
-Where $P(x)$ is the probability of an investment returning $x$ times the initial investment, and $\alpha$ is the power law exponent, typically between 2 and 3 for venture capital returns \cite{clauset2009power}. This distribution implies that the probability of extremely high returns, while low, is significantly higher than what would be expected in a normal distribution. This phenomenon, which entails that a small number of investments generate the majority of returns, fundamentally shapes how venture capitalists approach fund management and investment decisions \cite{peter2015power}.
+Where $f(x)$ is the probability of an investment returning $x$ times the initial investment, and $\alpha$ is the power law exponent, typically between 2 and 3 for venture capital returns \cite{clauset2009power}. This distribution implies that the probability of extremely high returns, while low, is significantly higher than what would be expected in a normal distribution. This phenomenon, which entails that a small number of investments generate the majority of returns, fundamentally shapes how venture capitalists approach fund management and investment decisions \cite{peter2015power}: they focus on startups startups with potentially massive markets, scalable business models and business models that could be outcomes on the long tail of the power law. This also explains why VCs are often willing to accept high valuations for promising startups - the potential upside of a fund-returning investment can justify taking on significant risk and paying a premium price.
 
-VCs focus on startups with potentially massive markets and scalable business models, that could be power law outcomes. This also explains why VCs are often willing to accept high valuations for promising startups - the potential upside of a fund-returning investment can justify taking on significant risk and paying a premium price.
+In reality, startup returns are even more extremely distributed, with the vast majority of startups that return less than 1x returning 0x \cite{othman2019startup}.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\linewidth]{figures/losing.png}
+    \caption{Research into distribution of 1,115 of startup returns that fail to return 1x from AngelList highlights the skew towards 0x for startups that fail to return investment. \cite{othman2022howmuchcanyouloseonafailedstartupinvestment}}
+    \label{fig:startup_returns_distribution}
+\end{figure}
 
-\section{Data-Driven Investing}
-The venture capital industry has shifted from a bespoke asset class at its inception in the late 1940s to a commoditised institution on the whole. This heightened competition has led to a shift towards more data-driven strategies as VCs seek to gain an edge in the market by leveraging analytics in the sourcing and due diligence of investment cases, as well as management of portfolio startups. In the following subsections, we will provide an overview of some data-driven methods currently employed in the venture capital industry. These approaches demonstrate how the field is evolving to incorporate more quantitative and technological solutions to address the challenges of startup evaluation and investment decision-making.
+\pagebreak
+
+Research by Moonfire, a VC firm distinguished in its use of AI, found that $x_{\text{min}} = 0.35$ and $\alpha = 2.05$ was an appropriate model of a typical 
+startup based off of 5,000 startups it assessed on Crunchbase \cite{farina_arpaia_2023_venture_capital_portfolio_construction}. Moonfire did valuable research on how this informs portfolio construction, which we expanded on, to account for the phenomenon mentioned that startups that return less than 1x on investment usually return 0x. We simulate funds of different portfolio sizes, and sample startups according to power law distributions with the listed hyperparameters, clamping returns below 1x down to 0 and truncating returns above a maximum threshold down as well. The simulation assumes no reserves for follow-on investing and uniform investments for simplicity.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.32\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{figures/vc_fund_probabilities_alpha_1.9_max_return_100.png}
+      \caption{$\alpha = 1.9$, max return = 100x}
+      \label{fig:vc_fund_probabilities_alpha_1.9_max_return_100}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.32\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{figures/vc_fund_probabilities_alpha_2.05_max_return_100.png}
+      \caption{$\alpha = 2.05$, max return = 100x}
+      \label{fig:vc_fund_probabilities_alpha_2.05_max_return_100}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.32\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{figures/vc_fund_probabilities_alpha_2.2_max_return_100.png}
+      \caption{$\alpha = 2.2$, max return = 100x}
+      \label{fig:vc_fund_probabilities_alpha_2.2_max_return_100}
+    \end{subfigure}
+    
+    \begin{subfigure}[b]{0.32\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{figures/vc_fund_probabilities_alpha_1.9_max_return_500.png}
+      \caption{$\alpha = 1.9$, max return = 500x}
+      \label{fig:vc_fund_probabilities_alpha_1.9_max_return_500}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.32\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{figures/vc_fund_probabilities_alpha_2.05_max_return_500.png}
+      \caption{$\alpha = 2.05$, max return = 500x}
+      \label{fig:vc_fund_probabilities_alpha_2.05_max_return_500}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.32\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{figures/vc_fund_probabilities_alpha_2.2_max_return_500.png}
+      \caption{$\alpha = 2.2$, max return = 500x}
+      \label{fig:vc_fund_probabilities_alpha_2.2_max_return_500}
+    \end{subfigure}
+    \caption{VC fund return probabilities for different power law exponents ($\alpha$) and maximum return values. The x-axis represents the fund's return multiple, and the y-axis shows the probability of achieving that return.}
+    \label{fig:vc_fund_probabilities}
+\end{figure}
+
+The take aways are the same as from the Moonfire paper: larger portfolio sizes reduce the chance of losing money but decrease the chance of big (>5x) return. MoonAI expands the number of startups a VC can analyse, improves the quality of that analysis, and helps them add new connections to their network that can provide high quality deals. In doing so, it lowers the $\alpha$ parameter of power law function describing the multiple obtained from the startups in their fund, making the long tail "fatter". Thus, VCs using such a system would be able to guarantee better performance to their LPs. 
+
+\pagebreak
+
+
+\section{AI/ML Augmented Investing}
+The venture capital industry has shifted from a bespoke asset class at its inception in the late 1940s to a commoditised institution on the whole. This heightened competition has led to a shift towards more data-driven strategies as VCs seek to improve the chances of finding startups on the long tail of the power law by leveraging analytics in the sourcing and due diligence of investment cases, as well as management of portfolio startups. In the following subsections, we will provide an overview of some methods currently employed in the venture capital industry. These approaches demonstrate how the field is evolving to incorporate more quantitative and technological solutions to address the challenges of startup evaluation and investment decision-making.
 
 \subsubsection{Investment Specific Language Models}
 Recent advancements in language models have led to the development of investment-specific models designed to enhance financial analysis and decision-making. Yang et al. introduced InvestLM, a model that fine-tunes LLaMA-65B using a curated corpus of financial documents \cite{yang2023investlm}. The model employs Low Rank Adaptation (LoRA) for efficient parameter tuning and Linear Rope Scaling to handle large input lengths. Evaluation by domain experts and financial NLP benchmarks demonstrated InvestLM's strong capabilities in comprehending financial text and responding to investment-related queries.
@@ -961,11 +1024,11 @@ This research first showed the potential of generative language models in extrac
 \chapter{Moon AI}
 \section{User Research}
 
-The start of this thesis commenced working at Raized, a company focused on building sourcing technology for VCs. This experience provided valuable insights into the VC ecosystem and brought me to a critical realization: sourcing was not the primary challenge faced by VCs. Instead, it became apparent that many VCs considered their network to be their primary competitive advantage for sourcing. Many VCs we spoke to had enough on their plate analysing the startups they were finding through their networks and so sourcing tools were not an immediate priority. If anything, their biggest wish was to find interesting people in startup communities. Due diligence, on the other hand, was viewed as a a costly but necessary process.
+The start of this thesis commenced working at Raized, a company focused on building sourcing technology for VCs. This experience provided me with valuable insights into the VC ecosystem and brought me to a critical realization: sourcing was not the primary challenge faced by VCs. Instead, it became apparent that many VCs considered their network to be their primary competitive advantage for sourcing. Many VCs we spoke to had enough on their plate analysing the startups they were finding through their networks and so sourcing tools were not an immediate priority. If anything, their biggest wish was to find interesting people in startup communities. Due diligence, on the other hand, was viewed as a a costly but necessary process.
 
-After departing from Raized, I conducted further customer research with professionals from 30 venture capital firms, interviewing staff ranging from investment analysts, to in-house machine learning engineers. yielded significant insights into the current state of technology adoption in the industry. Approximately 75\% of the surveyed firms reported using traditional (non-AI) sourcing tools. However, many of these firms again indicated that they received sufficient deal flow from their existing networks, reducing their bandwidth to vet deals from external sourcing tools. In addition, at the time of writing there are already four or five notable players in the AI startup sourcing space so I decided 
+After departing from Raized, I conducted further customer research with professionals from 30 venture capital firms, interviewing staff ranging from investment analysts, to in-house machine learning engineers. yielded significant insights into the current state of technology adoption in the industry. Approximately 83\% of the surveyed firms reported using traditional (non-AI) sourcing tools. However, many of these firms again indicated that they received sufficient deal flow from their existing networks, reducing their bandwidth to vet deals from external sourcing tools. In addition, at the time of writing there are already four or five notable players in the AI startup sourcing space so it was decided not to focus on that part of the deal lifetime.
 
-Of the 30 VCs interviewed, only one was actively using AI in their sourcing process (and that came from a quant VC firm that employed more machine learning engineers than investment analysts), and again only one had implemented AI solutions in their due diligence procedures. This highlighted a significant gap in the application of AI technologies across the full spectrum of VC activities.
+Of the 30 funds spoken to, only one was actively using AI in their sourcing process (and that was Moonfire, a fund that famously employs more machine learning engineers than investment analysts), and again only one had implemented AI solutions in their due diligence procedures. This highlighted a significant gap in the application of AI technologies across the full spectrum of VC activities.
 
 The research also uncovered specific pain points in the VC workflow. For instance, the extraction of key performance indicators (KPIs) and specific requests from portfolio companies was identified as a time-consuming task. Additionally, there was notable interest in tools like Perplexity for enhancing understanding of investment hypotheses, although these tools lacked context-specific information about individual VC firms. VCs often mentioned how tools like perplexity, not only make it difficult to analyse a startup with the lense of a specific VC investment hypothesis, but are also not well suited to comparing certain startups. 
 
@@ -1074,6 +1137,11 @@ This allows a VC to quickly triage their deal flow, removing the need to analyse
 \subsubsection{Hypothesis Extraction}
 A key aspect of Venture Capital we have touched upon is thesis-driven investing. The MoonAI platforms allows VCs to define hierarchical hypotheses which form a structure akin to a list of trees. To extract the associated hypothesis from a startup's information, we pass the overview memo generated during the intial generation phase and a textual representation of the firms various hypothesis hierarchies, and then prompt the LLM to select if there is a hypothesis which matches the overview memo. Again, we use the zero-shot  ability of LLMs to achieve this and prompt the LLM to make as granular a selection as possible. 
 
+\section{Future Work}
+- proprietary vector store of startups
+- ability to adapt to a startups growth
+
+
 \chapter{Conclusion}
 
 This thesis has provided an overview of recent advances in Natural Language Processing (NLP) that have made the development of the MoonAI platform possible. These technological breakthroughs have opened new avenues for automating and enhancing various aspects of the Venture Capital process.
@@ -1170,5 +1238,91 @@ plt.tight_layout()
 plt.show()
     
 \end{verbatim}
+\chapter{Fund Performance Simulation}
+\begin{verbatim}
+    import numpy as np
+    import matplotlib.pyplot as plt
+    
+    
+    def simulate_vc_fund(num_startups, xmin, alpha, max_return, num_simulations=10000):
+        beta = alpha - 1
+        returns = xmin * (
+            1 - np.random.power(beta, size=(num_simulations, num_startups))
+        ) ** (-1 / beta)
+    
+        returns[returns < 1] = 0
+        returns = np.minimum(returns, max_return)
+    
+        fund_multiples = returns.sum(axis=1) / num_startups
+        return fund_multiples
+    
+    
+    def run_simulation(xmin, alpha, max_return, portfolio_sizes):
+        results = []
+        probability_results = []
+        target_multiples = [1, 2, 3, 5, 10]
+    
+        for size in portfolio_sizes:
+            fund_multiples = simulate_vc_fund(size, xmin, alpha, max_return)
+            median_multiple = np.median(fund_multiples)
+            top_decile = np.percentile(fund_multiples, 90)
+            results.append((size, median_multiple, top_decile))
+    
+            probabilities = [
+                np.mean(fund_multiples >= target) for target in target_multiples
+            ]
+            probability_results.append((size, *probabilities))
+    
+        return results, probability_results
+    
+    
+    def plot_probabilities(probability_results, xmin, alpha, max_return, filename):
+        prob_sizes, *prob_data = zip(*probability_results)
+    
+        plt.figure(figsize=(12, 6))
+        target_multiples = [1, 2, 3, 5, 10]
+        for i, multiple in enumerate(target_multiples):
+            plt.plot(prob_sizes, prob_data[i], label=f"{multiple}x")
+    
+        plt.xlabel("Portfolio Size")
+        plt.ylabel("Probability")
+        plt.title(
+            f"Probability of Achieving Different Fund Multiples (xmin={xmin}, α={alpha}, max_return={max_return}x)"
+        )
+        plt.legend()
+        plt.grid(True)
+        plt.savefig(filename)
+        plt.close()
+    
+    
+    def run_experiment(xmin, alpha, max_return, portfolio_sizes):
+        results, probability_results = run_simulation(
+            xmin, alpha, max_return, portfolio_sizes
+        )
+        plot_probabilities(
+            probability_results,
+            xmin,
+            alpha,
+            max_return,
+            f"vc_fund_probabilities_alpha_{alpha}_max_return_{max_return}.png",
+        )
+    
+    
+    # Simulation parameters
+    xmin = 0.35
+    max_returns = [50, 100, 200, 500, 1000]
+    portfolio_sizes = range(1, 201)
+    
+    # Run experiments with two different alpha values
+    alpha_values = [1.9, 2.05, 2.2]
+    
+    for alpha in alpha_values:
+        for max_return in max_returns:
+            run_experiment(xmin, alpha, max_return, portfolio_sizes)
+    
+    print("Experiments completed. Graphs have been saved locally.")
+    
+\end{verbatim}
+
 
 \end{document}
