@@ -6,7 +6,7 @@
 \usepackage{tikz}
 \usepackage{graphicx}
 \usepackage{subcaption}
-\usetikzlibrary{shapes,arrows,positioning}
+\usetikzlibrary{calc,shapes,arrows,positioning}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -21,7 +21,7 @@
 \institute{ETH AI Centre \\[2pt]
 ETH Zürich}
 
-\logo{\includegraphics[width=0.2\columnwidth]{figures/eth_ai_center}}
+\logo{\includegraphics[width=0.2\columnwidth]{figures/eth_ai_center.png}}
 
 \supervisors{Isabelle Siegrist\\[2pt] Prof. Dr. Elliott Ash}
 
@@ -178,7 +178,7 @@ This will also motivate the use of the Transformer architecture, and clarify why
 
 \begin{theorem}[Language Modelling Objective] \label{thm:first theorem}
     Given an alphabet $\Sigma$ and a distinguished end-of-sequence symbol $\texttt{eos} \notin \Sigma$, a
-    language model is a collection of conditional probability distributions $p(y \mid w)$ for $y \in \Sigma \cup \{\texttt{eos}\}$ and $\w \in \Sigma^*$,
+    language model is a collection of conditional probability distributions $p(y \mid w)$ for $y \in \Sigma \cup \{\texttt{eos}\}$ and $w \in \Sigma^*$,
     the Kleene closure of $\Sigma$.
 \end{theorem}
 
@@ -541,7 +541,7 @@ On the other hand, the skip-gram model does the opposite, predicting the context
 
 The vector embeddings are learned through the process of training these models. As the model tries to predict words based on their context (or vice versa), it adjusts the word vectors to maximize the probability of correct predictions. This process leads to words that appear in similar contexts having similar vector representations.
 
-A striking feature of word2vec embeddings is their ability to capture semantic relationships between words. This is often demonstrated through vector arithmetic. For example, the canonical example is the equation "king - man + woman ≈ queen" which shows that the learned embeddings encode meaningful semantic and syntactic relationships, and support mathematical operations.
+A striking feature of word2vec embeddings is their ability to capture semantic relationships between words. This is often demonstrated through vector arithmetic. For example, the canonical example is the equation "king - man + woman $\approx$ queen" which shows that the learned embeddings encode meaningful semantic and syntactic relationships, and support mathematical operations.
 
 \begin{figure}[h]
     \centering
@@ -611,7 +611,7 @@ Where:
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.5\textwidth]{figures/attention.webp}
+    \includegraphics[width=0.5\textwidth]{figures/attention.png}
     \caption{Visualization of the atttention mechanism in the Neural Machine Translation model. Lighter colors indicate stronger attention weights.}
     \label{fig:nmt_self_attention}
 \end{figure}
@@ -754,9 +754,16 @@ where $y_w$ and $y_l$ are the preferred and non-preferred outputs respectively, 
 
 
 \subsection{Multimodal Models}
-Large Language Models (LLMs) have expanded from text-only processing to incorporate multiple modalities. This integration allows for more comprehensive understanding and generation of content across different media types. A significant advancement in multimodal processing is the development of CLIP (Contrastive Language-Image Pre-training) by Radford et al. \cite{radford2021cliplearning}. CLIP connects visual and textual information through a joint embedding space. The model is trained on a diverse dataset of image-text pairs from the internet, learning to associate images with their textual descriptions. It consists an image encoder, typically a vision transformer and a text encoder, usually a transformer-based model. These encoders are trained to maximize the cosine similarity between the embeddings of matching image-text pairs while minimising it for non-matching pairs. This training approach enables CLIP to perform zero-shot classification and open-ended image recognition tasks without specific fine-tuning.
+Large Language Models (LLMs) have expanded from text-only processing to incorporate multiple modalities. This integration allows for more comprehensive understanding and generation of content across different media types. A significant advancement in multimodal processing is the development of CLIP (Contrastive Language-Image Pre-training) by Radford et al. \cite{radford2021cliplearning}. CLIP connects visual and textual information through a joint embedding space. The model is trained on a diverse dataset of image-text pairs from the internet, learning to associate images with their textual descriptions. It consists of an image and text encoder, trained to maximize the cosine similarity between the embeddings of matching image-text pairs while minimising it for non-matching pairs.
 
-In the context of MoonAI, CLIP allows our model to incorporate visual information into the analysis of a startup, rather than relying on solely on textual information. As language models expand to incorporate more modalities, it may become possible to natively process audio, for example recordings of calls between founders and VCs, rather than relying on transcription services to process the calls in a textual format. 
+SigLIP (Sigmoid Loss for Language Image Pre-training) \cite{zhai2022siglip} replaces CLIP's loss with a sigmoid loss function, allowing for independent processing of each image-text pair, helping the model to scale up batch sizes effectively (otherwise the cost of performing row-wise softmax was prohibitively expensive). 
+
+Building on a SigLIP vision encoder and Gemma-2B language model, PaliGemma was introduced as a state of the art vision langauge model. \cite{gemma2024pali} 
+Vision language models make it possible to caption figures, stored in pitch decks for example, into text which can be chunked and retrieved later.
+
+Further built on PaliGemma was ColPali \cite{faysse_sibille_2024colpali}, which provides efficient document retrieval by natively processing PDF documents as images through a VLM to create document embeddings. These embeddings are then compared to a query through a late interaction mechanism, similar to the approach used in ColBERT \cite{khattab2020colbert}. This late interaction allows for more fine-grained matching of the query and document representations, enhancing retrieval accuracy.ColPali is not currently used in the pipeline behind MoonAI currently, which instead uses OCR and captioning, however transitioning to ColPali is expected soon as processing the document entirely natively within a VLM is found to give an order of magnitude improvement over 
+
+As language models expand to incorporate more modalities, it will become possible to natively process audio, for example recordings of calls between founders and VCs, rather than relying on transcription services to process the calls in a textual format. 
 
 \section{Language Model Applications}
 
@@ -781,7 +788,6 @@ Retrieval-Augmented Generation (RAG) systems heavily rely on efficient vector se
 
 Various indexing strategies have been developed to optimize vector search for large-scale datasets. These strategies often involve preprocessing the data to create efficient data structures that facilitate faster search operations. Common approaches include tree-based methods (e.g., KD-trees, Ball trees) and graph-based methods \cite{malkov2018efficient}. Two innovations used by Moon AI are detailed belowed.
 
-\subsubsubsection{Matryoshka Embeddings}
 Matryoshka Embeddings, introduced by Hoffer et al. \cite{hoffer2018deep}, represent an innovative approach to improving the efficiency of vector search operations. This technique introduces an auxiliary objective during the training of embedding models, resulting in a hierarchical representation of semantic information. With Matryoshka Embeddings, the truncated versions of the embeddings are trained to maintain the similarity relationship through the auxiliary objective. This property allows for a unique search strategy: starting with a low-dimensional (and thus computationally cheaper) version of the embedding, and progressively increasing the dimensionality only for the most promising candidates. This approach can significantly speed up retrieval through successive embedding model calls, effectively reducing the computational cost of similarity search without substantially sacrificing accuracy \cite{hoffer2018deep}.The hierarchical nature of Matryoshka Embeddings also provides flexibility in balancing computational resources and search accuracy. Depending on the specific requirements of a search, more or fewer dimensions of the embedding can be used, dynamically adjusting the trade-off between speed and precision \cite{hoffer2018deep}.
 
 \begin{figure}[h]
@@ -791,8 +797,7 @@ Matryoshka Embeddings, introduced by Hoffer et al. \cite{hoffer2018deep}, repres
 \label{fig:matryoshka_embeddings}
 \end{figure}
 
-\subsubsubsection{HNSW (Hierarchical Navigable Small World)}
-The Hierarchical Navigable Small World (HNSW) algorithm \cite{malkov2018efficient} is another approximate nearest neighbour search. It is used by the pgvector extension - which allows a relational postgres database to include a vector store - that we enable in order to store embeddings. HNSW constructs an index over the embeddings stored in it as a multi-layer graph structure of "navigable small worlds," enabling logarithmic complexity in search operations.
+Alternatively, the Hierarchical Navigable Small World (HNSW) algorithm \cite{malkov2018efficient} is another approximate nearest neighbour search. It is used by the pgvector extension - which allows a relational postgres database to include a vector store - that we enable in order to store embeddings. HNSW constructs an index over the embeddings stored in it as a multi-layer graph structure of "navigable small worlds," enabling logarithmic complexity in search operations.
 
 The algorithm's search process is characterized by a hierarchical traversal of the multi-layer graph structure. It commences at the topmost layer, which contains the fewest nodes, and employs a greedy approach to navigate to the nearest neighbor within that layer. Upon reaching a local minimum, the search mechanism transitions to the subsequent, more detailed layer. This iterative refinement continues through progressively more granular layers, with each transition augmenting the search precision. The process culminates at the bottommost layer (layer 0), where the final nearest neighbor is identified. This hierarchical strategy facilitates rapid convergence on the most relevant vectors by efficiently narrowing the search space through successive approximations.
 
@@ -812,7 +817,7 @@ In addition to improving RAG pipelines, expanding context lengths can help reduc
 
 Beltagy et al. introduced the Longformer \cite{beltagy2020longformer}, which presents an efficient attention mechanism for processing long sequences. The Longformer combines local windowed attention with task-motivated global attention, allowing it to handle documents with tens of thousands of tokens while maintaining computational efficiency.
 
-Sparse attention patterns have also emerged as a key strategy for managing long sequences. Child et al. \cite{child2019generating} proposed the Sparse Transformer, which uses fixed sparse attention patterns to reduce the quadratic complexity of self-attention to O(n√n). This approach enables the processing of much longer sequences than traditional transformer models.
+Sparse attention patterns have also emerged as a key strategy for managing long sequences. Child et al. \cite{child2019generating} proposed the Sparse Transformer, which uses fixed sparse attention patterns to reduce the quadratic complexity of self-attention to $O(n\sqrt{n})$. This approach enables the processing of much longer sequences than traditional transformer models.
 
 These advancements have significant applications in document-level tasks. For instance, Zaheer et al. \cite{zaheer2020big} demonstrated the effectiveness of sparse attention models in tasks such as long-document classification and question-answering, where understanding the entire document context is crucial.
 
@@ -1039,12 +1044,44 @@ This product would have several benefits. Firstly, it would increase efficiency,
 This application, MoonAI, is complementary to existing research at ETH Zurich into whether automatically generating investment memoranda can decrease investor bias. 
 
 \section{Application}
-
 \subsection{Overview}
 
 The MoonAI application breaks down the processes of venture capital into the fundamental components we seek to automate, offering specific solutions for three critical areas: sourcing, due diligence, and portfolio management. At the time of writing of this thesis, the portfolio management offering is still under construction.
 
 In each of these areas, VCs are expected to digest vast amounts of unstructured data, particularly in early stage investing, a process which can be performed well by LLMs. In addition, the use of LLMs makes possible reasoning that would be considered far too onerous otherwise. In each case, these tasks can be done in real time with negligible latency.
+
+The first page of the platform the pipeline page, either in a list or kanban format, which quickly shows the deals the investors have in each stage of the investment process, which investment hypothesis (if any) each deal is assigned to and the compatability of each deal with the VC fund's criteria. The CRM's stages can be customised by each VC fund, which is of particular consideration because each VC fund tends to operate differently.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/pipeline_page.png}
+    \caption{Pipeline page in kanban format}
+    \label{fig:pipeline_page}
+\end{figure}
+
+The VC can click on a particular deal to see the overview, where they can quickly upvote it as a signal to other members of the firm, or leave comments. Simple functionality is provided to override the compatability judged by the LLM, assign it to a different hypothesis and assign it to a team member. To facilitate collaboration we created a simple notification system. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/overview.PNG}
+    \caption{Overview memo of a startup}
+    \label{fig:overview_memo}
+\end{figure}
+
+Clicking through various tabs of a deals page allows the VC to see other memos of interest to them, graphs generated about the startup and documents stored relating to the deal.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{figures/market.PNG}
+    \caption{Market analysis of a startup}
+    \label{fig:market_memo}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{figures/founder.PNG}
+    \caption{Founder analysis of a startup}
+    \label{fig:founder_memo}
+\end{figure}
 
 \subsection{Architecture}
 
@@ -1124,7 +1161,7 @@ We use structured output to summarise each founder's profile (highlighting their
 In the future, this will be expanded to automatically potential 'red flags' in a founders background such as frequent job changes, lack of relevant experience, and inconsistencies in the information provided. These red flags could be automatically flagged for the VC's attention, allowing for a quicker evaluation of the founders' backgrounds.
 
 \subsubsection{Product \& Go To Market Analysis}
-These components of the analysis are completed with a simple prompt to an LLM to think out loud about its reasoning and then create a memo in markdown.
+These components of the analysis are completed with a simple prompt to an LLM to think out loud about its reasoning and then create the specific memo in markdown.
 
 \subsubsection{Criteria Compatability}
 Another aspect of our platform designed to free time for VCs is automated compatability extraction. The compatibility analysis component of MoonAI assesses the alignment between a startup and a venture capital firm's investment criteria. MoonAI allows VCs to specify their investment criteria along several dimnesions (geography, stage, industry) each of which is defined in natural language. Again, we use the zero-shot ability of LLMs to make a decision on a startup's criteria compatability by passing the overview memo and the criteria of the VC fund to an LLM asking it to make a decision on the compatability with an explanation. In order to constrain the output to a specific binary, we model the output as an enumeration, whilst also adding output fields for a scrathpad to allow the LLM to "think out loud" and also explain its decision which can be surfaced to the VC in the app. 
@@ -1149,6 +1186,10 @@ One of the most promising areas for future development is the creation of a prop
 Another crucial area for improvement is the ability to adapt the analysis to a startup's growth over time. Currently analysis is based on a single snapshot of the startup and is not able to respond to getting new information about a startup. This adaptive capability would allow MoonAI to provide more nuanced and relevant insights as startups evolve, which is especially important as speed of iteration is a key indicator to the future success of a startup. 
 
 The goal of MoonAI is to act also as a second brain of a VC, to massively augment what is possible for them. To that extent, activities that aren't necessarily specific to a particular startup can still be interesting to implement as features of the product. For example, a large component of work a VC has to do revolves around maintaining relationships with other VCs who could co-invest. This requires remembering who at which firm is focussed on what kind of deal. This complicated retrieval task is an ideal candidate for an LLM application. The same can be said with helping portfolio companies to hire promising talent or experienced hires. These personal relationships, with investors or people in the startup community, will most likely always be nurtured through non-AI agent communication, but connecting the information around them to an LLM application offers the possibility of augmenting the capabilities of a VC. 
+
+-integration to become a fully fledged CRM
+-ColPali for document processing
+-automatically assessing hot deals
 
 \chapter{Conclusion}
 
@@ -1246,89 +1287,92 @@ plt.tight_layout()
 plt.show()
     
 \end{verbatim}
+
 \chapter{Fund Performance Simulation}
+
 \begin{verbatim}
-    import numpy as np
-    import matplotlib.pyplot as plt
-    
-    
-    def simulate_vc_fund(num_startups, xmin, alpha, max_return, num_simulations=10000):
-        beta = alpha - 1
-        returns = xmin * (
-            1 - np.random.power(beta, size=(num_simulations, num_startups))
-        ) ** (-1 / beta)
-    
-        returns[returns < 1] = 0
-        returns = np.minimum(returns, max_return)
-    
-        fund_multiples = returns.sum(axis=1) / num_startups
-        return fund_multiples
-    
-    
-    def run_simulation(xmin, alpha, max_return, portfolio_sizes):
-        results = []
-        probability_results = []
-        target_multiples = [1, 2, 3, 5, 10]
-    
-        for size in portfolio_sizes:
-            fund_multiples = simulate_vc_fund(size, xmin, alpha, max_return)
-            median_multiple = np.median(fund_multiples)
-            top_decile = np.percentile(fund_multiples, 90)
-            results.append((size, median_multiple, top_decile))
-    
-            probabilities = [
-                np.mean(fund_multiples >= target) for target in target_multiples
-            ]
-            probability_results.append((size, *probabilities))
-    
-        return results, probability_results
-    
-    
-    def plot_probabilities(probability_results, xmin, alpha, max_return, filename):
-        prob_sizes, *prob_data = zip(*probability_results)
-    
-        plt.figure(figsize=(12, 6))
-        target_multiples = [1, 2, 3, 5, 10]
-        for i, multiple in enumerate(target_multiples):
-            plt.plot(prob_sizes, prob_data[i], label=f"{multiple}x")
-    
-        plt.xlabel("Portfolio Size")
-        plt.ylabel("Probability")
-        plt.title(
-            f"Probability of Achieving Different Fund Multiples (xmin={xmin}, α={alpha}, max_return={max_return}x)"
-        )
-        plt.legend()
-        plt.grid(True)
-        plt.savefig(filename)
-        plt.close()
-    
-    
-    def run_experiment(xmin, alpha, max_return, portfolio_sizes):
-        results, probability_results = run_simulation(
-            xmin, alpha, max_return, portfolio_sizes
-        )
-        plot_probabilities(
-            probability_results,
-            xmin,
-            alpha,
-            max_return,
-            f"vc_fund_probabilities_alpha_{alpha}_max_return_{max_return}.png",
-        )
-    
-    
-    # Simulation parameters
-    xmin = 0.35
-    max_returns = [50, 100, 200, 500, 1000]
-    portfolio_sizes = range(1, 201)
-    
-    # Run experiments with two different alpha values
-    alpha_values = [1.9, 2.05, 2.2]
-    
-    for alpha in alpha_values:
-        for max_return in max_returns:
-            run_experiment(xmin, alpha, max_return, portfolio_sizes)
-    
-    print("Experiments completed. Graphs have been saved locally.")
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+def simulate_vc_fund(num_startups, xmin, alpha, max_return, num_simulations=10000):
+    beta = alpha - 1
+    returns = xmin * (
+        1 - np.random.power(beta, size=(num_simulations, num_startups))
+    ) ** (-1 / beta)
+
+    returns[returns < 1] = 0
+    returns = np.minimum(returns, max_return)
+
+    fund_multiples = returns.sum(axis=1) / num_startups
+    return fund_multiples
+
+
+def run_simulation(xmin, alpha, max_return, portfolio_sizes):
+    results = []
+    probability_results = []
+    target_multiples = [1, 2, 3, 5, 10]
+
+    for size in portfolio_sizes:
+        fund_multiples = simulate_vc_fund(size, xmin, alpha, max_return)
+        median_multiple = np.median(fund_multiples)
+        top_decile = np.percentile(fund_multiples, 90)
+        results.append((size, median_multiple, top_decile))
+
+        probabilities = [
+            np.mean(fund_multiples >= target) for target in target_multiples
+        ]
+        probability_results.append((size, *probabilities))
+
+    return results, probability_results
+
+
+def plot_probabilities(probability_results, xmin, alpha, max_return, filename):
+    prob_sizes, *prob_data = zip(*probability_results)
+
+    plt.figure(figsize=(12, 6))
+    target_multiples = [1, 2, 3, 5, 10]
+    for i, multiple in enumerate(target_multiples):
+        plt.plot(prob_sizes, prob_data[i], label=f"{multiple}x")
+
+    plt.xlabel("Portfolio Size")
+    plt.ylabel("Probability")
+    plt.title(
+        f"""Probability of Achieving Different Fund Multiples (xmin={xmin}, 
+        \\alpha={alpha}, max_return={max_return}x)"""
+    )
+    plt.legend()
+    plt.grid(True)
+    plt.savefig(filename)
+    plt.close()
+
+
+def run_experiment(xmin, alpha, max_return, portfolio_sizes):
+    results, probability_results = run_simulation(
+        xmin, alpha, max_return, portfolio_sizes
+    )
+    plot_probabilities(
+        probability_results,
+        xmin,
+        alpha,
+        max_return,
+        f"vc_fund_probabilities_alpha_{alpha}_max_return_{max_return}.png",
+    )
+
+
+# Simulation parameters
+xmin = 0.35
+max_returns = [50, 100, 200, 500, 1000]
+portfolio_sizes = range(1, 201)
+
+# Run experiments with two different alpha values
+alpha_values = [1.9, 2.05, 2.2]
+
+for alpha in alpha_values:
+    for max_return in max_returns:
+        run_experiment(xmin, alpha, max_return, portfolio_sizes)
+
+print("Experiments completed. Graphs have been saved locally.")
     
 \end{verbatim}
 
