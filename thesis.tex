@@ -21,7 +21,7 @@
 \institute{ETH AI Centre \\[2pt]
 ETH Zürich}
 
-\logo{\includegraphics[width=0.2\columnwidth]{figures/eth_ai_center.png}}
+\logo{\includegraphics[width=0.2\columnwidth]{figures/eth_ai_center}}
 
 \supervisors{Isabelle Siegrist\\[2pt] Prof. Dr. Elliott Ash}
 
@@ -111,9 +111,9 @@ constraints of processing vast amounts of information.
 
 VCs have increasingly adopted data-driven investing practices to combat these biases. 
 Traditional gradient boosting approaches have been used successfully, and in recent years the growth of data volume has ushered deep learning (DL) into the industy ~\cite{eqt}.
-For example, graph neural networks have been used to predict a startup's success based on its links to a wider startup ecosystem ~\cite{korea}. 
+For example, graph neural networks have been used to predict a startup's success based on its links to a wider startup ecosystem ~\cite{corea}. 
 These models can integrate diverse data sources, including structured information about startups, founders, and investors ~\cite{corea}, as well as unstructured data from social networks and web sources. 
-Preliminary findings suggest that data-driven VCs may be more likely to back founders from underrepresented backgrounds, potentially addressing systemic biases in the industry ~\cite{futureVC}.
+Preliminary findings suggest that AI-augmented VCs may be more likely to back founders from underrepresented backgrounds, potentially addressing systemic biases in the industry ~\cite{futureVC}.
 
 In recent years, the VC landscape has experienced a shift towards the practice solo General Partners (GPs)  raising funds, meanwhile fund raising has been increasingly strained for non-elite VC firms since the end of zero interest rates. Unlike traditional VC firms, with rigid investment deal processes, solo GPs can make investment decisions quickly and independently, which is particularly valuable in competitive deal environments where rapid decision-making can be crucial.
 In contrast, the formation of new traditional VC firms has slowed in recent years. This can be attributed to several factors, including the trend towards larger fund sizes, which makes it challenging for new firms to compete and gain traction with the returns from the VC industry becoming concentrated among well-established firms that enjoy significant advantages in deal flow and fundraising. 
@@ -196,17 +196,16 @@ This thesis assumes familiarity with the basics of machine learning. Nevertheles
 
 In classical computer programming, humans define a set of explicit rules and provide input data. The computer then processes new data according to the defined rules to produce an output for the data. This approach works well for problems with clear, unchanging rules and predictable inputs ~\cite{russell2010artificial}.
 
-Machine learning, on the other hand, inverts this paradigm: rules are learnt by applying processing to data. It can be broadly categorised into two main types: supervised and unsupervised learning ~\cite{murphy2012machine}.
+Machine learning, on the other hand, inverts this paradigm: rules are learnt by applying processing to data. It can be categorised into two main types: supervised and unsupervised learning.
 
 In supervised learning, humans provide a large dataset of input-output pairs (often referred to as training data). 
-The machine learning algorithm then attempts to learn the underlying patterns or rules that map the inputs to the outputs ~\cite{hastie2009elements}. 
+The machine learning algorithm then attempts to learn the underlying patterns or rules that map the inputs to the outputs ~\cite{hastie01statisticallearning}. 
 This learned model can then be used to make predictions or decisions on new, unseen data.
 Supervised learning is particularly useful for tasks such as classification and regression ~\cite{bishop2006pattern}.
 
 In unsupervised learning, the algorithm is given input data without corresponding output labels. The goal is to discover hidden patterns or structures within the data ~\cite{ghahramani2004unsupervised}. Common unsupervised learning tasks include clustering, dimensionality reduction, and anomaly detection ~\cite{hinton2006reducing}.
 
-The key advantage of machine learning is its ability to handle complex, non-linear relationships in data and to adapt to new patterns without being explicitly reprogrammed ~\cite{goodfellow2016deep}. 
-This makes it particularly useful for tasks like natural language processing, where the rules governing language use are clearly too complex and nuanced to be explicitly coded ~\cite{jurafsky2009speech}.
+The key advantage of machine learning is its ability to handle complex, non-linear relationships in data and to adapt to new patterns without being explicitly reprogrammed ~\cite{goodfellow2016deep}. this makes it particularly useful for tasks like natural language processing, where the rules governing language use are clearly too complex and nuanced to be explicitly coded.
 
 \subsection{Losses}
 To begin our search for a model that best describes the underlying patterns in our data, it is necessary to have a way of describing how accurate our model's predictions are. This is done by defining a loss function that measures the difference between the model's predictions and the ground-truth values ~\cite{goodfellow2016deep}.
@@ -219,7 +218,7 @@ The cross-entropy loss, denoted as $H(p,q)$, for a classification task with $C$ 
     H(p,q) = -\sum_{i=1}^C p(i) \log q(i)
 \end{equation}
 
-where $p(i)$ is the true probability distribution (usually a one-hot encoded vector for the true class) and $q(i)$ is the predicted probability distribution from the model ~\cite{murphy2012machine}.
+where $p(i)$ is the true probability distribution (usually a one-hot encoded vector for the true class) and $q(i)$ is the predicted probability distribution from the model.
 
 For binary classification, this simplifies to:
 
@@ -235,7 +234,7 @@ In the context of language modeling, where we're predicting the next token in a 
     L = -\sum_{t=1}^T \sum_{v=1}^V y_{t,v} \log(\hat{y}_{t,v})
 \end{equation}
 
-where $T$ is the sequence length, $V$ is the vocabulary size, $y_{t,v}$ is 1 if token $v$ is the true next token at position $t$ and 0 otherwise, and $\hat{y}_{t,v}$ is the model's predicted probability for token $v$ at position $t$ ~\cite{jurafsky2009speech}.
+where $T$ is the sequence length, $V$ is the vocabulary size, $y_{t,v}$ is 1 if token $v$ is the true next token at position $t$ and 0 otherwise, and $\hat{y}_{t,v}$ is the model's predicted probability for token $v$ at position $t$.
 
 Minimising this loss encourages the model to assign higher probabilities to the correct next tokens in the training data, thus learning the underlying patterns of the language ~\cite{bengio2003neural}.
 
@@ -274,7 +273,7 @@ Mathematically, for a composite function $f(g(x))$, the chain rule states:
     \frac{df}{dx} = \frac{df}{dg} \cdot \frac{dg}{dx}
 \end{equation}
 
-AutoDiff systems leverage this principle to compute gradients through arbitrarily complex computational graphs ~\cite{griewank2008evaluating}. Modern deep learning frameworks like PyTorch and TensorFlow have built-in AutoDiff capabilities, which greatly simplify the implementation of new models and training procedures ~\cite{paszke2019pytorch, abadi2016tensorflow}. These systems maintain a computational graph of operations and use it to automatically compute gradients, enabling efficient training of large-scale neural networks, allows researchers to focus on designing network architectures and loss functions, while the AutoDiff system handles the intricate details of gradient computation ~\cite{baydin2018automatic}.
+AutoDiff systems leverage this principle to compute gradients through arbitrarily complex computational graphs. Modern deep learning frameworks like PyTorch and TensorFlow have built-in AutoDiff capabilities, which greatly simplify the implementation of new models and training procedures ~\cite{paszke2019pytorch, abadi2016tensorflow}. These systems maintain a computational graph of operations and use it to automatically compute gradients, enabling efficient training of large-scale neural networks, allows researchers to focus on designing network architectures and loss functions, while the AutoDiff system handles the intricate details of gradient computation ~\cite{baydin2018automatic}.
 
 \subsubsection{Optimisation}
 
@@ -287,7 +286,7 @@ Several advanced optimization algorithms have been developed to improve upon bas
 \end{equation}
 where $\gamma$ is the momentum coefficient.
 
-RMSprop adapts the learning rate for each parameter based on the historical gradient magnitudes ~\cite{tieleman2012lecture}:
+RMSprop adapts the learning rate for each parameter based on the historical gradient magnitudes ~\cite{kurbiel2017trainingdeepneuralnetworks}:
 \begin{equation}
     s_{t+1} = \beta s_t + (1-\beta)(\nabla \mathcal{L}(\theta_t))^2
 \end{equation}
@@ -296,7 +295,7 @@ RMSprop adapts the learning rate for each parameter based on the historical grad
 \end{equation}
 where $\beta$ is the decay rate and $\epsilon$ is a small constant for numerical stability.
 
-The most widely adopted optimizer in practice, Adam, combines ideas from momentum and RMSprop, maintaining both a running average of gradients and their squared values ~\cite{kingma2014adam}:
+The most widely adopted optimizer in practice, Adam, combines ideas from momentum and RMSprop, maintaining both a running average of gradients and their squared values ~\cite{kingma2017adammethodstochasticoptimization}:
 \begin{equation}
     m_{t+1} = \beta_1 m_t + (1-\beta_1)\nabla \mathcal{L}(\theta_t)
 \end{equation}
@@ -308,13 +307,13 @@ The most widely adopted optimizer in practice, Adam, combines ideas from momentu
 \end{equation}
 where $\hat{m}_{t+1}$ and $\hat{v}_{t+1}$ are bias-corrected estimates of $m_{t+1}$ and $v_{t+1}$ respectively.
 
-These advanced optimizers often lead to faster convergence and better generalization in practice ~\cite{ruder2016overview}.
+These advanced optimizers often lead to faster convergence and better generalization in practice ~\cite{ruder2017overviewgradientdescentoptimization}.
 
 \subsubsection{Initialisation}
 
 Proper initialization of neural network parameters is crucial for effective training. The naive approach of initialising all weights to zero is not viable, as this would cause all neurons to learn the same features. Two popular initialization methods have been developed.
 
-Xavier Initialization, proposed by Glorot and Bengio, is designed to maintain the variance of activations and gradients across layers. For a layer with $n_{in}$ input units and $n_{out}$ output units, weights are initialised from a uniform distribution:
+Xavier Initialization, proposed by Glorot and Bengio \cite{glorot2010understanding}, is designed to maintain the variance of activations and gradients across layers. For a layer with $n_{in}$ input units and $n_{out}$ output units, weights are initialised from a uniform distribution:
 
 \begin{equation}
     W \sim U\left(-\sqrt{\frac{6}{n_{in} + n_{out}}}, \sqrt{\frac{6}{n_{in} + n_{out}}}\right)
@@ -322,7 +321,7 @@ Xavier Initialization, proposed by Glorot and Bengio, is designed to maintain th
 
 This initialization works well for layers with linear activations or tanh activations, helping to prevent the vanishing or exploding gradient problem in deep networks.
 
-He Initialization, proposed by He et al., is particularly suited for layers with ReLU activations. In this method, weights are initialised from a normal distribution:
+He Initialization \cite{he2015delvingdeeprectifierssurpassing} proposes initialising weights for layers with ReLU activations from a normal distribution:
 
 \begin{equation}
     W \sim N\left(0, \sqrt{\frac{2}{n_{in}}}\right)
@@ -330,7 +329,7 @@ He Initialization, proposed by He et al., is particularly suited for layers with
 
 This approach helps maintain the variance of the outputs, which is especially important for deep networks with ReLU activations, as it prevents vanishing or exploding gradients.
 
-Both Xavier and He initialization methods aim to set initial parameters that neither shrink nor amplify the input signal excessively. By doing so, they facilitate smoother optimization and faster convergence during the training process, ultimately leading to more effective and efficient neural network models \cite{glorot2010understanding, he2015delving}.
+Both Xavier and He initialization methods aim to set initial parameters that neither shrink nor amplify the input signal excessively. By doing so, they facilitate smoother optimization and faster convergence during the training process, ultimately leading to more effective and efficient neural network models.
 
 \subsubsection{Normalisation}
 
@@ -348,13 +347,13 @@ Layer Normalisation, proposed by Ba et al. \cite{ba2016layer}, normalizes the in
 \end{equation}
 where $\mu$ and $\sigma^2$ are the mean and variance computed over all features for each data point.
 
-Both Batch Normalisation and Layer Normalisation help stabilize the distribution of layer inputs throughout training, mitigating the vanishing/exploding gradient problem and enabling more efficient training of deep neural networks \cite{santurkar2018does}. These techniques maintain appropriate scaling of activations and gradients throughout the network during the entire training process.
+Both Batch Normalisation and Layer Normalisation help stabilize the distribution of layer inputs throughout training, mitigating the vanishing/exploding gradient problem and enabling more efficient training of deep neural networks \cite{santurkar2019does}. These techniques maintain appropriate scaling of activations and gradients throughout the network during the entire training process.
 
 \subsection{Regularisation}
 
 Regularisation techniques are employed to prevent overfitting and improve the generalisation of neural networks \cite{goodfellow2016deep}. Overfitting occurs when a model learns the training data too well, and thereby learns also its noise and peculiarities, leading to poor performance on unseen data. This can happen because the model becomes too complex and starts to memorize the training examples rather than learning general patterns. Regularisation methods aim to strike a balance between fitting the training data and maintaining performance on unseen data \cite{bishop2006pattern}.
 
-Dropout, for example, randomly "drops out" a proportion of neurons during training, forcing the network to learn more robust features \cite{srivastava2014dropout}. During inference, all neurons are used but their outputs are scaled:
+Dropout, for example, randomly "drops out" a proportion of neurons during training, forcing the network to learn more robust features \cite{dropout}. During inference, all neurons are used but their outputs are scaled:
 
 \begin{equation}
     y = f(Wx) \odot m, \quad m_i \sim \text{Bernoulli}(p)
@@ -379,7 +378,7 @@ These regularisation techniques, often used in combination, help in training mor
 Natural Language Processing (NLP) has evolved significantly over the years, with various techniques developed to represent and analyze textual data. This section explores the historical approaches to language representation that laid the foundation for modern NLP methods. We will discuss three key techniques that were widely used before the advent of deep neural networks: N-grams, Word Document Frequency, and Topic Modelling. These methods played crucial roles in tasks such as text classification, information retrieval, and document analysis, and their principles continue to influence contemporary NLP approaches \cite{manning1999foundations}.
 
 \subsection{N-grams}
-N-grams are contiguous sequences of n items from a given sample of text or speech. In the context of natural language processing, these items are typically words or characters. N-grams have been a fundamental technique in language modeling and various NLP tasks for several decades \cite{jurafsky2000speech}.
+N-grams are contiguous sequences of n items from a given sample of text or speech. In the context of natural language processing, these items are typically words or characters. N-grams have been a fundamental technique in language modeling and various NLP tasks for several decades.
 
 The concept of n-grams was introduced in the early days of computational linguistics. One of the seminal papers that popularised the use of n-grams in language modeling is "A Mathematical Theory of Communication" by Claude Shannon (1948), which laid the foundation for information theory and introduced the idea of using probabilistic models for language \cite{shannon1948mathematical}.
 
@@ -387,7 +386,7 @@ N-grams achieved state-of-the-art performance in many NLP tasks throughout the 1
 
 Google Translate, one of the most widely used machine translation systems, initially relied heavily on n-gram models. Specifically, it used a 5-gram language model, as described in the paper "Large Language Models in Machine Translation" by Brants et al. (2007). This approach allowed Google Translate to capture local context and produce more fluent translations compared to earlier rule-based systems \cite{brants2007large}.
 
-However, despite their historical success, n-grams have limitations that make them sub-optimal for modern language models. One significant limitation is their restricted context, as n-grams can only capture local context within a fixed window size. This constraint makes it challenging to model long-range dependencies in language, which are crucial for understanding complex sentences and maintaining coherence across paragraphs \cite{bengio2003neural}. Another issue is sparsity; as n increases, the number of possible n-grams grows exponentially, leading to data sparsity issues. This makes it difficult to estimate probabilities for rare or unseen n-grams accurately \cite{katz1987estimation}. N-gram models also lack semantic understanding, treating words as discrete symbols without considering their meaning or relationships. This limitation hinders their ability to capture semantic similarities between words or phrases \cite{mikolov2013distributed}. Additionally, traditional n-gram models operate on a fixed vocabulary, making it difficult to handle out-of-vocabulary words or adapt to new domains \cite{jelinek1980interpolated}. Lastly, the memory requirements for n-gram models can be substantial, as storing probabilities for all possible n-grams can be memory-intensive, especially for large values of n \cite{heafield2011kenlm}.
+However, despite their historical success, n-grams have limitations that make them sub-optimal for modern language models. One significant limitation is their restricted context, as n-grams can only capture local context within a fixed window size. This constraint makes it challenging to model long-range dependencies in language, which are crucial for understanding complex sentences and maintaining coherence across paragraphs \cite{bengio2003neural}. Another issue is sparsity; as n increases, the number of possible n-grams grows exponentially, leading to data sparsity issues. This makes it difficult to estimate probabilities for rare or unseen n-grams accurately \cite{katz1987estimation}. N-gram models also lack semantic understanding, treating words as discrete symbols without considering their meaning or relationships. This limitation hinders their ability to capture semantic similarities between words or phrases \cite{mikolov2013distributed}. Additionally, traditional n-gram models operate on a fixed vocabulary, making it difficult to handle out-of-vocabulary words or adapt to new domains \cite{jelinek1990self}. Lastly, the memory requirements for n-gram models can be substantial, as storing probabilities for all possible n-grams can be memory-intensive, especially for large values of n \cite{heafield2011kenlm}.
 
 \begin{tikzpicture}[
     box/.style={draw, rectangle, minimum width=2cm, minimum height=1cm},
@@ -496,7 +495,7 @@ Where:
 Griffiths and Steyvers \cite{griffiths2004finding} applied LDA to analyze the abstracts of papers published in Proceedings of the National Academy of Sciences (PNAS), 
 extracting 300 topics from 28,154 abstracts published 1991 to 2001. The model captured the rise and fall of scientific topics over time, reflecting changing research trends.
 Topic modelling techniques like LDA has been widely adopted in social sciences, providing researchers with powerful tools to explore and analyze large text collections, 
-but superior alternatives based on prompting large language models have emerged ~\cite{WangPrakashPromptTopic}. LDA itself is unsuitable for language modelling  in its
+but superior alternatives based on prompting large language models have emerged ~\cite{wang2023promptinglargelanguagemodels}. LDA itself is unsuitable for language modelling  in its
 ability for language modelling due to its bag-of-word assumption which hides semantic information and fixed topic assumption.  
 
 \section{Embeddings}
@@ -618,10 +617,10 @@ Where:
 
 This mechanism allows the model to weigh the importance of different parts of the input when producing each part of the output. The dot product of the query with all the keys measures how much attention to pay to each value when producing an output.
 
-Another vital technique from NMT adopted in current language models is Byte Pair Encoding (BPE). This was originally a method for data compression \cite{PhilipGage1994}, but was adapted to neural machine translation to help address the problem of representing rare or out of vocab words\cite{sennrich2015neural}. BPE iteratively merges most frequent pair of symbols in a sequence to create new symbols. To help address the issue of out-of-vocabulary words, it usually operates on subword units, which are obtained by breaking words into subword units. This approach improves the model's ability to handle rare words and generalize across different languages and domains, making it useful in multilingual machine translation, for example.
+Another vital technique from NMT adopted in current language models is Byte Pair Encoding (BPE). This was originally a method for data compression \cite{gage}, but was adapted to neural machine translation to help address the problem of representing rare or out of vocab words\cite{sennrich2015neural}. BPE iteratively merges most frequent pair of symbols in a sequence to create new symbols. To help address the issue of out-of-vocabulary words, it usually operates on subword units, which are obtained by breaking words into subword units. This approach improves the model's ability to handle rare words and generalize across different languages and domains, making it useful in multilingual machine translation, for example.
 
 \section{Transformers and Beyond}
-The field of NLP underwent a revolutionary change with the introduction of the Transformer architecture, as presented in the seminal paper "Attention Is All You Need" by Vaswani et al. \cite{vaswani2017attention}. The paper introduced a novel architecture, eschewing convolution and recurrence to rely entirely on attention mechanisms.
+The field of NLP underwent a revolutionary change with the introduction of the Transformer architecture, as presented in the seminal paper "Attention Is All You Need" by Vaswani et al. \cite{vaswani2023attentionneed}. The paper introduced a novel architecture, eschewing convolution and recurrence to rely entirely on attention mechanisms.
 
 \begin{figure}[h]
     \centering
@@ -666,7 +665,7 @@ The model uses the Transformer encoder architecture, with 12/24 Transformer laye
 After pretraining, BERT can be fine-tuned with just one additional output layer for a wide variety of NLP tasks, including sentiment analysis, natural language inference, named entity recognition, question answering, and text classification. 
 This fine-tuning process allows BERT to adapt its pretrained knowledge to specific downstream tasks with minimal task-specific parameters, leading to state-of-the-art results on numerous NLP benchmarks.
 
-BERT's success demonstrated the power of unsupervised pretraining and transfer learning in NLP, paving the way for a new paradigm in language understanding models. BERT has limitations, such as a fixed-length context window and potential pretraining-finetuning mismatch, but despite these BERT's impact on NLP has been profound, inspiring numerous follow-up works and improvements that have further advanced the field of natural language understanding and generation. Models like RoBERTa (larger training data and no NSP) \cite{liu2019roberta}, ALBERT (significant parameter reduction) \cite{lan2019albert}, and DistilBERT (knowledge distillation) \cite{sanh2019distilbert} improved upon BERT, however they won't be discussed in the interest of time. 
+BERT's success demonstrated the power of unsupervised pretraining and transfer learning in NLP, paving the way for a new paradigm in language understanding models. BERT has limitations, such as a fixed-length context window and potential pretraining-finetuning mismatch, but despite these BERT's impact on NLP has been profound, inspiring numerous follow-up works and improvements that have further advanced the field of natural language understanding and generation. Models like RoBERTa (larger training data and no NSP) \cite{liu2019roberta}, ALBERT (significant parameter reduction) \cite{lan2020albert}, and DistilBERT (knowledge distillation) \cite{sanh2020distilbert} improved upon BERT, however they won't be discussed in the interest of time. 
 
 \subsubsection{GPT-2}
 GPT-2, introduced by Radford et al. in 2019 \cite{radford2019language}, was a groundbreaking language model that demonstrated the potential of large-scale unsupervised pre-training. With 1.5 billion parameters (weights), GPT-2 was trained on a dataset of 8 million web pages. Unlike typical Transformer models that include both encoder and decoder components, GPT-2 exclusively uses the decoder part. This architecture is particularly well-suited for language modeling and text generation tasks.
@@ -698,12 +697,12 @@ However, its unprecedented scale led to remarkable improvements in performance a
 
 \subsection{Few-Shot and Zero-Shot Learning}
 Large Language Models have an extraordinary ability to perform few-shot and zero-shot learning. These capabilities allow LLMs to adapt to new tasks with minimal or no task-specific training examples \cite{brown2020language}.
-Few-shot learning denotes the model's ability to perform a new task after seeing only a small number of examples \cite{wang2020generalising}. This approach has shown remarkable success in various NLP tasks, including text classification, named entity recognition, and question answering \cite{gao2021making}. 
+Few-shot learning denotes the model's ability to perform a new task after seeing only a small number of examples. This approach has shown remarkable success in various NLP tasks, including text classification, named entity recognition, and question answering \cite{lin2022fewshotlearningmultilinguallanguage}. 
 Zero-shot learning, on the other hand, involves the model's capacity to perform tasks without any task-specific examples \cite{xian2018zero}. 
 This capability relies heavily on the model's pre-training and the formulation of the task in natural language. 
-Radford et al. \cite{radford2019language} demonstrated zero-shot task transfer with GPT-2 already. For instance, when given a news article and prompted with "TL;DR:" the model was able to generate a summary of the article without any specific training for summarization tasks. This showcases the model's ability to understand and perform a new task based solely on the context provided in the prompt, illustrating the potential for language models to generalize to unseen tasks. This capability enables models to perform tasks without explicit fine-tuning, making them highly versatile and adaptable to new scenarios \cite{min2022rethinking}.
+Radford et al. \cite{radford2019language} demonstrated zero-shot task transfer with GPT-2 already. For instance, when given a news article and prompted with "TL;DR:" the model was able to generate a summary of the article without any specific training for summarization tasks. This showcases the model's ability to understand and perform a new task based solely on the context provided in the prompt, illustrating the potential for language models to generalize to unseen tasks. This capability enables models to perform tasks without explicit fine-tuning, making them highly versatile and adaptable to new scenarios \cite{min2024rethinking}.
 
-Few and zero shot learning are particularly promising in low resource domains where task-specific labeled data is scarce \cite{hedderich2021survey}, for example low-resource language translation \cite{garcia2020multilingual} and domain adaptation \cite{gururangan2020don}. This is especially useful in the context of VC deal analysis because training material is difficult to obtain due to data privacty issues. The zero- and few-shot  of LLMs greatly diminish the cost required to create 'intelligent' applications, by allowing developers to craft prompts which activate latent spaces of an LLM's distribution to perform well at a novel task, without the requirement of having a propreitary dataset to fine tune on.
+Few and zero shot learning are particularly promising in low resource domains where task-specific labeled data is scarce \cite{hedderich2021survey}, for example low-resource language translation \cite{garcia2020multilingual}. This is especially useful in the context of VC deal analysis because training material is difficult to obtain due to data privacty issues. The zero- and few-shot  of LLMs greatly diminish the cost required to create 'intelligent' applications, by allowing developers to craft prompts which activate latent spaces of an LLM's distribution to perform well at a novel task, without the requirement of having a propreitary dataset to fine tune on.
 
 \subsubsection{Prompting}
 
@@ -750,13 +749,13 @@ DPO simplifies the process by optimising the policy to match human preferences d
 
 The DPO objective can be expressed as:
 \[\mathcal{L}_{\text{DPO}} = -\mathbb{E}_{(x,y_w,y_l)\sim \mathcal{D}}[\log \sigma(\beta(\log p_\theta(y_w|x) - \log p_\theta(y_l|x)))]\]
-where $y_w$ and $y_l$ are the preferred and non-preferred outputs respectively, $\sigma$ is the sigmoid function, and $\beta$ is a temperature parameter. DPO offers a more stable and computationally efficient approach to aligning language models with human preferences. Although DPO substantially reduces complexity by removing the need for a reward model, it has been shown to have limitations \cite{dposuperiortoppo_xu}.
+where $y_w$ and $y_l$ are the preferred and non-preferred outputs respectively, $\sigma$ is the sigmoid function, and $\beta$ is a temperature parameter. DPO offers a more stable and computationally efficient approach to aligning language models with human preferences. Although DPO substantially reduces complexity by removing the need for a reward model, it has been shown to have limitations \cite{xu2024dposuperiorppollm}.
 
 
 \subsection{Multimodal Models}
 Large Language Models (LLMs) have expanded from text-only processing to incorporate multiple modalities. This integration allows for more comprehensive understanding and generation of content across different media types. A significant advancement in multimodal processing is the development of CLIP (Contrastive Language-Image Pre-training) by Radford et al. \cite{radford2021cliplearning}. CLIP connects visual and textual information through a joint embedding space. The model is trained on a diverse dataset of image-text pairs from the internet, learning to associate images with their textual descriptions. It consists of an image and text encoder, trained to maximize the cosine similarity between the embeddings of matching image-text pairs while minimising it for non-matching pairs.
 
-SigLIP (Sigmoid Loss for Language Image Pre-training) \cite{zhai2022siglip} replaces CLIP's loss with a sigmoid loss function, allowing for independent processing of each image-text pair, helping the model to scale up batch sizes effectively (otherwise the cost of performing row-wise softmax was prohibitively expensive). 
+SigLIP (Sigmoid Loss for Language Image Pre-training) \cite{zhai2023sigmoidlosslanguageimage} replaces CLIP's loss with a sigmoid loss function, allowing for independent processing of each image-text pair, helping the model to scale up batch sizes effectively (otherwise the cost of performing row-wise softmax was prohibitively expensive). 
 
 Building on a SigLIP vision encoder and Gemma-2B language model, PaliGemma was introduced as a state of the art vision langauge model. \cite{gemma2024pali} 
 Vision language models make it possible to caption figures, stored in pitch decks for example, into text which can be chunked and retrieved later.
@@ -784,11 +783,11 @@ Combining RAG with few-shot learning and prompt engineering has been shown to im
 
 
 \subsubsection{Efficient Vector Search}
-Retrieval-Augmented Generation (RAG) systems heavily rely on efficient vector search mechanisms, particularly approximate nearest neighbor (ANN) search algorithms \cite{johnson2019billion}. These algorithms are crucial for quickly identifying the most relevant information to augment language model outputs. The efficiency of vector search directly impacts the performance and usability of RAG systems, especially in real-time applications where response time is critical \cite{lewis2020retrieval}. Exhaustive search methods quickly become impractical for large-scale datasets due to their linear time complexity. This necessitates the use of approximate methods that can deliver sufficiently accurate results at a fraction of the computational cost \cite{andoni2018approximate}.
+Retrieval-Augmented Generation (RAG) systems heavily rely on efficient vector search mechanisms, particularly approximate nearest neighbor (ANN) search algorithms \cite{johnson2017billion}. These algorithms are crucial for quickly identifying the most relevant information to augment language model outputs. The efficiency of vector search directly impacts the performance and usability of RAG systems, especially in real-time applications where response time is critical \cite{lewis2020retrieval}. Exhaustive search methods quickly become impractical for large-scale datasets due to their linear time complexity. This necessitates the use of approximate methods that can deliver sufficiently accurate results at a fraction of the computational cost \cite{andoni2018approximate}.
 
 Various indexing strategies have been developed to optimize vector search for large-scale datasets. These strategies often involve preprocessing the data to create efficient data structures that facilitate faster search operations. Common approaches include tree-based methods (e.g., KD-trees, Ball trees) and graph-based methods \cite{malkov2018efficient}. Two innovations used by Moon AI are detailed belowed.
 
-Matryoshka Embeddings, introduced by Hoffer et al. \cite{hoffer2018deep}, represent an innovative approach to improving the efficiency of vector search operations. This technique introduces an auxiliary objective during the training of embedding models, resulting in a hierarchical representation of semantic information. With Matryoshka Embeddings, the truncated versions of the embeddings are trained to maintain the similarity relationship through the auxiliary objective. This property allows for a unique search strategy: starting with a low-dimensional (and thus computationally cheaper) version of the embedding, and progressively increasing the dimensionality only for the most promising candidates. This approach can significantly speed up retrieval through successive embedding model calls, effectively reducing the computational cost of similarity search without substantially sacrificing accuracy \cite{hoffer2018deep}.The hierarchical nature of Matryoshka Embeddings also provides flexibility in balancing computational resources and search accuracy. Depending on the specific requirements of a search, more or fewer dimensions of the embedding can be used, dynamically adjusting the trade-off between speed and precision \cite{hoffer2018deep}.
+Matryoshka Embeddings \cite{kusupati2024matryoshkarepresentationlearning}, represent an innovative approach to improving the efficiency of vector search operations. This technique introduces an auxilliary objective during the training of embedding models, resulting in a hierarchical representation of semantic information. With Matryoshka Embeddings, the truncated versions of the embeddings are trained to maintain the similarity relationship through the auxiliary objective. This property allows for a unique search strategy: starting with a low-dimensional (and thus computationally cheaper) version of the embedding, and progressively increasing the dimensionality only for the most promising candidates. This approach can significantly speed up retrieval through successive embedding model calls, effectively reducing the computational cost of similarity search without substantially sacrificing accuracy \cite{kusupati2024matryoshkarepresentationlearning}.The hierarchical nature of Matryoshka Embeddings also provides flexibility in balancing computational resources and search accuracy. Depending on the specific requirements of a search, more or fewer dimensions of the embedding can be used, dynamically adjusting the trade-off between speed and precision \cite{kusupati2024matryoshkarepresentationlearning}.
 
 \begin{figure}[h]
 \centering
@@ -810,7 +809,7 @@ The algorithm's search process is characterized by a hierarchical traversal of t
 
 The HNSW graph construction process is iterative, using a dynamic candidate list to efficiently create connections between nodes. The layer at which to insert a node is determined probabilistically for each node, and all nodes are inserted to all layers equal to or below their assigned layer. When adding a new node, a search starts from an entry point in the top layer, performing a greedy search through the graph layers to update a list of promising nodes with which to connect the current node. At each layer, the algorithm selects the best connections from the candidate list, with the bottom layer allowing more connections; $M_{max0}$ and $M_{max}$ are hyperparameters that define the permitted number of connections in the bottom layer and other layers respectively, with more connections permitted in the bottom layer usually. This process results in a hierarchical structure with sparse upper layers that allow long-range traversals and denser lower layers with shorter-range connections.
 
-In vector search applications, HNSW excels at finding similar vectors in high-dimensional spaces, making it ideal for tasks like semantic similarity search in RAG systems \cite{johnson2019billion}. Its ability to balance search quality and memory usage through parameter tuning allows for optimization in various scenarios, making it very popular. 
+In vector search applications, HNSW excels at finding similar vectors in high-dimensional spaces, making it ideal for tasks like semantic similarity search in RAG systems \cite{johnson2017billion}. Its ability to balance search quality and memory usage through parameter tuning allows for optimization in various scenarios, making it very popular. 
 
 \subsection{Inference: Expanding Context Lengths and Decreasing Costs}
 In addition to improving RAG pipelines, expanding context lengths can help reduce the risk of hallucination by grounding the output with more context. The computational cost associated with inference is continuing to decrease, further contributing to the viability of language model applications. 
@@ -819,17 +818,17 @@ Beltagy et al. introduced the Longformer \cite{beltagy2020longformer}, which pre
 
 Sparse attention patterns have also emerged as a key strategy for managing long sequences. Child et al. \cite{child2019generating} proposed the Sparse Transformer, which uses fixed sparse attention patterns to reduce the quadratic complexity of self-attention to $O(n\sqrt{n})$. This approach enables the processing of much longer sequences than traditional transformer models.
 
-These advancements have significant applications in document-level tasks. For instance, Zaheer et al. \cite{zaheer2020big} demonstrated the effectiveness of sparse attention models in tasks such as long-document classification and question-answering, where understanding the entire document context is crucial.
+These advancements have significant applications in document-level tasks. For instance, Zaheer et al. \cite{zaheer2021big} demonstrated the effectiveness of sparse attention models in tasks such as long-document classification and question-answering, where understanding the entire document context is crucial.
 
-Flash Attention, introduced by Dao et al. \cite{dao2022flashattention}, is a memory-efficient attention algorithm that significantly reduces the memory footprint and computational complexity of attention mechanisms, without approximating. Flash attention processes the data in smaller chunks so that the smaller, high-bandwidth memory can be utilised and recomputes attention matrices during the backwards pass so that the large matrices don't have to be stored in lower bandwidth memory, thus avoiding low latency calls. With these techniques informed by the memory hierarchy, Flash Attention allows the memory requirements to scale linearly rather than quadratically with the sequence length. 
+Flash Attention, introduced by Dao et al. \cite{dao2023flashattention2fasterattentionbetter}, is a memory-efficient attention algorithm that significantly reduces the memory footprint and computational complexity of attention mechanisms, without approximating. Flash attention processes the data in smaller chunks so that the smaller, high-bandwidth memory can be utilised and recomputes attention matrices during the backwards pass so that the large matrices don't have to be stored in lower bandwidth memory, thus avoiding low latency calls. With these techniques informed by the memory hierarchy, Flash Attention allows the memory requirements to scale linearly rather than quadratically with the sequence length. 
 
 These advancements are just some of many that are collectively contributing to expanding the practical applications of LLMs by enabling their use in scenarios requiring processing of longer documents, while also making their inference more cost-effective. 
 
 \subsection{Agents}
-The concept of AI agents based on (LLMs) has gained significant attention recently due to their potential for autonomous decision-making and complex task solving. A notable contribution to this field is the paper by Li et al. \cite{li2023simulacra}, which investigated emergent behavior in LLM-based agents. The authors demonstrate that these agents can exhibit complex, seemingly intelligent behaviors that were not explicitly programmed.
+The concept of AI agents based on (LLMs) has gained significant attention recently due to their potential for autonomous decision-making and complex task solving. A notable contribution to this field is the paper by Park et al. \cite{park2023generativeagentsinteractivesimulacra}, which investigated emergent behavior in LLM-based agents. The authors demonstrate that these agents can exhibit complex, seemingly intelligent behaviors that were not explicitly programmed.
 
-Multi-agent systems have shown promise in addressing complex tasks that are beyond the scope of single-agent approaches. Dafoe et al. \cite{dafoe2020open} discuss the potential of multi-agent AI systems in solving intricate, economically valuable problems across various domains.
-These systems leverage the collective intelligence of multiple LLM-based agents, often leading to more robust and creative solutions.The integration of reinforcement learning (RL) with LLMs has opened new avenues for creating more adaptive and goal-oriented agents. Luketina et al. \cite{luketina2019survey} provide a comprehensive survey of the intersection between deep learning, reinforcement learning, and natural language processing, highlighting how RL can enhance LLM-based agents' ability to learn from interaction and optimize for specific objectives.
+Multi-agent systems have shown promise in addressing complex tasks that are beyond the scope of single-agent approaches. Multi-agent can be more adept in solving intricate, economically valuable problems across various domains \cite{chen2024autoagentsframeworkautomaticagent}. 
+These systems leverage the collective intelligence of multiple LLM-based agents, often leading to more robust and creative solutions. A future avenue of progress in multi-agent systems will be the coordination and planning of indiviual agents, using techniques historically studied in Reinforcement Learning, to create more adaptive and goal-oriented agents. Luketina et al. \cite{luketina2019survey} provide a comprehensive survey of the intersection between reinforcement learning, and natural language processing.
 
 \subsection{Conclusion}
 In conclusion, language models have reached a stage where building applications is not only feasible but can also create economically valuable products. Issues around hallucination will gradually disappear as performance continues to scale, RAG pipelines are improved and context lengths become longer.
@@ -842,7 +841,7 @@ The VC ecosystem primarily consists of two key players: Limited Partners (LPs) a
 
 Investments in startups are often categorised into stages: Seed, Series A, B, C, and later stages. Each stage represents a different phase of a company's growth and involves varying levels of capital and risk \cite{hellmann2002venture}. Seed funding supports early concept development, while later stages focus on scaling and expansion.
 
-The venture capital investment lifecycle encompasses several critical stages, each contributing to the strategic deployment of capital in high-potential startups \cite{gompers2004venture}. Initially, deal sourcing involves identifying promising investment opportunities through various channels, including industry networks and proprietary databases \cite{sorenson2001syndication}. Subsequently, initial screening filters potential investments based on predetermined criteria aligned with the VC firm's investment thesis \cite{petty1994harvesting}. The due diligence phase then entails a comprehensive evaluation of selected startups, scrutinising their business models, market potential, team capabilities, and financial projections \cite{fried2003venture}. Following a positive assessment, term sheet negotiation and deal closing formalize the investment structure \cite{kaplan2003financial, cumming2006contracts}. Post-investment, VCs typically provide ongoing support to portfolio companies, leveraging their expertise and networks to enhance value \cite{sapienza1996venture}. The lifecycle culminates in an exit event, such as an IPO or acquisition, realising returns on the investment \cite{cumming2008preplanned}.
+The venture capital investment lifecycle encompasses several critical stages, each contributing to the strategic deployment of capital in high-potential startups \cite{gompers2004venture}. Initially, deal sourcing involves identifying promising investment opportunities through various channels, including industry networks and proprietary databases. Subsequently, initial screening filters potential investments based on predetermined criteria aligned with the VC firm's investment thesis \cite{petty2011}. The due diligence phase then entails a comprehensive evaluation of selected startups, scrutinising their business models, market potential, team capabilities, and financial projections. Following a positive assessment, term sheet negotiation and deal closing formalize the investment structure. Post-investment, VCs typically provide ongoing support to portfolio companies, leveraging their expertise and networks to enhance value \cite{sapienza1996venture}. The lifecycle culminates in an exit event, such as an IPO or acquisition, realising returns on the investment.
 
 \section{VC fund structure}
 
@@ -871,7 +870,7 @@ U_{GPc} = \begin{cases}
 U_{GPr} = fl(r-1)
 \end{equation}
 
-Jafri et al showed that the "highest leverage action is to increase the size of the fund or increase the management fee, rather than improve the value of the underlying equity" \cite{Jafri_distributed_vc} in a simple model without hurdle rates. We expand on this by showing that even with the hurdle rates and GP commit considered, the incentive for GPs remains to increase management fees or increase AUM, rather than improving the underlying equity value.
+Jafri et al showed that the "highest leverage action is to increase the size of the fund or increase the management fee, rather than improve the value of the underlying equity" \cite{jafri_distributed_vc} in a simple model without hurdle rates. We expand on this by showing that even with the hurdle rates and GP commit considered, the incentive for GPs remains to increase management fees or increase AUM, rather than improving the underlying equity value.
 
 \begin{figure}[htbp]
     \centering
@@ -915,7 +914,7 @@ In venture capital, returns typically follow a power law distribution, which can
 f(x) = \frac{\alpha - 1}{x_{\text{min}}} \left(\frac{x}{x_{\text{min}}}\right)^{-\alpha} \quad \text{for } x \geq x_{\text{min}}
 \end{equation}
 
-Where $f(x)$ is the probability of an investment returning $x$ times the initial investment, and $\alpha$ is the power law exponent, typically between 2 and 3 for venture capital returns \cite{clauset2009power}. This distribution implies that the probability of extremely high returns, while low, is significantly higher than what would be expected in a normal distribution. This phenomenon, which entails that a small number of investments generate the majority of returns, fundamentally shapes how venture capitalists approach fund management and investment decisions \cite{peter2015power}: they focus on startups startups with potentially massive markets, scalable business models and business models that could be outcomes on the long tail of the power law. This also explains why VCs are often willing to accept high valuations for promising startups - the potential upside of a fund-returning investment can justify taking on significant risk and paying a premium price.
+Where $f(x)$ is the probability of an investment returning $x$ times the initial investment, and $\alpha$ is the power law exponent \cite{clauset2009power}, typically around 2 for venture capital returns \cite{farina_arpaia_2023_venture_capital_portfolio_construction}. This distribution implies that the probability of extremely high returns, while low, is significantly higher than what would be expected in a normal distribution. This phenomenon, which entails that a small number of investments generate the majority of returns, fundamentally shapes how venture capitalists approach fund management and investment decisions: they focus on startups startups with potentially massive markets, scalable business models and business models that could be outcomes on the long tail of the power law. This also explains why VCs are often willing to accept high valuations for promising startups - the potential upside of a fund-returning investment can justify taking on significant risk and paying a premium price.
 
 In reality, startup returns are even more extremely distributed, with the vast majority of startups that return less than 1x returning 0x \cite{othman2019startup}.
 \begin{figure}[htbp]
@@ -990,7 +989,7 @@ Recent advancements in language models have led to the development of investment
 
 The development of InvestLM contributes to the growing field of financial domain language models, which aim to process extensive financial texts and improve investment decision-making. However, it is noted that many of these models, including BloombergGPT and InvestLM, primarily focus on "high finance" applications \cite{yang2023investlm}. The study also provides support for the superficial alignment hypothesis, suggesting that knowledge acquired during pre-training and fine-tuning primarily aligns output with specific formats.
 
-Other notable contributions in this field include FinBERT, a financial language model based on BERT architecture; FinMA, which fine-tunes language models on financial NLP benchmarks with instruction-formatted questions; and FinGPT, which focuses on news and tweet sentiment analysis, albeit with limited generalizability to other tasks \cite{araci2019finbert, liu2023finma, yang2023fingpt}. These models represent the ongoing efforts to adapt large language models to specific financial applications, although challenges remain in achieving broad applicability across various financial tasks.
+Other notable contributions in this field include FinBERT, a financial language model based on BERT architecture; FinMA, which fine-tunes language models on financial NLP benchmarks with instruction-formatted questions; and FinGPT, which focuses on news and tweet sentiment analysis, albeit with limited generalizability to other tasks \cite{araci2019finbert, xie2023pixiulargelanguagemodel, yang2023fingpt}. These models represent the ongoing efforts to adapt large language models to specific financial applications, although challenges remain in achieving broad applicability across various financial tasks.
 
 \subsubsection{Network-Based Approach to Predicting Success}
 
@@ -998,7 +997,7 @@ Venture capital ecosystems can be modelled as complex graphs, and research has f
 
 One study applied link prediction techniques to bipartite graphs for identifying potential investment opportunities in venture capital networks \cite{predictVCbipartite}. It modeled the investment landscape as a bipartite graph, with investors and companies as nodes, and investments as edges. The study compared three link prediction models: Random Link Prediction (baseline), Preferential Attachment (PA), and Segmented Preferential Attachment (SPA). Results showed that PA and SPA significantly outperformed random prediction, with PA achieving better overall F1 scores and SPA demonstrating higher maximum precision.
 
-In contrast, a more recent study by Lyu et al. \cite{lyu2023graph} employed graph neural networks for predicting startup success. This approach utilised a comprehensive dataset from PitchBook and proposed an incremental graph representation learning method. The key components of this method were multifaceted. Firstly, it involved the construction of a bipartite graph network that represented the intricate relationships between individuals and startups. Secondly, the method incorporated Graph Self-Attention (GST) for node-level representation learning, enabling the capture of complex interactions within the network. Thirdly, it implemented an incremental updating mechanism for representations as the network evolved over time, ensuring the model's adaptability to dynamic ecosystems. Fourthly, the approach employed supervised fine-tuning using link prediction and node classification tasks, enhancing the model's predictive capabilities. Lastly, it utilised sequential modeling of node representations over time using Long Short-Term Memory (LSTM) networks, allowing for the capture of temporal dependencies in startup trajectories.
+In contrast, a more recent study by Lyu et al. \cite{lyu2021graph} employed graph neural networks for predicting startup success. This approach utilised a comprehensive dataset from PitchBook and proposed an incremental graph representation learning method. The key components of this method were multifaceted. Firstly, it involved the construction of a bipartite graph network that represented the intricate relationships between individuals and startups. Secondly, the method incorporated Graph Self-Attention (GST) for node-level representation learning, enabling the capture of complex interactions within the network. Thirdly, it implemented an incremental updating mechanism for representations as the network evolved over time, ensuring the model's adaptability to dynamic ecosystems. Fourthly, the approach employed supervised fine-tuning using link prediction and node classification tasks, enhancing the model's predictive capabilities. Lastly, it utilised sequential modeling of node representations over time using Long Short-Term Memory (LSTM) networks, allowing for the capture of temporal dependencies in startup trajectories.
 
 The graph neural network approach outperformed all baselines, including human investors and traditional machine learning methods, achieving up to 1.94x better performance than human investors. It showed particularly strong results for startups in IT, healthcare, and B2C industries.
 
