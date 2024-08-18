@@ -12,7 +12,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % DOCUMENT METADATA
 
-\thesistype{Towards more data-driven, and less biased decisions in startup investing with AI workflows} % Master's Thesis, Bachelor's Thesis, Semester Thesis, Group Project
+\thesistype{Towards more automated, data-driven decisions in startup investing with AI workflows} % Master's Thesis, Bachelor's Thesis, Semester Thesis, Group Project
 \title{Moon AI: automating VC}
 
 \author{Angelo Giacco}
@@ -52,7 +52,6 @@ I owe as always a special debt of gratitude to my family for their love and supp
 \end{acknowledgements}
 
 
-
 \begin{abstract}
     The venture capital (VC) industry has in recent years experienced a significant shift towards a solo General Partner (GP) model, where a single partner, often a successful former founder or early hire at a unicorn, raises a fund to invest in upcoming entrepreneurs. Solo-GPs are more agile but lack the platform services and in depth analysis available to VC firms with large teams. Simultaneously, Large Langauge Models (LLMs) have emerged as powerful multi-task learners. This has led to the emergence of AI-copilots powered by LLMs for multi-task reasoning emerging in various verticals. 
     
@@ -88,19 +87,19 @@ Diese Arbeit bietet einen Überblick über die Fortschritte in der Natürlichen 
 
 The venture capital (VC) industry stands at the forefront of innovation, playing a crucial role
 in identifying and nurturing startups that have the potential to disrupt industries and drive
-economic growth. Indeed, Acs et al. ~\cite{acs} find that startups are key catalysts for economic growth, 
-not only creating new markets but also stimulate competition and innovation in existing ones, bringing economic dynamism across multiple sectors. 
+economic growth. Startups are key catalysts for economic growth, 
+that not only create new markets but also stimulate competition and innovation in existing ones, bringing economic dynamism across multiple sectors ~\cite{acs}. 
 
-The VC industry invests in startups with significant potential to disrupt industries and drive economic growth. 
+VCs invest in startups with significant potential to disrupt industries and drive economic growth. 
 VC investments returns follow a power law distribution, with a long tail of successful investments. 
 A study of 21,000 financings from 2004-2013 by Correlation Ventures found that 65\% of financings fail to return 1x capital ~\cite{levine2014venture}, 
 thus the remaining 35\% must return significantly more to generate a net-return that is acceptable. 
-VCs rely on a small number of portfolio investments to achieve outstanding paybacks: enough to cover for losses and
-still produce substantial profits. To generate these substantial outcomes, startups rely on the external funding from VCs
+VCs rely on a small number of their portfolio investments to achieve outstanding paybacks: enough to cover for losses and
+still produce substantial profits. To generate these substantial outcomes, startups in turn rely on the external funding from VCs
 to achieve rapid growth, often depicted by a "hockey stick" growth curve ~\cite{marmer}.
 
 The power law nature of startups means that the competition to get on the best deals is incredibly intense, and those 
-deals are also the only ones that matter. The top 2\% of VC funds capture 95\% of industry
+deals are the only ones that matter. The top 2\% of VC funds capture 95\% of industry
 returns ~\cite{bai}. Particularly at the earliest stage of the investment lifecycle (pre- Series A), there is a scarcity of
 reliable information ~\cite{dellermann}. As a result, VCs often rely heavily on human judgment which is prone to bias. 
 This may yield sub-optimal decisions ~\cite{cummingdai} and could explain why women-led startups only received 2.1\% of all venture capital invested in 2023 ~\cite{pitchbook2024vc}.
@@ -115,14 +114,15 @@ For example, graph neural networks have been used to predict a startup's success
 These models can integrate diverse data sources, including structured information about startups, founders, and investors ~\cite{corea}, as well as unstructured data from social networks and web sources. 
 Preliminary findings suggest that AI-augmented VCs may be more likely to back founders from underrepresented backgrounds, potentially addressing systemic biases in the industry ~\cite{futureVC}.
 
-In recent years, the VC landscape has experienced a shift towards the practice solo General Partners (GPs)  raising funds, meanwhile fund raising has been increasingly strained for non-elite VC firms since the end of zero interest rates. Unlike traditional VC firms, with rigid investment deal processes, solo GPs can make investment decisions quickly and independently, which is particularly valuable in competitive deal environments where rapid decision-making can be crucial.
+In recent years, there has been an increased presence of solo General Partners (GPs)  raising funds, whilst fund raising has been increasingly strained for non-elite VC firms since the end of zero interest rates. Unlike traditional VC firms, with rigid investment deal processes, solo GPs can make investment decisions quickly and independently, which is particularly valuable in competitive deal environments where rapid decision-making can be crucial.
 In contrast, the formation of new traditional VC firms has slowed in recent years. This can be attributed to several factors, including the trend towards larger fund sizes, which makes it challenging for new firms to compete and gain traction with the returns from the VC industry becoming concentrated among well-established firms that enjoy significant advantages in deal flow and fundraising. 
-The difficulty for smaller VCs to raise funds means they will have less resources for research, contributing to their worse performance.
+The difficulty for smaller VCs to raise funds constrains resources for research, further limiting their ability to outperform the market.
 
-Solo GPs and smaller funds have extremely limited resources which may amplify the issues of bias and incomplete information in the investment process, forcing them to  focus on a narrower pool of potential investments, potentially overlooking promising opportunities outside their immediate network (Huang et al., 2020). Furthermore, without the resources to explore a wide range of sectors or geographies, solo GPs might gravitate towards familiar industries or founder profiles, potentially limiting the diversity of their investment portfolios (Gompers et al., 2021) and limiting opportunities for under represented founders. In addition, the agility of solo GPs will intensify the competition and rush to produce term sheets for 'hot' startups. 
+The limited resources of Solo GPs and smaller funds may amplify the issues of bias and incomplete information in the investment process, forcing them to focus on a narrower pool of potential investments, potentially overlooking promising opportunities outside their immediate network ~\cite{huang2023networks}. Furthermore, without the resources to explore a wide range of sectors or geographies, solo GPs might gravitate towards familiar industries or founder profiles, potentially limiting the diversity of their investment portfolios ~\cite{GOMPERS2020169} and limiting opportunities for underrepresented founders. In addition, the agility of solo GPs will intensify the competition and rush to produce term sheets for 'hot' startups. 
 
 In response to these challenges, a project at the ETH AI Center of ETH Zurich aims to introduce automation to VC firms and facilitate the adoption of data-driven investing practices. 
-The project focuses on developing an AI-powered tool for generating investment memoranda. This approach aims to streamline the decision-making process for investment analysts, significantly reducing the time spent on screening potential investments. 
+The project focuses on developing a CRM to help a VC fund manage its deal pipeline that integrates an LLM-powered tool for generating investment memoranda. This approach aims to streamline the decision-making process for investment analysts, significantly reducing the time spent on screening potential investments. 
+
 Utilising multimodal data and state-of-the-art language models, the system aggregates diverse data sources, including pitch decks, financial data, and web information, to provide a comprehensive analysis of investment opportunities.
 Furthermore, this project introduces tools for data-driven investing that aim to reduce bias in the investment process by incorporating objective insights, broadening investment scope, identifying overlooked startups, informing decisions with diverse data points, and standardising evaluation processes. Developing the MoonAI product is the first phase of this project; subsequent research will analyse its ability to reduced bias decision making. 
 
@@ -132,11 +132,10 @@ analysis. Second, it introduces a data-driven approach to complement human intui
 investment process, potentially reducing biases and improving decision-making accuracy
 ~\cite{dellermann}. Finally, by streamlining the sourcing and evaluation processes, MoonAI
 could allow VCs to consider a broader range of startups by reducing the cognitive load of analysing a startup, potentially leading to a more diverse
-and inclusive investment landscape (Brush et al., 2019).
+and inclusive investment landscape.
 
 While the VC industry has been facing challenges, Large Language Models (LLMs) have emerged as powerful tools capable of multi-task reasoning and processing vast amounts of
-unstructured data (Brown et al., 2020) and transformed the field of Natural Language Processing (NLP). These advancements have led to the development of
-AI-powered copilots in various industries, augmenting human capabilities and decision-making processes.
+unstructured data and transformed the field of Natural Language Processing (NLP) ~\cite{brown2020language}. Thanks to this, AI-powered copilots are now possible in various industries, augmenting human capabilities and decision-making processes.
  Large Language Models (LLMs) are particularly well-suited to be a venture capital copilot and decision-making support for several key reasons. 
 Firstly, LLMs excel at pattern matching, a crucial skill in the venture capital industry. They can analyze vast amounts of unstructured data from various sources, 
 identifying trends, similarities, and potential success indicators that might not be immediately apparent to human analysts.
@@ -147,11 +146,9 @@ Furthermore, LLMs offer simple yet powerful workflow automation capabilities. Th
 such as initial startup screening, report generation, and even preliminary financial analysis. By automating these routine tasks, LLMs free up valuable time 
 for venture capitalists to focus on higher-level strategic decisions and relationship building with promising founders. This efficiency gain is particularly 
 beneficial for solo GPs or smaller VC firms with limited resources, allowing them to compete more effectively with larger, more established firms.
-The combination of these capabilities makes LLMs an ideal tool for augmenting human decision-making in venture capital. They can provide data-driven insights,
- reduce information asymmetry, and increase the overall efficiency of the investment process. 
+The combination of these capabilities makes LLMs an ideal tool for augmenting human decision-making in venture capital. They can provide data-driven insights, reduce information asymmetry, and increase the overall efficiency of the investment process. 
  
- As the venture capital landscape continues to evolve and 
- become more competitive, the integration of LLMs into investment workflows has the potential to significantly enhance the accuracy, speed, and scope of investment decisions, ultimately leading to better outcomes for both investors and entrepreneurs.
+As the venture capital landscape continues to evolve and become more competitive, the integration of LLMs into investment workflows has the potential to significantly enhance the accuracy, speed, and scope of investment decisions, ultimately leading to better outcomes for both investors and entrepreneurs.
 
 This thesis explores the intersection of these trends through the development of MoonAI, an
 AI-powered venture investing copilot designed to empower both solo GPs and traditional VC firms.
@@ -167,19 +164,18 @@ technical foundations of Large Language Models, provide a review of the Venture 
 \chapter{Natural Language Processing}
 
 In this section, the recent in advances in Natural Language Processing will be discussed. First, we will consider the basics of machine learning, 
-then consider the standard approaches to NLP used in the past prior to the emergence of deep learning and discuss the advances that have been made in recent years that have enabled large language models to become state of the art at virtually all tasks in the field of NLP.
+then consider the standard approaches to NLP used in the past prior to the emergence of deep learning and discuss the advances that have been made in recent years that have enabled transformer-based large language models to become state of the art at virtually all tasks in the field of NLP.
 
-Many of these advances have been possible due to the parallelizability of training thanks to the Transformer architecture which make use of advances in GPUs. How GPUs are able to parallelize the training of large language models is beyond the scope of this overview, but it is important to note that this is a significant advance that has revolutionised the field of NLP. It can be summarised as follows: GPUs have significantly accelerated the training of transformer-based models by leveraging their ability to perform massive parallel computations, which make them ideal for matrix multiplications, the operation underpinning the self-attention mechanism in transformers and the feed-forward layers. 
-GPUs excel at these tasks due to their architecture, which is designed to handle many simple calculations simultaneously.
+A key advance that won't be discussed in depth is that leading models are able to leverage Graphical Processing Units (GPUs) to parallelize the training of large language models. GPUs are able to perform massive parallel computations, intially designed for graphics operations, which make them ideal for matrix multiplications, the operation underpinning the self-attention mechanism in transformers and the feed-forward layers. GPUs excel at these tasks due to their architecture, which is designed to handle many simple calculations simultaneously.
 This GPU-driven acceleration has been a key factor in enabling the training of increasingly large and complex language models, pushing the boundaries of what's possible in NLP.
 
 Before we consider the essentials of machine learning that enable the training of large language models, let us first specify the objective of a large language model more clearly. 
-This will also motivate the use of the Transformer architecture, and clarify why other methods, from n-gram based approaches to other flavours of DL like recurrent neural networks, are not suited for the task.
+This will also motivate the use of the Transformer architecture, and clarify why other methods we will discuss are not suited for the task.
 
 \begin{theorem}[Language Modelling Objective] \label{thm:first theorem}
     Given an alphabet $\Sigma$ and a distinguished end-of-sequence symbol $\texttt{eos} \notin \Sigma$, a
     language model is a collection of conditional probability distributions $p(y \mid w)$ for $y \in \Sigma \cup \{\texttt{eos}\}$ and $w \in \Sigma^*$,
-    the Kleene closure of $\Sigma$.
+    the Kleene closure of $\Sigma$ ~\cite{cotterell2024formalaspectslanguagemodeling}.
 \end{theorem}
 
 We therefore can obtain the probability of a string according to a particular language model by autoregressively factorising:
@@ -220,14 +216,6 @@ The cross-entropy loss, denoted as $H(p,q)$, for a classification task with $C$ 
 
 where $p(i)$ is the true probability distribution (usually a one-hot encoded vector for the true class) and $q(i)$ is the predicted probability distribution from the model.
 
-For binary classification, this simplifies to:
-
-\begin{equation}
-    H(p,q) = -[y \log(\hat{y}) + (1-y) \log(1-\hat{y})]
-\end{equation}
-
-where $y$ is the true label (0 or 1) and $\hat{y}$ is the predicted probability of the positive class ~\cite{bishop2006pattern}.
-
 In the context of language modeling, where we're predicting the next token in a sequence, the cross-entropy loss is calculated over the entire vocabulary at each step:
 
 \begin{equation}
@@ -253,7 +241,7 @@ where $\theta^*$ represents the optimal set of parameters that minimizes the los
 
 \subsubsection{Gradient Descent}
 
-Gradient descent is a fundamental optimization algorithm used in training neural networks. It iteratively adjusts the model parameters in the direction of steepest descent of the loss function. The basic update rule for gradient descent is:
+Gradient descent is a fundamental optimization algorithm used in training neural networks. It adjusts the model parameters by iteratively "moving" in the direction of steepest descent of the loss function. The basic update rule for gradient descent is:
 
 \begin{equation}
     \theta_{t+1} = \theta_t - \eta \nabla \mathcal{L}(\theta_t)
@@ -273,11 +261,12 @@ Mathematically, for a composite function $f(g(x))$, the chain rule states:
     \frac{df}{dx} = \frac{df}{dg} \cdot \frac{dg}{dx}
 \end{equation}
 
-AutoDiff systems leverage this principle to compute gradients through arbitrarily complex computational graphs. Modern deep learning frameworks like PyTorch and TensorFlow have built-in AutoDiff capabilities, which greatly simplify the implementation of new models and training procedures ~\cite{paszke2019pytorch, abadi2016tensorflow}. These systems maintain a computational graph of operations and use it to automatically compute gradients, enabling efficient training of large-scale neural networks, allows researchers to focus on designing network architectures and loss functions, while the AutoDiff system handles the intricate details of gradient computation ~\cite{baydin2018automatic}.
+AutoDiff systems leverage this principle to compute gradients through arbitrarily complex computational graphs. Modern deep learning frameworks like PyTorch and TensorFlow have built-in AutoDiff capabilities, which greatly simplify the implementation of new models and training procedures ~\cite{paszke2019pytorch, abadi2016tensorflow}. These systems maintain a computational graph of operations and use it to automatically compute gradients during training-time inference, enabling efficient training of large-scale neural networks. This allows researchers to focus on designing network architectures and loss functions, while the AutoDiff system handles the intricate details of gradient computation ~\cite{baydin2018automatic}.
 
 \subsubsection{Optimisation}
 
-Several advanced optimization algorithms have been developed to improve upon basic SGD. Momentum adds a fraction of the previous update to the current one, helping to accelerate convergence and reduce oscillations ~\cite{sutskever2013importance}:
+Several advanced optimization algorithms have been developed to improve upon basic SGD, to faster reach convergence ~\cite{ruder2017overviewgradientdescentoptimization}.
+Momentum adds a fraction of the previous update to the current one, helping to accelerate convergence and reduce oscillations ~\cite{sutskever2013importance}:
 \begin{equation}
     v_{t+1} = \gamma v_t + \eta \nabla \mathcal{L}(\theta_t)
 \end{equation}
@@ -307,19 +296,15 @@ The most widely adopted optimizer in practice, Adam, combines ideas from momentu
 \end{equation}
 where $\hat{m}_{t+1}$ and $\hat{v}_{t+1}$ are bias-corrected estimates of $m_{t+1}$ and $v_{t+1}$ respectively.
 
-These advanced optimizers often lead to faster convergence and better generalization in practice ~\cite{ruder2017overviewgradientdescentoptimization}.
-
 \subsubsection{Initialisation}
 
-Proper initialization of neural network parameters is crucial for effective training. The naive approach of initialising all weights to zero is not viable, as this would cause all neurons to learn the same features. Two popular initialization methods have been developed.
+Proper initialization of neural network parameters is crucial for effective training. The naive approach of initialising all weights to zero is not viable, as this would cause all neurons to learn the same features. Two popular initialization methods are widely used, increasingly though machine learning is transitioning to fine-tuning (continued training) of pre-trained models, eschewing the need for considering initialisation. 
 
 Xavier Initialization, proposed by Glorot and Bengio \cite{glorot2010understanding}, is designed to maintain the variance of activations and gradients across layers. For a layer with $n_{in}$ input units and $n_{out}$ output units, weights are initialised from a uniform distribution:
 
 \begin{equation}
     W \sim U\left(-\sqrt{\frac{6}{n_{in} + n_{out}}}, \sqrt{\frac{6}{n_{in} + n_{out}}}\right)
 \end{equation}
-
-This initialization works well for layers with linear activations or tanh activations, helping to prevent the vanishing or exploding gradient problem in deep networks.
 
 He Initialization \cite{he2015delvingdeeprectifierssurpassing} proposes initialising weights for layers with ReLU activations from a normal distribution:
 
@@ -329,7 +314,7 @@ He Initialization \cite{he2015delvingdeeprectifierssurpassing} proposes initiali
 
 This approach helps maintain the variance of the outputs, which is especially important for deep networks with ReLU activations, as it prevents vanishing or exploding gradients.
 
-Both Xavier and He initialization methods aim to set initial parameters that neither shrink nor amplify the input signal excessively. By doing so, they facilitate smoother optimization and faster convergence during the training process, ultimately leading to more effective and efficient neural network models.
+Both Xavier and He initialization methods aim to set initial parameters that neither shrink nor amplify the input signal excessively. By doing so, they facilitate smoother optimization and faster convergence during the training process.
 
 \subsubsection{Normalisation}
 
@@ -351,19 +336,22 @@ Both Batch Normalisation and Layer Normalisation help stabilize the distribution
 
 \subsection{Regularisation}
 
-Regularisation techniques are employed to prevent overfitting and improve the generalisation of neural networks \cite{goodfellow2016deep}. Overfitting occurs when a model learns the training data too well, and thereby learns also its noise and peculiarities, leading to poor performance on unseen data. This can happen because the model becomes too complex and starts to memorize the training examples rather than learning general patterns. Regularisation methods aim to strike a balance between fitting the training data and maintaining performance on unseen data \cite{bishop2006pattern}.
+Overfitting is a phenomenon in ML when a model learns the training data too well, and thereby learns also its noise, leading to poor performance on unseen data.Regularisation techniques are employed to prevent overfitting and improve the generalisation of neural networks \cite{goodfellow2016deep}. Regularisation methods balance fitting the training data and maintaining performance on unseen data \cite{bishop2006pattern}.
 
 Dropout, for example, randomly "drops out" a proportion of neurons during training, forcing the network to learn more robust features \cite{dropout}. During inference, all neurons are used but their outputs are scaled:
 
 \begin{equation}
-    y = f(Wx) \odot m, \quad m_i \sim \text{Bernoulli}(p)
+    y = f(Wx) \odot m, \quad m_i \sim \text{Bernoulli}(p) \quad \text{(training)}
+\end{equation}
+\begin{equation}
+    y = p \cdot f(Wx) \quad \text{(inference)}
 \end{equation}
 
 where $p$ is the probability of keeping a neuron active.
 
-Early Stopping monitors the validation error during training and stops when it starts to increase, preventing the model from overfitting to the training data \cite{prechelt1998early}.
+Early Stopping monitors the validation error (error on a set separate both to train and test sets) during training and stops when it starts to increase, preventing the model from overfitting to the training data \cite{prechelt1998early}. 
 
-Weight Decay adds a penalty term to the loss function based on the L2 norm of the weights \cite{krogh1992simple}:
+Another option is Weight Decay, which adds a penalty term to the loss function based on the L2 norm of the weights \cite{krogh1992simple}:
 
 \begin{equation}
     \mathcal{L}_{new}(\theta) = \mathcal{L}(\theta) + \lambda \|\theta\|_2^2
@@ -375,14 +363,14 @@ These regularisation techniques, often used in combination, help in training mor
 
 \section{Historical Language Representations}
 
-Natural Language Processing (NLP) has evolved significantly over the years, with various techniques developed to represent and analyze textual data. This section explores the historical approaches to language representation that laid the foundation for modern NLP methods. We will discuss three key techniques that were widely used before the advent of deep neural networks: N-grams, Word Document Frequency, and Topic Modelling. These methods played crucial roles in tasks such as text classification, information retrieval, and document analysis, and their principles continue to influence contemporary NLP approaches \cite{manning1999foundations}.
+Natural Language Processing (NLP) has evolved lots over the years, with various techniques developed to represent and analyze textual data. This section explores the historical approaches to language representation that laid the foundation for modern NLP methods. We will discuss three key techniques that were widely used before the advent of deep neural networks: N-grams, Word Document Frequency, and Topic Modelling. These methods played crucial roles in tasks such as text classification, information retrieval, and document analysis, and their principles continue to influence contemporary NLP approaches \cite{manning1999foundations}.
 
 \subsection{N-grams}
 N-grams are contiguous sequences of n items from a given sample of text or speech. In the context of natural language processing, these items are typically words or characters. N-grams have been a fundamental technique in language modeling and various NLP tasks for several decades.
 
 The concept of n-grams was introduced in the early days of computational linguistics. One of the seminal papers that popularised the use of n-grams in language modeling is "A Mathematical Theory of Communication" by Claude Shannon (1948), which laid the foundation for information theory and introduced the idea of using probabilistic models for language \cite{shannon1948mathematical}.
 
-N-grams achieved state-of-the-art performance in many NLP tasks throughout the 1990s and 2000s. For instance, the paper "An Empirical Study of Smoothing Techniques for Language Modeling" by Chen and Goodman (1996) demonstrated the effectiveness of various n-gram models for language modeling tasks \cite{chen1996empirical}. Another influential work, "A Bit of Progress in Language Modeling" by Goodman (2001), showed how n-gram models could be extended and improved for better performance \cite{goodman2001bit}.
+N-grams achieved state-of-the-art performance in many NLP tasks throughout the 1990s and 2000s. For instance, the paper "An Empirical Study of Smoothing Techniques for Language Modeling" by Chen and Goodman (1996) demonstrated the effectiveness of various n-gram models for language modeling tasks \cite{chen1996empirical}. Another influential work, "A Bit of Progress in Language Modeling" by Goodman (2001), showed how n-gram models could be extended and improved for better performance on a language modelling task\cite{goodman2001bit}.
 
 Google Translate, one of the most widely used machine translation systems, initially relied heavily on n-gram models. Specifically, it used a 5-gram language model, as described in the paper "Large Language Models in Machine Translation" by Brants et al. (2007). This approach allowed Google Translate to capture local context and produce more fluent translations compared to earlier rule-based systems \cite{brants2007large}.
 
@@ -454,12 +442,12 @@ Mathematically, for two document vectors A and B, the cosine similarity is given
 \text{cosine similarity} = \frac{A \cdot B}{\|A\| \|B\|}
 \end{equation}
 
-Where $A \cdot B$ is the dot product of the vectors, and $\|A\|$ and $\|B\|$ are their Euclidean norms. We will revisit the the cosine similarity in the context of word embeddings. 
+Where $A \cdot B$ is the dot product of the vectors, and $\|A\|$ and $\|B\|$ are their Euclidean norms. Cosine similarity is still an important component of NLP in the context of embeddings which we will introduce soon. 
 
-A notable example of their application in natural language processing is the work by Burgess et al. in their paper "Legislative Influence Detectors: Identifying Influential Actors in the Legislative Process" \cite{burgess2016legislative}. In this study, the authors used DTMs and cosine similarity to analyze the influence of various actors on legislative outcomes.
+A notable example of applying DTMs and cosine similarity in natural language processing is the work by Burgess et al. in their paper "Legislative Influence Detectors: Identifying Influential Actors in the Legislative Process" \cite{burgess2016legislative}. In this study, the authors used DTMs and cosine similarity to analyze the influence of various actors on legislative outcomes.
 The researchers constructed DTMs from legislative texts and stakeholder submissions, then used cosine similarity to measure the textual similarity between final legislation and the various inputs. This allowed them to quantify the influence of different stakeholders on the legislative process, providing valuable insights into policy-making dynamics.
 
-While Document Term Matrices (DTMs) have been widely used in natural language processing, they have significant limitations. Bengio et al. \cite{bengio2003neural} highlighted that traditional n-gram models and DTM-based approaches suffer from the curse of dimensionality and fail to capture semantic similarities between words.
+While Document Term Matrices (DTMs) have been widely used in natural language processing, they have significant limitations. Bengio et al. \cite{bengio2003neural} highlighted that (much like traditional n-gram models) DTM-based approaches suffer from the curse of dimensionality and fail to capture semantic similarities between words.
 The curse of dimensionality refers to the exponential increase in possible word sequences as sequence length grows, leading to data sparsity and generalization difficulties. For example, with a 10,000-word vocabulary, there are 10,000 possible one-word sequences, but $10^{20}$ possible five-word sequences.
 As vocabulary size grows, the number of dimensions increases, potentially leading to overfitting on smaller datasets and processing difficulties with large corpora. Moreover, DTMs fail to capture semantic relationships between words, treating each word as a distinct dimension regardless of meaning. 
 This means semantically similar words like "car" and "automobile" are represented as entirely different dimensions.
@@ -495,8 +483,7 @@ Where:
 Griffiths and Steyvers \cite{griffiths2004finding} applied LDA to analyze the abstracts of papers published in Proceedings of the National Academy of Sciences (PNAS), 
 extracting 300 topics from 28,154 abstracts published 1991 to 2001. The model captured the rise and fall of scientific topics over time, reflecting changing research trends.
 Topic modelling techniques like LDA has been widely adopted in social sciences, providing researchers with powerful tools to explore and analyze large text collections, 
-but superior alternatives based on prompting large language models have emerged ~\cite{wang2023promptinglargelanguagemodels}. LDA itself is unsuitable for language modelling  in its
-ability for language modelling due to its bag-of-word assumption which hides semantic information and fixed topic assumption.  
+but superior alternatives based on prompting large language models have emerged ~\cite{wang2023promptinglargelanguagemodels}. LDA itself is unsuitable for language modelling due to its bag-of-word assumption which hides semantic information and fixed topic assumption.  
 
 \section{Embeddings}
 
@@ -511,7 +498,7 @@ embeddings can be used as input features for various NLP tasks, enabling transfe
 
 \subsection{A Neural Probabilistic Language Model}
 Yoshua Bengio introduced the concept of word embeddings in 2003 \cite{bengio2003neural}, proposing a novel approach that simultaneously learned two crucial components: (1) a distributed feature vector for each word, with a dimensionality of just 30 compared to a vocabulary size of 17,000, and (2) the probability function of word sequences. 
-The model consisted of a linear projection layer to obtain the low-dimensional vector, which was followed by a non-linear hidden layer and an output layer to compute the logits. The model improved perplexity by 20\% over trigram models, but Bengio noted that the embeddings did not capture polysemous words well, and that the model could be improved by using a-priori information, for example from WordNet. Polysemous words are those that have multiple meanings or senses depending on the context (e.g., "bank" can refer to a financial institution or the edge of a river). This limitation highlights the challenge of representing words with multiple meanings in a single fixed-length vector. 
+The model consisted of a linear projection layer to obtain the low-dimensional vector, which was followed by a non-linear hidden layer and an output layer to compute the logits. The model improved perplexity by 20\% over trigram models, but Bengio noted that the embeddings did not capture polysemous words well, and that the model could be improved by using a-priori information, for example from WordNet. Polysemous words are those that have multiple meanings or senses depending on the context (e.g., "bank" can refer to a financial institution or the edge of a river). 
 
 \subsection{word2vec}
 In 2013, Tomas Mikolov and colleagues at Google introduced word2vec, a highly efficient method for learning high-quality word embeddings \cite{mikolov2013efficient}. Word2vec significantly improved upon previous methods by dramatically reducing computational complexity while maintaining or improving the quality of the resulting word vectors.
@@ -540,7 +527,7 @@ On the other hand, the skip-gram model does the opposite, predicting the context
 
 The vector embeddings are learned through the process of training these models. As the model tries to predict words based on their context (or vice versa), it adjusts the word vectors to maximize the probability of correct predictions. This process leads to words that appear in similar contexts having similar vector representations.
 
-A striking feature of word2vec embeddings is their ability to capture semantic relationships between words. This is often demonstrated through vector arithmetic. For example, the canonical example is the equation "king - man + woman $\approx$ queen" which shows that the learned embeddings encode meaningful semantic and syntactic relationships, and support mathematical operations.
+A striking feature of word2vec embeddings is their ability to capture semantic relationships between words. This is often demonstrated through vector arithmetic. For example, the canonical example is the equation "king - man + woman $\approx$ queen" which shows that the learned embeddings encode meaningful semantic and syntactic relationships, and support mathematical operations, as shown in Figure \ref{fig:word2vec_analogy}.
 
 \begin{figure}[h]
     \centering
@@ -552,7 +539,7 @@ A striking feature of word2vec embeddings is their ability to capture semantic r
 Word2vec became a cornerstone of many NLP applications and paved the way for further advancements in word embedding techniques.
 
 \subsection{GloVe}
-Global Vectors for Word Representation (GloVe), introduced by Pennington et al. \cite{pennington2014glove}, is a popular word embedding method that aims to capture the meaning of words by analyzing how frequently they co-occur with other words in a large corpus.
+Global Vectors for Word Representation (GloVe), introduced by Pennington et al. \cite{pennington2014glove}, was another a popular word embedding method that aimed to capture the meaning of words by analyzing how frequently they co-occur with other words in a large corpus.
 
 GloVe combines two approaches to create word embeddings. The first approach is global matrix factorization, which looks at the overall statistics of word co-occurrences in the entire corpus. The second approach is local context window methods, which considers the immediate context around each word. By integrating these two methods, GloVe aims to capture both the global and local aspects of word relationships in its embeddings.
 
@@ -570,7 +557,7 @@ Where:
     \item $X_{ij}$ is the number of times word $j$ occurs in the context of word $i$
     \item $\mathbf{w}_i$ and $\tilde{\mathbf{w}}_j$ are word vectors
     \item $b_i$ and $\tilde{b}_j$ are scalar biases
-    \item $f(X_{ij})$ is a weighting function
+    \item $f(X_{ij})$ is a weighting function that ensures co-occurences below a threshold have less impact
 \end{itemize}
 
 By minimising this function, GloVe learns word vectors that capture meaningful semantic relationships between words. When it was introduced, GloVe demonstrated performance comparable to word2vec on various NLP tasks, while providing a more interpretable model of how it captures word meanings.
@@ -579,7 +566,7 @@ By minimising this function, GloVe learns word vectors that capture meaningful s
 ELMo (Embeddings from Language Models), introduced by Peters et al. in 2018 \cite{peters2018deep}, marked a significant advancement in word embedding techniques. Unlike its predecessors, ELMo produces dynamic, contextualised word embeddings that capture complex characteristics of word use, including syntax and semantics, and how these uses vary across linguistic contexts.
 
 The key innovation of ELMo lies in its use of a deep, bidirectional LSTM model trained on a large text corpus. This model consists of a character-level convolutional neural network (CNN) that captures subword information and a two-layer bidirectional LSTM that processes the output of the CNN
-ELMo generates word embeddings by taking a weighted sum of the internal states of this LSTM. Importantly, these weights are learned as part of the downstream task, allowing the model to emphasize different aspects of the word representations depending on the specific application.
+ELMo generates word embeddings by taking a weighted sum of the internal states of this LSTM. These weights are learned as part of the downstream task, allowing the model to emphasize different aspects of the word representations depending on the specific application.
 
 ELMo advanced the state of the art by allowing to represent different meanings of the same word depending on context and capturing syntactic information in the embeddings, improving performance on tasks like part-of-speech tagging. It was improved by BERT which relied on the creation of the transformer architecture, which emerged from Sequence Learning. We'll take a brief detour to discuss the history of sequence learning. 
 
@@ -589,7 +576,7 @@ Sequence learning is a fundamental task in natural language processing and machi
 \subsection{Sequence-to-Sequence (seq2seq) Models}
 Sequence-to-sequence models, introduced by Sutskever et al. \cite{sutskever2014sequence}, are a class of models designed to transform an input sequence into an output sequence. 
 These models typically consist of an encoder, which processes the input sequence and compresses it into a fixed-length context vector, and a decoder which takes the context vector and generates the output sequence.
-The encoder and decoder were implemented using Long Short-Term Memory (LSTM) networks, due to their ability to handle long-range dependencies in sequences.
+The encoder and decoder were implemented using Long Short-Term Memory (LSTM) networks, due to their ability to handle long-range dependencies in sequences. 
 
 \subsection{Neural Machine Translation}
 Neural Machine Translation (NMT) is one of the most prominent applications of seq2seq models.
@@ -619,8 +606,12 @@ This mechanism allows the model to weigh the importance of different parts of th
 
 Another vital technique from NMT adopted in current language models is Byte Pair Encoding (BPE). This was originally a method for data compression \cite{gage}, but was adapted to neural machine translation to help address the problem of representing rare or out of vocab words\cite{sennrich2015neural}. BPE iteratively merges most frequent pair of symbols in a sequence to create new symbols. To help address the issue of out-of-vocabulary words, it usually operates on subword units, which are obtained by breaking words into subword units. This approach improves the model's ability to handle rare words and generalize across different languages and domains, making it useful in multilingual machine translation, for example.
 
+\subsection{Language Modelling with Sequence to Sequence models}
+Sequence-to-sequence models face two primary challenges in their applicability to language modelling. Due to their recurrent nature, these models process inputs sequentially, which poses challenges parallelization. This makes large scale training prohibitively expensive, and is particularly an issue in the long sequences encountered in language modelling. The second challenge involved the use of a fixed-length context vector. The encoder has to compress the entire input sequence into a single vector of predetermined length, which then serves as the context for the decoder. This method potentially led to information loss, especially for longer sequences, as the fixed-length vector might not adequately capture all relevant information from the input. These limitations subsequently motivated the development of the Transformer architecture.
+
+
 \section{Transformers and Beyond}
-The field of NLP underwent a revolutionary change with the introduction of the Transformer architecture, as presented in the seminal paper "Attention Is All You Need" by Vaswani et al. \cite{vaswani2023attentionneed}. The paper introduced a novel architecture, eschewing convolution and recurrence to rely entirely on attention mechanisms.
+The field of NLP underwent a revolutionary change with the introduction of the Transformer architecture, as presented in the seminal paper "Attention Is All You Need" by Vaswani et al. \cite{vaswani2023attentionneed}. The paper introduced a novel architecture, replacing convolution and recurrence to rely entirely on attention mechanisms.
 
 \begin{figure}[h]
     \centering
@@ -652,9 +643,9 @@ Here:
 
 This mechanism allows the model to jointly attend to information from different representation subspaces at different positions, enhancing the model's ability to capture various aspects of the input data.
 
-The transformer architecture relies on positional embeddings, most commonly RoPE, as the model lacks recurrence or convolution, providing information about the sequence order. Each layer in both the encoder and decoder contains a fully connected feed forward network. Additionally, layer normalisation are employed to facilitate more effective training of deeper networks.
+The transformer architecture relies on positional embeddings, most commonly RoPE (Rotary Position Embedding) \cite{su2023roformer}, as the model lacks recurrence or convolution, providing information about the sequence order. Each layer in both the encoder and decoder contains a fully connected feed forward network. Additionally, layer normalisation are employed to facilitate more effective training of deeper networks.
 
-One of the most significant advantages of the Transformer architecture is its parallelizability. Unlike recurrent models (like LSTMs) that process sequences step by step, Transformers can process entire sequences in parallel. This is possible because the self-attention mechanism computes relationships between all words in a sequence simultaneously. This parallelization allows for much faster training on modern hardware like GPUs and TPUs, enabling the development of larger and more powerful models.
+One of the most significant advantages of the Transformer architecture is its parallelizability. Transformers can process entire sequences in parallel. This is possible because the self-attention mechanism computes relationships between all words in a sequence simultaneously. This parallelization allows for much faster training on modern hardware like GPUs and TPUs, enabling the development of larger and more powerful models.
 
 \subsection{BERT}
 Building upon the Transformer architecture, Bidirectional Encoder Representations from Transformers (BERT), introduced by Devlin et al. \cite{devlin2018bert}, marked another significant milestone in NLP. BERT revolutionised the field by applying bidirectional training of Transformer to language modeling, leading to contextual representations that capture meaning from both left and right contexts.
@@ -662,13 +653,13 @@ Building upon the Transformer architecture, Bidirectional Encoder Representation
 BERT introduced novel pretraining tasks: Masked Language Model (MLM) and Next Sentence Prediction. In MLM, 15\% of input tokens are randomly masked. 80\% of selected tokens are replaced with [MASK], helping the model predict masked words from context. 10\% are replaced with random words, introducing noise and preventing overfitting. 10\% are left unchanged, ensuring the model learns correct contextual representations and relationships between words. For Next Sentence Prediction (NSP), it learns to predict if a given sentence naturally follows another. These tasks force the model to maintain a contextual representation of every input token and understand relationships between sentences.
 The model uses the Transformer encoder architecture, with 12/24 Transformer layers, 768/1024 hidden units, and 12/16 attention heads for BERT-base and BERT-large respectively. BERT employs learned positional embeddings with a sequence length of 512 tokens.
 
-After pretraining, BERT can be fine-tuned with just one additional output layer for a wide variety of NLP tasks, including sentiment analysis, natural language inference, named entity recognition, question answering, and text classification. 
+After pretraining, BERT can be fine-tuned with just one additional output layer for a wide variety of NLP tasks.
 This fine-tuning process allows BERT to adapt its pretrained knowledge to specific downstream tasks with minimal task-specific parameters, leading to state-of-the-art results on numerous NLP benchmarks.
 
-BERT's success demonstrated the power of unsupervised pretraining and transfer learning in NLP, paving the way for a new paradigm in language understanding models. BERT has limitations, such as a fixed-length context window and potential pretraining-finetuning mismatch, but despite these BERT's impact on NLP has been profound, inspiring numerous follow-up works and improvements that have further advanced the field of natural language understanding and generation. Models like RoBERTa (larger training data and no NSP) \cite{liu2019roberta}, ALBERT (significant parameter reduction) \cite{lan2020albert}, and DistilBERT (knowledge distillation) \cite{sanh2020distilbert} improved upon BERT, however they won't be discussed in the interest of time. 
+BERT's success demonstrated the power of unsupervised pretraining and transfer learning in NLP, paving the way for a new paradigm in language understanding models. BERT has inspired numerous follow-up works and improvements that have further advanced the field of natural language understanding and generation. Models like RoBERTa (larger training data and no NSP task) \cite{liu2019roberta}, ALBERT (significant parameter reduction) \cite{lan2020albert}, and DistilBERT (knowledge distillation) \cite{sanh2020distilbert} improved upon BERT further.
 
 \subsubsection{GPT-2}
-GPT-2, introduced by Radford et al. in 2019 \cite{radford2019language}, was a groundbreaking language model that demonstrated the potential of large-scale unsupervised pre-training. With 1.5 billion parameters (weights), GPT-2 was trained on a dataset of 8 million web pages. Unlike typical Transformer models that include both encoder and decoder components, GPT-2 exclusively uses the decoder part. This architecture is particularly well-suited for language modeling and text generation tasks.
+GPT-2, introduced by Radford et al. in 2019 \cite{radford2019language}, was another breakthrough made possible by the Transformer architecture. GPT-2 was a groundbreaking language model based on a decoder-only transformer architecture. It demonstrated the potential of large-scale unsupervised pre-training: with 1.5 billion parameters, GPT-2 was trained on a dataset of 8 million web pages. Unlike typical Transformer models that include both encoder and decoder components, GPT-2 exclusively uses the decoder part.
 
 The success of GPT-2 highlighted a crucial insight: increasing model size and training data volume could lead to significant improvements in performance and generalization. This observation set the stage for the development of its successor, GPT-3.
 
@@ -687,7 +678,7 @@ L = \frac{A}{N^\alpha} + \frac{B}{D^\beta} + L_0
 
 C is the compute in FLOPS required to train the model, L is loss, $L_0$ is the irreducible loss (a constant representing the best possible performance), $C_0$ is the cost of training a parameter on a single token (estimated to be 6 by Hoffman), and the other terms (A, B, $\alpha$, $\beta$) are constants estimated in the paper.
 
-Chinchilla scaling provides a more nuanced understanding of the relationship between model size, dataset size, and computational resources. It suggests that simply increasing model size without a corresponding increase in dataset size may not yield optimal results, challenging the "bigger is always better" assumption.
+Chinchilla scaling provides a more nuanced understanding of the relationship between model size, dataset size, and computational resources. It suggests that simply increasing model size without a corresponding increase in dataset size may not yield optimal results, challenging the naive "bigger is always better" assumption.
 
 \subsubsection{GPT-3}
 Building upon the foundations laid by GPT-2, Brown et al. introduced GPT-3 in 2020 \cite{brown2020language}, created with another massive increase in scale. With 175 billion parameters, GPT-3 was over 100 times larger than its predecessor. 
@@ -697,12 +688,12 @@ However, its unprecedented scale led to remarkable improvements in performance a
 
 \subsection{Few-Shot and Zero-Shot Learning}
 Large Language Models have an extraordinary ability to perform few-shot and zero-shot learning. These capabilities allow LLMs to adapt to new tasks with minimal or no task-specific training examples \cite{brown2020language}.
-Few-shot learning denotes the model's ability to perform a new task after seeing only a small number of examples. This approach has shown remarkable success in various NLP tasks, including text classification, named entity recognition, and question answering \cite{lin2022fewshotlearningmultilinguallanguage}. 
+Few-shot learning denotes the model's ability to perform a new task after seeing only a small number of examples; few-shot prompting LLMs has beaten various NLP benchmarks \cite{lin2022fewshotlearningmultilinguallanguage}. 
 Zero-shot learning, on the other hand, involves the model's capacity to perform tasks without any task-specific examples \cite{xian2018zero}. 
 This capability relies heavily on the model's pre-training and the formulation of the task in natural language. 
 Radford et al. \cite{radford2019language} demonstrated zero-shot task transfer with GPT-2 already. For instance, when given a news article and prompted with "TL;DR:" the model was able to generate a summary of the article without any specific training for summarization tasks. This showcases the model's ability to understand and perform a new task based solely on the context provided in the prompt, illustrating the potential for language models to generalize to unseen tasks. This capability enables models to perform tasks without explicit fine-tuning, making them highly versatile and adaptable to new scenarios \cite{min2024rethinking}.
 
-Few and zero shot learning are particularly promising in low resource domains where task-specific labeled data is scarce \cite{hedderich2021survey}, for example low-resource language translation \cite{garcia2020multilingual}. This is especially useful in the context of VC deal analysis because training material is difficult to obtain due to data privacty issues. The zero- and few-shot  of LLMs greatly diminish the cost required to create 'intelligent' applications, by allowing developers to craft prompts which activate latent spaces of an LLM's distribution to perform well at a novel task, without the requirement of having a propreitary dataset to fine tune on.
+Few and zero shot learning are particularly promising in low resource domains where task-specific labeled data is scarce \cite{hedderich2021survey}, for example low-resource language translation \cite{garcia2020multilingual}. This is especially useful in the context of VC deal analysis because training material is difficult to obtain due to data privacty issues. The zero- and few-shot  of LLMs greatly diminish the cost required to create 'intelligent' applications, by allowing developers to craft prompts which activate latent spaces of an LLM's distribution to perform well at a novel task, without the requirement of having a propretiary dataset to fine tune on.
 
 \subsubsection{Prompting}
 
@@ -713,12 +704,12 @@ Strategies such as chain-of-thought prompting \cite{wei2022chain}, self-consiste
 \subsection{Emergent Behaviour}
 GPT-3 revealed intriguing emergent behaviors, capabilities that were not explicitly programmed or anticipated. These behaviors often become apparent only as models are scaled up in size and complexity.
 
-One key aspect of emergent behavior is captured by the aforementioned scaling laws described by Kaplan et al. \cite{kaplan2020scaling}. These laws suggest that model performance improves predictably with increases in model size, dataset size, and computational resources. This observation aligns with the "bitter lesson" articulated by Rich Sutton \cite{sutton2019bitter}, which posits that methods leveraging increased amounts of computation tend to outperform those with intricate new architectures.
+One key aspect of emergent behavior is captured by the aforementioned scaling laws described by Kaplan et al. \cite{kaplan2020scaling}, which suggest that model performance improves predictably with increases in model size, dataset size, and computational resources. This observation aligns with the "bitter lesson" articulated by Rich Sutton \cite{sutton2019bitter}, which notes that, in the recent history of AI, methods that prefer leveraging increased amounts of computation over exploring intricate new architectures have performed best.
 
 A particularly interesting emergent phenomenon is "grokking," first described by Power et al. \cite{power2022grokking}. Grokking refers to a sudden performance improvement after a long period of stagnation during training. This phenomenon suggests that large language models might undergo phase transitions in their learning process, suddenly grasping underlying patterns in ways that are not yet fully understood.
 
 \subsection{Aligning Language Models with Human Intent}
-As large language models like GPT-3 have grown in capability, a new challenge has emerged: ensuring these models behave in ways aligned with human intent. InstructGPT, developed by Ouyang et al. \cite{ouyang2022training}, addressed this limitation through a process of fine-tuning.
+As large language models like GPT-3 have grown in capability, a new challenge has emerged: ensuring these models behave in ways aligned with human intent. An autoregressive language model trained on tokens crawled from the internet, by definition, will generate content that could have been crawled form the internet, which is not necessarily the output a user would want. InstructGPT, developed by Ouyang et al. \cite{ouyang2022training}, addressed this limitation through a process of fine-tuning.
 The process involves several steps:
 
 1. Supervised Fine-Tuning (SFT): The model is fine-tuned on a dataset of human-written demonstrations of desired behavior. The optimization objective for SFT can be expressed as:
@@ -758,7 +749,7 @@ Large Language Models (LLMs) have expanded from text-only processing to incorpor
 SigLIP (Sigmoid Loss for Language Image Pre-training) \cite{zhai2023sigmoidlosslanguageimage} replaces CLIP's loss with a sigmoid loss function, allowing for independent processing of each image-text pair, helping the model to scale up batch sizes effectively (otherwise the cost of performing row-wise softmax was prohibitively expensive). 
 
 Building on a SigLIP vision encoder and Gemma-2B language model, PaliGemma was introduced as a state of the art vision langauge model. \cite{gemma2024pali} 
-Vision language models make it possible to caption figures, stored in pitch decks for example, into text which can be chunked and retrieved later.
+Vision language models combine Computer Vision (CV) and NLp, to generate text based on visual inputs. For example, this makes it possible to caption figures, stored in pitch decks for example, into text which can be chunked, embedded and retrieved later.
 
 Further built on PaliGemma was ColPali \cite{faysse_sibille_2024colpali}, which provides efficient document retrieval by natively processing PDF documents as images through a VLM to create document embeddings. These embeddings are then compared to a query through a late interaction mechanism, similar to the approach used in ColBERT \cite{khattab2020colbert}. This late interaction allows for more fine-grained matching of the query and document representations, enhancing retrieval accuracy.ColPali is not currently used in the pipeline behind MoonAI currently, which instead uses OCR and captioning, however transitioning to ColPali is expected soon as processing the document entirely natively within a VLM is found to give an order of magnitude improvement over 
 
@@ -773,26 +764,26 @@ LangChain, a common LLM chaining framework, implements structured output generat
 
 Logit processing, by contrast, guarantees structured generation in language models \cite{chaudhari2023logit}. A key component of this approach is selective multiplication, which computes logits only for tokens allowed by the structure, thereby guaranteeing conformity. Logit processing converts json schemas to regular expression and then transforms this regular expression into token level finite state machine. Particulary for generating json objects, this finite state machine has many determinisitc transitions, and only makes expensive calls to an LLM when a transition is not deterministic. To ensure that the LLM samples a valid transition in the finite state machine, selective multiplication ensures that all invalid tokens' logits are set to negative infinity when sampling.
 
-This process is obviously of unhelpful during unconstrained string generation when the set of possible tokens is large, however during constrained generation, for example during control flow reasoning, it can lead to large speed ups. The implementation of this technique occurs through model-level integration, ensuring seamless incorporation into existing language model architectures \cite{chaudhari2023logit}. This approach effectively addresses a fundamental computational inefficiency in traditional language model inference, where logits are computed for the entire vocabulary, even when many tokens are impossible given the structure \cite{willard2023efficient}. Empirical studies have shown consistent speed improvements across both simple and complex schemas. For instance, in the case of a simple JSON schema, structured generation utilising selective multiplication consistently outperformed traditional methods in terms of speed. Similarly, for more complex schemas, significant time savings were observed, although the frequency of optimization application was reduced \cite{chaudhari2023logit}.
+This process is clearly of little benefit during unconstrained string generation, or in general the set of possible tokens is large, however during constrained generation, for example during control flow reasoning, it can lead to very large speed ups. The implementation of this technique occurs through model-level integration, ensuring seamless incorporation into existing language model architectures \cite{chaudhari2023logit}. This approach effectively addresses a fundamental computational inefficiency in traditional language model inference, where logits are computed for the entire vocabulary, even when many tokens are impossible given the structure \cite{willard2023efficient}. Empirical studies have shown consistent speed improvements across both simple and complex schemas. For instance, in the case of a simple JSON schema, structured generation utilising selective multiplication consistently outperformed traditional methods in terms of speed. Similarly, for more complex schemas, significant time savings were observed, although the frequency of optimization application was reduced \cite{chaudhari2023logit}.
 
 \subsection{RAG (Retrieval-Augmented Generation)}
-A common issue with LLMs are hallucinations, where models generate plausible but factually incorrect information, are a common issue with large language models \cite{maynez2020faithfulness}. A commonly used solution is to adopt, Retrieval-Augmented Generation (RAG) whereby prompts are enhanced with information retrieved from knowledge systems external to the LLM in order to enhance the quality and reliability of generated responses \cite{lewis2020retrieval}. This approach mitigates the issue of hallucination in scenarios requiring up-to-date or specialised information.
+A common issue with LLMs are hallucinations, where models generate plausible but factually incorrect information, are a common issue with large language models \cite{maynez2020faithfulness}. A commonly used solution is to adopt Retrieval-Augmented Generation (RAG) whereby prompts are enhanced with information retrieved from knowledge systems external to the LLM in order to enhance the quality and reliability of generated responses \cite{lewis2020retrieval}. This approach mitigates the issue of hallucination in scenarios requiring up-to-date or specialised information.
 
 By incorporating a retrieval component, RAG systems can access and utilize vast amounts of information that may not be present in the LLM's training data \cite{lewis2020retrieval}. This is particularly valuable for tasks requiring domain-specific knowledge or information about current events.
-Combining RAG with few-shot learning and prompt engineering has been shown to improve answer quality \cite{liu2021pre}, and is vital in the context of analysing startups where it is impossible to keep LLMs up to date with information about the latest startups due to their knowledge cut off.
+Combining RAG with few-shot learning and prompt engineering has been shown to improve answer quality \cite{liu2021pre}, and is vital in the context of MoonAI: when analysing startups, it is impossible to keep LLMs up to date with information about the latest startups due to their knowledge cut off.
 
 
 \subsubsection{Efficient Vector Search}
 Retrieval-Augmented Generation (RAG) systems heavily rely on efficient vector search mechanisms, particularly approximate nearest neighbor (ANN) search algorithms \cite{johnson2017billion}. These algorithms are crucial for quickly identifying the most relevant information to augment language model outputs. The efficiency of vector search directly impacts the performance and usability of RAG systems, especially in real-time applications where response time is critical \cite{lewis2020retrieval}. Exhaustive search methods quickly become impractical for large-scale datasets due to their linear time complexity. This necessitates the use of approximate methods that can deliver sufficiently accurate results at a fraction of the computational cost \cite{andoni2018approximate}.
 
-Various indexing strategies have been developed to optimize vector search for large-scale datasets. These strategies often involve preprocessing the data to create efficient data structures that facilitate faster search operations. Common approaches include tree-based methods (e.g., KD-trees, Ball trees) and graph-based methods \cite{malkov2018efficient}. Two innovations used by Moon AI are detailed belowed.
+Various indexing strategies have been developed to optimize vector search for large-scale datasets. These strategies often involve preprocessing the data to create efficient data structures that facilitate faster search operations. Two solutions in the space used by Moon AI are detailed belowed.
 
 Matryoshka Embeddings \cite{kusupati2024matryoshkarepresentationlearning}, represent an innovative approach to improving the efficiency of vector search operations. This technique introduces an auxilliary objective during the training of embedding models, resulting in a hierarchical representation of semantic information. With Matryoshka Embeddings, the truncated versions of the embeddings are trained to maintain the similarity relationship through the auxiliary objective. This property allows for a unique search strategy: starting with a low-dimensional (and thus computationally cheaper) version of the embedding, and progressively increasing the dimensionality only for the most promising candidates. This approach can significantly speed up retrieval through successive embedding model calls, effectively reducing the computational cost of similarity search without substantially sacrificing accuracy \cite{kusupati2024matryoshkarepresentationlearning}.The hierarchical nature of Matryoshka Embeddings also provides flexibility in balancing computational resources and search accuracy. Depending on the specific requirements of a search, more or fewer dimensions of the embedding can be used, dynamically adjusting the trade-off between speed and precision \cite{kusupati2024matryoshkarepresentationlearning}.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.5\textwidth]{figures/matryoshka.png}
-\caption{Illustration of Matryoshka Embeddings. The embedding vector is structured hierarchically, with each nested level representing a higher-dimensional embedding. This allows for efficient search by starting with the lowest dimension and progressively increasing as needed.}
+\caption{Illustration of Matryoshka Embeddings. The embedding vector is structured hierarchically and trained so that truncation at various points maintains similarity.}
 \label{fig:matryoshka_embeddings}
 \end{figure}
 
@@ -807,11 +798,11 @@ The algorithm's search process is characterized by a hierarchical traversal of t
     \label{fig:hnsw_structure}
     \end{figure}
 
-The HNSW graph construction process is iterative, using a dynamic candidate list to efficiently create connections between nodes. The layer at which to insert a node is determined probabilistically for each node, and all nodes are inserted to all layers equal to or below their assigned layer. When adding a new node, a search starts from an entry point in the top layer, performing a greedy search through the graph layers to update a list of promising nodes with which to connect the current node. At each layer, the algorithm selects the best connections from the candidate list, with the bottom layer allowing more connections; $M_{max0}$ and $M_{max}$ are hyperparameters that define the permitted number of connections in the bottom layer and other layers respectively, with more connections permitted in the bottom layer usually. This process results in a hierarchical structure with sparse upper layers that allow long-range traversals and denser lower layers with shorter-range connections.
+The HNSW graph construction process is iterative, using a dynamic candidate list to efficiently create connections between nodes. The layer at which to insert a node is determined probabilistically for each node, and all nodes are inserted to all layers equal to or below their assigned layer. When adding a new node, a search starts from an entry point in the top layer, performing a greedy search through the graph layers to update a list of promising nodes with which to connect the current node. At each layer, the algorithm selects the best connections from the candidate list; $M_{max0}$ and $M_{max}$ are hyperparameters that define the permitted number of connections in the bottom layer and other layers respectively, with more connections (usually double) permitted in the bottom layer. This process results in a hierarchical structure with sparse upper layers that allow long-range traversals and denser lower layers with shorter-range connections.
 
-In vector search applications, HNSW excels at finding similar vectors in high-dimensional spaces, making it ideal for tasks like semantic similarity search in RAG systems \cite{johnson2017billion}. Its ability to balance search quality and memory usage through parameter tuning allows for optimization in various scenarios, making it very popular. 
+In vector search applications, HNSW excels at finding similar vectors in high-dimensional spaces, making it ideal for tasks like semantic similarity search in RAG systems \cite{johnson2017billion}. Both HNSW and matryoshka embeddings offer the ability to balance search quality and memory usage through parameter tuning allows for optimization in various scenarios, making it very popular. 
 
-\subsection{Inference: Expanding Context Lengths and Decreasing Costs}
+\subsection{Inference}
 In addition to improving RAG pipelines, expanding context lengths can help reduce the risk of hallucination by grounding the output with more context. The computational cost associated with inference is continuing to decrease, further contributing to the viability of language model applications. 
 
 Beltagy et al. introduced the Longformer \cite{beltagy2020longformer}, which presents an efficient attention mechanism for processing long sequences. The Longformer combines local windowed attention with task-motivated global attention, allowing it to handle documents with tens of thousands of tokens while maintaining computational efficiency.
@@ -841,13 +832,13 @@ The VC ecosystem primarily consists of two key players: Limited Partners (LPs) a
 
 Investments in startups are often categorised into stages: Seed, Series A, B, C, and later stages. Each stage represents a different phase of a company's growth and involves varying levels of capital and risk \cite{hellmann2002venture}. Seed funding supports early concept development, while later stages focus on scaling and expansion.
 
-The venture capital investment lifecycle encompasses several critical stages, each contributing to the strategic deployment of capital in high-potential startups \cite{gompers2004venture}. Initially, deal sourcing involves identifying promising investment opportunities through various channels, including industry networks and proprietary databases. Subsequently, initial screening filters potential investments based on predetermined criteria aligned with the VC firm's investment thesis \cite{petty2011}. The due diligence phase then entails a comprehensive evaluation of selected startups, scrutinising their business models, market potential, team capabilities, and financial projections. Following a positive assessment, term sheet negotiation and deal closing formalize the investment structure. Post-investment, VCs typically provide ongoing support to portfolio companies, leveraging their expertise and networks to enhance value \cite{sapienza1996venture}. The lifecycle culminates in an exit event, such as an IPO or acquisition, realising returns on the investment.
+The venture capital investment lifecycle encompasses several critical stages, each contributing to the strategic deployment of capital in high-potential startups \cite{gompers2004venture}. Initially, deal sourcing involves identifying promising investment opportunities through various channels, including industry networks and proprietary databases. Subsequently, initial screening filters potential investments based on predetermined criteria aligned with the VC firm's investment thesis \cite{petty2011}. The due diligence phase then entails a comprehensive evaluation of selected startups, scrutinising their business models, market potential, team capabilities, and financial projections. Following a positive assessment, term sheet negotiation and deal closing formalize the investment structure. Post-investment, VCs typically provide ongoing support to portfolio companies, leveraging their expertise and networks to enhance value \cite{sapienza1996venture}. The lifecycle culminates in an exit event, such as an IPO or acquisition, realising returns on the investment which can be distributed back to LPs.
 
 \section{VC fund structure}
 
 The structure of a typical venture capital (VC) fund is set up to align the interests of LPs and GPs. The investment cycle of a VC fund typically consists of two main periods: the Investment Period, usually spanning the first 3-5 years of the fund's life, during which GPs make new investments, deploying the capital made available to them by GPs; and the Harvest Period, comprising the remaining years, focused on managing and exiting investments. We will denote the entire lifetime as l. 
 
-The structure of a typical venture capital fund is defined by several key parameters. The Fund Size (f) refers to the total amount of capital that Limited Partners (LPs) commit to the fund, including all fees. This is also known as paid-in-capital. Management Fee (p), also Performance Fee, is an annual percentage charged for managing the fund throughout its lifespan. Many VC funds also require a GP Commit, which is a portion of the fund that the GPs must personally invest. Finally, the Carry Fee (c) is a percentage of the profits that GPs receive after returning the initial investment to LPs. This fee is typically only paid out once the fund has achieved a certain level of returns, known as the hurdle rate, but we will omit this for simplicity. The most prevalent structure is a "2 and 20" model (2\% management fee and 20\% carried interest) which is designed to incentivize GPs to maximize returns while providing a stable operational base, with a 1\% GP commit (l) typically used. 
+The structure of a typical venture capital fund is defined by several key parameters. The Fund Size (f) refers to the total amount of capital that Limited Partners (LPs) commit to the fund, including all fees. This is also known as paid-in-capital. Management Fee (p) is an annual percentage charged for managing the fund throughout its lifespan. Many VC funds also require a GP Commit, which is a portion of the fund that the GPs must personally invest. Finally, the Carry Fee (c) is a percentage of the profits that GPs receive after returning the initial investment to LPs. This fee is typically only paid out once the fund has achieved a certain level of returns, known as the hurdle rate, but we will omit this for simplicity. The most prevalent structure is a "2 and 20" model (2\% management fee and 20\% carried interest) which is designed to incentivize GPs to maximize returns while providing a stable operational base, with a 1\% GP commit (l) typically used. 
 
 The utility function for a GP in this model can be expressed as the sum of the carry incentive, the management fee incentive and return on the GP commit:
 
@@ -870,13 +861,13 @@ U_{GPc} = \begin{cases}
 U_{GPr} = fl(r-1)
 \end{equation}
 
-Jafri et al showed that the "highest leverage action is to increase the size of the fund or increase the management fee, rather than improve the value of the underlying equity" \cite{jafri_distributed_vc} in a simple model without hurdle rates. We expand on this by showing that even with the hurdle rates and GP commit considered, the incentive for GPs remains to increase management fees or increase AUM, rather than improving the underlying equity value.
+The figures below demonstrate that utility for GPs is best maximised by raising fund size or management fee. This is particularly significant considering that the vast majority of VC funds don't manage to return the fund. Jafri et al. initially showed this under a simple model without hurdle rates \cite{jafri_distributed_vc}, and our analysis expands on this finding. Even when accounting for hurdle rates and GP commit, the primary incentive for GPs remains increasing management fees or AUM, rather than improving the underlying equity value of their investments.
 
 \begin{figure}[htbp]
     \centering
     \begin{subfigure}[b]{0.32\textwidth}
       \centering
-      \includegraphics[width=\linewidth]{figures/h=1.5.png}
+      \includegraphics[width=\linewidth]{figures/h1.png}
       \caption{h = 1}
       \label{fig:h1}
     \end{subfigure}
@@ -898,13 +889,13 @@ Jafri et al showed that the "highest leverage action is to increase the size of 
     \label{fig:gp_utility_scenarios}
     \end{figure}
 
-Whilst in the previous chapter on NLP we have noted that the intelligence of AI systems is scaling according to a power law and costs are decreasing due to large investment in enterprise and academia, due to the incentive structures prevalent in VC, the management fees paid to GPs are only increasing. This persists, despite the fact that the cost of coordination, tooling and intelligence are coming down. Given that even top-quartile VC funds struggle to achieve a DPI of 2x \cite{gompers1994riseandfallofvc}, this raises questions over the integrity of the industry. 
+Whilst in the previous chapter on NLP we have noted that the intelligence of AI systems is scaling according to a power law and costs are decreasing due to large investment in enterprise, due to the incentive structures prevalent in VC, the management fees paid to GPs are only increasing. This persists, despite the fact that the cost of coordination, tooling and intelligence are coming down. Given that even top-quartile VC funds struggle to achieve a DPI of 2x \cite{gompers1994riseandfallofvc}, this raises questions over the integrity of the industry. 
 
 We have shown that GPs' utility can most easily be maximised by increasing AUM and management fees, however this provides no utility to both startup founders and LPs. Removing entirely a management fee and increasing the carry to 25\% ensures the incentives are aligned between all parties. However, there is no incentive to do this currently as this is the only situation in which the utility for GPs can be negative, in all other the cases the supposed "skin in the game" through a 1\% GP commit is outweighed by the anuual management fees. The thesis behind MoonAI is that the bariers to adopting a 0\% management fee are eroding. For example, SeedLabs has pioneered a solution that makes the marginal cost of executing a deal close to 0 and uses software to automate fund administration. 
 
 MoonAI's goal of building autonomous sourcing and due diligence in VC provides another avenue in the quest to solve this dislocation of incentives. Reducing the capital needed to run a VC fund through intelligent automations puts negative pressure on management fees and enables VC funds to take fixed management fees that do not scale linearly with assets under management. The innovations of MoonAI make it possible to create a VC fund offering LPs a 0\% management fee through automated deal sourcing and due diligence, as well as automated fund administration through a partnership with SeedLabs. 
 
-Before outlining the architecture of the MoonAI platform, the power law that dictates returns in the VC industry is briefly touched upon and data driven investing currently adopted in the VC industry is overviewed.  the innovations used 
+Before outlining the architecture of the MoonAI platform, the power law that dictates returns in the VC industry is briefly touched upon and AI augmented investing currently adopted in the VC industry is overviewed.
 
 \section{Power Law}
 
@@ -914,20 +905,20 @@ In venture capital, returns typically follow a power law distribution, which can
 f(x) = \frac{\alpha - 1}{x_{\text{min}}} \left(\frac{x}{x_{\text{min}}}\right)^{-\alpha} \quad \text{for } x \geq x_{\text{min}}
 \end{equation}
 
-Where $f(x)$ is the probability of an investment returning $x$ times the initial investment, and $\alpha$ is the power law exponent \cite{clauset2009power}, typically around 2 for venture capital returns \cite{farina_arpaia_2023_venture_capital_portfolio_construction}. This distribution implies that the probability of extremely high returns, while low, is significantly higher than what would be expected in a normal distribution. This phenomenon, which entails that a small number of investments generate the majority of returns, fundamentally shapes how venture capitalists approach fund management and investment decisions: they focus on startups startups with potentially massive markets, scalable business models and business models that could be outcomes on the long tail of the power law. This also explains why VCs are often willing to accept high valuations for promising startups - the potential upside of a fund-returning investment can justify taking on significant risk and paying a premium price.
+Where $f(x)$ is the probability of an investment returning $x$ times the initial investment, and $\alpha$ is the power law exponent \cite{clauset2009power}, typically around 2 for venture capital returns \cite{farina_arpaia_2023_venture_capital_portfolio_construction}. This distribution implies that the probability of extremely high returns, while low, is significantly higher than what would be expected in a normal distribution. The fact that a small number of investments generate the majority of returns, fundamentally shapes how venture capitalists approach fund management and investment decisions: they focus on startups startups with potentially massive markets, scalable business models and business models that could be outcomes on the long tail of the power law. This also explains why VCs are often willing to accept high valuations for promising startups: the potential upside of a fund-returning investment can justify taking on significant risk and paying a premium price.
 
 In reality, startup returns are even more extremely distributed, with the vast majority of startups that return less than 1x returning 0x \cite{othman2019startup}.
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.8\linewidth]{figures/losing.png}
+    \includegraphics[width=0.5\linewidth]{figures/losing.png}
     \caption{Research into distribution of 1,115 of startup returns that fail to return 1x from AngelList highlights the skew towards 0x for startups that fail to return investment. \cite{othman2022howmuchcanyouloseonafailedstartupinvestment}}
     \label{fig:startup_returns_distribution}
 \end{figure}
 
 \pagebreak
 
-Research by Moonfire, a VC firm distinguished in its use of AI, found that $x_{\text{min}} = 0.35$ and $\alpha = 2.05$ was an appropriate model of a typical 
-startup based off of 5,000 startups it assessed on Crunchbase \cite{farina_arpaia_2023_venture_capital_portfolio_construction}. Moonfire did valuable research on how this informs portfolio construction, which we expanded on, to account for the phenomenon mentioned that startups that return less than 1x on investment usually return 0x. We simulate funds of different portfolio sizes, and sample startups according to power law distributions with the listed hyperparameters, clamping returns below 1x down to 0 and truncating returns above a maximum threshold down as well. The simulation assumes no reserves for follow-on investing and uniform investments for simplicity.
+Research by Moonfire found that using power law parameters $x_{\text{min}} = 0.35$ and $\alpha = 2.05$ was an appropriate model of typical 
+startup returns based off of 5,000 startups it assessed on Crunchbase \cite{farina_arpaia_2023_venture_capital_portfolio_construction}. Moonfire did valuable research on how this informs portfolio construction, which we expand on, to account for the phenomenon mentioned that startups that return less than 1x on investment usually return 0x. We simulate funds of different portfolio sizes, and sample startups according to power law distributions with the listed hyperparameters, clamping returns below 1x down to 0 and truncating returns above a maximum threshold down as well. The simulation assumes no reserves for follow-on investing and uniform investments for simplicity.
 
 \begin{figure}[htbp]
     \centering
@@ -976,43 +967,39 @@ startup based off of 5,000 startups it assessed on Crunchbase \cite{farina_arpai
     \label{fig:vc_fund_probabilities}
 \end{figure}
 
-The take aways are the same as from the Moonfire paper: larger portfolio sizes reduce the chance of losing money but decrease the chance of big (>5x) return. MoonAI expands the number of startups a VC can analyse, improves the quality of that analysis, and helps them add new connections to their network that can provide high quality deals. In doing so, it lowers the $\alpha$ parameter of power law function describing the multiple obtained from the startups in their fund, making the long tail "fatter". Thus, VCs using such a system would be able to guarantee better performance to their LPs. 
+The take aways are the same as from the Moonfire paper: larger portfolio sizes reduce the chance of losing money but decrease the chance of big (>5x) return. The goal of MoonAI is to vastly expand the number of startups a VC can analyse, improve the quality of that analysis, and help them add new connections to their network that can provide high quality deals. In doing so, the goal is to lower the $\alpha$ parameter of the power law function describing the multiple obtained from the startups in their fund, making the long tail "fatter". VCs using such a system would be able to guarantee better performance to their LPs, which is the name of the game after all. 
 
 \pagebreak
 
 
 \section{AI/ML Augmented Investing}
-The venture capital industry has shifted from a bespoke asset class at its inception in the late 1940s to a commoditised institution on the whole. This heightened competition has led to a shift towards more data-driven strategies as VCs seek to improve the chances of finding startups on the long tail of the power law by leveraging analytics in the sourcing and due diligence of investment cases, as well as management of portfolio startups. In the following subsections, we will provide an overview of some methods currently employed in the venture capital industry. These approaches demonstrate how the field is evolving to incorporate more quantitative and technological solutions to address the challenges of startup evaluation and investment decision-making.
+The venture capital industry has shifted from a bespoke asset class at its inception in the late 1940s to a commoditised institution, with countless firms operating in the market. This heightened competition has led to a shift towards more data-driven strategies and AI augmented investing as VCs seek to improve the chances of finding startups on the long tail of the power law by leveraging analytics in the sourcing and due diligence of investment cases, as well as management of portfolio startups. In the following subsections, we will provide an overview of some methods currently employed in the venture capital industry. These approaches demonstrate how the field is evolving to incorporate more quantitative and technological solutions to address the challenges of startup evaluation and investment decision-making.
 
-\subsubsection{Investment Specific Language Models}
+\subsection{Investment Specific Language Models}
 Recent advancements in language models have led to the development of investment-specific models designed to enhance financial analysis and decision-making. Yang et al. introduced InvestLM, a model that fine-tunes LLaMA-65B using a curated corpus of financial documents \cite{yang2023investlm}. The model employs Low Rank Adaptation (LoRA) for efficient parameter tuning and Linear Rope Scaling to handle large input lengths. Evaluation by domain experts and financial NLP benchmarks demonstrated InvestLM's strong capabilities in comprehending financial text and responding to investment-related queries.
 
-The development of InvestLM contributes to the growing field of financial domain language models, which aim to process extensive financial texts and improve investment decision-making. However, it is noted that many of these models, including BloombergGPT and InvestLM, primarily focus on "high finance" applications \cite{yang2023investlm}. The study also provides support for the superficial alignment hypothesis, suggesting that knowledge acquired during pre-training and fine-tuning primarily aligns output with specific formats.
+The development of InvestLM contributed to the growing field of financial domain language models, which aim to process extensive financial texts and improve investment decision-making. However, it is noted that many of these models, including BloombergGPT and InvestLM, primarily focus on "high finance" applications \cite{yang2023investlm}.
 
-Other notable contributions in this field include FinBERT, a financial language model based on BERT architecture; FinMA, which fine-tunes language models on financial NLP benchmarks with instruction-formatted questions; and FinGPT, which focuses on news and tweet sentiment analysis, albeit with limited generalizability to other tasks \cite{araci2019finbert, xie2023pixiulargelanguagemodel, yang2023fingpt}. These models represent the ongoing efforts to adapt large language models to specific financial applications, although challenges remain in achieving broad applicability across various financial tasks.
+Other notable contributions in this field include FinBERT, a financial language model based on BERT architecture; FinMA, which fine-tunes language models on financial NLP benchmarks with instruction-formatted questions; and FinGPT, which focuses on news and tweet sentiment analysis, albeit with limited generalizability to other tasks \cite{araci2019finbert, xie2023pixiulargelanguagemodel, yang2023fingpt}. These models represent the ongoing efforts to adapt large language models to specific financial applications, although challenges remain in achieving broad applicability across various financial tasks. In particular, in the domain of VC, curating a dataset of documents to train such a model is a challenge, and there are no current benchmarks to test such a solution (nor is there an incentive for such a benchmark to be public and collaborated on).  
 
-\subsubsection{Network-Based Approach to Predicting Success}
+\subsection{Success Prediction}
+
+A key goal of using AI/ML to augment analysts' decision making is to help them in predicting the possibility of success. Defining success is complicated in the world of startups, as a startup's outcome may take many forms: for example, a startup that quickly returns 3x is not seen as a success in the industry, but does allow a VC to 'take more shots on goal'. 
+
+Gradient boosted decision trees are popular in the industry. Retterath et al. benchmarked the screening performances between 111 VCs and a gradient boosted tree classification algorithm, finding that the algorithm performed 29\% better than the average investor \cite{retterath2020human}. Nevertheless, given the skewed returns in the top quartile, the performance would have still been significantly lower than top-quartile VCs.
+Sharchilev et al. predict startup success (where success is defined as achieving a Series A round) by combining structured ecosystem data with information from social networking services and web presence. Their method, modifying base neural networks with gradient boosting, achieved state-of-the-art performance in predicting follow on Series A funding \cite{sharchilev2018web}.
+
+Defining success purely as going from Seed to Series A successfully is a flawed metric. Arroyo et al expanded the use of crunchbase data to predict the likelihood of mulitple future funding rounds and various exit scenarios \cite{corea}. Potanin et al also used gradient boosted decision trees to examine Series B & C stage companies achieving an IPO or acquisition \cite{potanin2023startupsuccesspredictionvc}. 
+
+\subsection{Network-Based Success Prediction}
 
 Venture capital ecosystems can be modelled as complex graphs, and research has focused on using graph structure to infer success likelihood. Two notable approaches in this area are bipartite link prediction and graph neural networks.
 
-One study applied link prediction techniques to bipartite graphs for identifying potential investment opportunities in venture capital networks \cite{predictVCbipartite}. It modeled the investment landscape as a bipartite graph, with investors and companies as nodes, and investments as edges. The study compared three link prediction models: Random Link Prediction (baseline), Preferential Attachment (PA), and Segmented Preferential Attachment (SPA). Results showed that PA and SPA significantly outperformed random prediction, with PA achieving better overall F1 scores and SPA demonstrating higher maximum precision.
+One notable study applied link prediction techniques to bipartite graphs for identifying potential investment opportunities in venture capital networks \cite{predictVCbipartite}. It modeled the investment landscape as a bipartite graph, with investors and companies as nodes, and investments as edges. The study compared three link prediction models: Random Link Prediction (baseline), Preferential Attachment (PA), and Segmented Preferential Attachment (SPA). Results showed that PA and SPA significantly outperformed random prediction, with PA achieving better overall F1 scores and SPA demonstrating higher maximum precision.
 
-In contrast, a more recent study by Lyu et al. \cite{lyu2021graph} employed graph neural networks for predicting startup success. This approach utilised a comprehensive dataset from PitchBook and proposed an incremental graph representation learning method. The key components of this method were multifaceted. Firstly, it involved the construction of a bipartite graph network that represented the intricate relationships between individuals and startups. Secondly, the method incorporated Graph Self-Attention (GST) for node-level representation learning, enabling the capture of complex interactions within the network. Thirdly, it implemented an incremental updating mechanism for representations as the network evolved over time, ensuring the model's adaptability to dynamic ecosystems. Fourthly, the approach employed supervised fine-tuning using link prediction and node classification tasks, enhancing the model's predictive capabilities. Lastly, it utilised sequential modeling of node representations over time using Long Short-Term Memory (LSTM) networks, allowing for the capture of temporal dependencies in startup trajectories.
+In contrast, a more recent study by Lyu et al. \cite{lyu2021graph} employed graph neural networks for predicting startup success. This approach utilised a comprehensive dataset from PitchBook and proposed an incremental graph representation learning method. It involved the construction of a bipartite graph network that represented the intricate relationships between individuals and startups. It incorporated Graph Self-Attention (GST) for node-level representation learning, enabling the capture of complex interactions within the network and an incremental updating mechanism for representations as the network evolved over time, ensuring the model's adaptability to dynamic ecosystems. In addition supervised fine-tuning using link prediction and node classification tasks was employed, enhancing the model's predictive capabilities. To capture temporal dependencies in startup trajectories, it utilised sequential modeling of node representations over time using LSTMs.
 
 The graph neural network approach outperformed all baselines, including human investors and traditional machine learning methods, achieving up to 1.94x better performance than human investors. It showed particularly strong results for startups in IT, healthcare, and B2C industries.
-
-Comparing the two approaches, the graph neural network method appears to be more sophisticated and effective. While the bipartite link prediction study focused solely on predicting potential investments, the graph neural network approach aimed to predict startup success (defined as IPO or acquisition within 5 years). The latter also incorporated more complex features and temporal dynamics, leading to superior performance.
-
-Both studies highlight the potential of graph-based machine learning techniques in venture capital, but the graph neural network approach demonstrates a more comprehensive and powerful method for leveraging network structures in startup success prediction.
-
-\subsubsection{Success Prediction}
-
-Retterath benchmarked the screening performances between 111 Vcs and a gradient boosted tree classification algorithm, finding that the algorithm performed 29\% better than the average invesotr. 
-
-Sharchilev et al present an innovative approach to predicting startup success enriching structured data from the startup ecosystem with information from business-oriented social networking services and general web presence. The study employs a robust machine learning pipeline, utilising multiple base models and gradient boosting techniques. They focused on predicting whether a startup that has received seed or angel funding will secure a Series A or larger funding round within the next year. The trian dataset encompasses general company information, previous investment details, team information, and web mentions. The researchers developed a prediction pipeline called WBSSP, which combined several machine learning models. The pipeline utilizes CatBoost, a gradient boosting decision tree modification, with features derived from dense neural network outputs, logistic regression, and a neural network fed by a sparse neural network. The results demonstrate state-of-the-art performance, with a significant finding being the importance of a company's web presence. While individual web mentions may not be significant, their aggregation provides a representative picture of a company's perception by its target audience, substantially improving prediction quality compared to using only structured data from the startup ecosystem.
-
-A common strategy in ML for VC has been to create gradient boosted algorithms using crunchbase data to predict startup success. This has been done by Arroyo et al as well as Potanin al. 
-
 
 \subsection{Hypothesis Extraction}
 
@@ -1023,7 +1010,7 @@ A team at EQT, a well known player in the data driven VC industry, developed a n
 
 The proposed system demonstrated superior performance compared to classification baselines, achieving an accuracy exceeding 80\%. Furthermore, it exhibits generalization capabilities to previously unseen sectors absent from the training data. The system also demonstrates robustness in handling dynamic sector frameworks and evolving annotations.
 
-This research first showed the potential of generative language models in extracting structured industry hypotheses from unstructured company data at scale, with the possibility of expanding it to extract other tags that are relevant to a VC. 
+This research first showed the potential of generative language models in extracting structured industry hypotheses from unstructured company data at scale, with the possibility of expanding it to extract other features that are relevant to a VC, for example one with a preference towards female founders or founding teams with PhDs. 
 
 \chapter{Moon AI}
 \section{User Research}
@@ -1032,13 +1019,13 @@ The start of this thesis commenced working at Raized, a company focused on build
 
 After departing from Raized, I conducted further customer research with professionals from 30 venture capital firms, interviewing staff ranging from investment analysts, to in-house machine learning engineers. yielded significant insights into the current state of technology adoption in the industry. Approximately 83\% of the surveyed firms reported using traditional (non-AI) sourcing tools. However, many of these firms again indicated that they received sufficient deal flow from their existing networks, reducing their bandwidth to vet deals from external sourcing tools. In addition, at the time of writing there are already four or five notable players in the AI startup sourcing space so it was decided not to focus on that part of the deal lifetime.
 
-Of the 30 funds spoken to, only one was actively using AI in their sourcing process (and that was Moonfire, a fund that famously employs more machine learning engineers than investment analysts), and again only one had implemented AI solutions in their due diligence procedures. This highlighted a significant gap in the application of AI technologies across the full spectrum of VC activities.
+Of the 30 funds spoken to, only one was actively using AI in their sourcing process (and that was a fund that famously employs more machine learning engineers than investment analysts), and again only that same one had implemented AI solutions in their due diligence procedures. This highlighted a significant gap in the application of AI technologies across the full spectrum of VC activities. This was very surprising given the large academic interest in predicting startup success with ML. In practice however, it doesn't seem to have caught on. 
 
-The research also uncovered specific pain points in the VC workflow. For instance, the extraction of key performance indicators (KPIs) and specific requests from portfolio companies was identified as a time-consuming task. Additionally, there was notable interest in tools like Perplexity for enhancing understanding of investment hypotheses, although these tools lacked context-specific information about individual VC firms. VCs often mentioned how tools like perplexity, not only make it difficult to analyse a startup with the lense of a specific VC investment hypothesis, but are also not well suited to comparing certain startups. 
+The research also uncovered specific pain points in the VC workflow. For instance, the extraction of key performance indicators (KPIs) and specific requests from portfolio companies was identified as a time-consuming task. Additionally, there was a lot of love for tools like  Perplexity to enhance understanding of investment hypotheses. Perplexity however, lacks context-specific information about individual VC firms, making it difficult for it to provide analysis through the lens of a specific VC.
 
-Based on these findings, an idea developed to create a verticalised application for VCs using AI to automated parts of the screening process and incorporating elements of website embedding search to create a novel sourcing proposition. The application would be packaged as a CRM capable of tracking all startups a company was analysing regardless of the stage, that also provided a sourcing tools to find startups to add to the CRM.
+Based on these findings, an idea developed to create a verticalised application for VCs to automate parts of the screening process with AI. In addition, the application offer a semantic search for startups. This would help the VC source startups based on factors they were interested in, rather than surfacing startups identified through a black box ML pipeline. The application is as a CRM capable of tracking all startups a fund has interacted with, in order to benefit from greater context about a fund's activities.
 
-This product would have several benefits. Firstly, it would increase efficiency, allowing VCs to evaluate a larger number of potential deals. Secondly, it would reduce cognitive load by automating routine and less engaging aspects of the process. Finally, it would improve decision making by helping VCs to better find research and competitors relating to a specific startup.
+This product would have several benefits. Firstly, it would increase efficiency, allowing VCs to evaluate a larger number of potential deals. Secondly, it would reduce cognitive load by automating routine and less engaging aspects of the process. Thirdly, it would improve decision making by helping VCs to better find research and competitors relating to a specific startup. Finally, the tool could provide context around an investment hypothesis to find events, scientists and subject matter experts in order to improve a VC's deal flow. 
 
 This application, MoonAI, is complementary to existing research at ETH Zurich into whether automatically generating investment memoranda can decrease investor bias. 
 
@@ -1047,7 +1034,7 @@ This application, MoonAI, is complementary to existing research at ETH Zurich in
 
 The MoonAI application breaks down the processes of venture capital into the fundamental components we seek to automate, offering specific solutions for three critical areas: sourcing, due diligence, and portfolio management. At the time of writing of this thesis, the portfolio management offering is still under construction.
 
-In each of these areas, VCs are expected to digest vast amounts of unstructured data, particularly in early stage investing, a process which can be performed well by LLMs. In addition, the use of LLMs makes possible reasoning that would be considered far too onerous otherwise. In each case, these tasks can be done in real time with negligible latency.
+In each of these areas, VCs are expected to digest vast amounts of unstructured data, particularly in early stage investing,  which can be performed well by LLMs. In addition, the use of LLMs makes possible reasoning that would be considered far too onerous otherwise. In each case, these tasks can be done in real time with negligible latency.
 
 The first page of the platform the pipeline page, either in a list or kanban format, which quickly shows the deals the investors have in each stage of the investment process, which investment hypothesis (if any) each deal is assigned to and the compatability of each deal with the VC fund's criteria. The CRM's stages can be customised by each VC fund, which is of particular consideration because each VC fund tends to operate differently.
 \begin{figure}[h]
@@ -1065,8 +1052,10 @@ The VC can click on a particular deal to see the overview, where they can quickl
     \caption{Overview memo of a startup}
     \label{fig:overview_memo}
 \end{figure}
+\pagebreak
 
-Clicking through various tabs of a deals page allows the VC to see other memos of interest to them, graphs generated about the startup and documents stored relating to the deal.
+Clicking through various tabs of a deals page allows the VC to see other memos of interest to them. For example, the market memo shows the VC a summary of the potential market opportunities with headline market sizing estimations, whilst also referring to the sources used to generate the analysis.
+
 
 \begin{figure}[h]
     \centering
@@ -1075,12 +1064,55 @@ Clicking through various tabs of a deals page allows the VC to see other memos o
     \label{fig:market_memo}
 \end{figure}
 
+The founder section provides an overview of the founder's profile, a direct link to their linkedin profile and creates an analysis of the founders fit to the market.
+
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.4\textwidth]{figures/founder.PNG}
     \caption{Founder analysis of a startup}
     \label{fig:founder_memo}
 \end{figure}
+
+The competition section shows all the companies found that are thought to be in the same market as the startup. It provides a brief overview of the competitor and synthesises the key difference between the startup and its competitor. The competitor can be clicked to read a longer analysis.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{figures/competitors.PNG}
+    \caption{Competitor analyis - only first two competitors shown}
+    \label{fig:competition}
+\end{figure}
+
+\pagebreak
+
+
+The dashboard shows the traction that the company has, and in the future will be expanded to include any KPIs of interest to the VC extracted from the data room. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/dashboard.PNG}
+    \caption{Startup dashboard showing signals of traction interesting to a VC}
+    \label{fig:dashboard}
+\end{figure}
+
+The startup search feature makes it easy for a VC to run a search for a startup with a certain description or matching a pre-defined investment hypothesis. Each startup found is summarised based on their website content and linked to. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/startup_finder.PNG}
+    \caption{Semantic search capability of MoonAI - only first three results shown}
+    \label{fig:startup_finder}
+\end{figure}
+
+Another useful aspect is that investment hypotheses are core components of the MoonAI platform, with tools in place to help a VC enhance their understanding. A hyptohesis' overview page includes a section showing them the latest news or academic papers in the space for example. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/hypothesis.PNG}
+    \caption{Related content for a VC's hypothesis on AI enabled agriculture }
+    \label{fig:hypothesis}
+\end{figure}
+
+\pagebreak
 
 \subsection{Architecture}
 
@@ -1105,7 +1137,7 @@ The frontend communicates with the backend via RESTful API calls, as is standard
 
 The goal of this architecture is to be simple to extend for future development of MoonAI, both comercially and for research at ETH, as well as offering scalability.
 
-A key requirement of making calls to an LLM as discussed previously structured output. We use langchain and pydantic in order to create python models that are generated by an LLM, in order to be able to describe the output on a granular level and due to ease of integration with the python codebase. 
+A key requirement of making calls to an LLM as discussed previously structured output. We use langchain and pydantic in order to create python models that are generated by an LLM, in order to be able to describe the output on a granular level and due to ease of integration with the python codebase.  
 
 \subsection{Sourcing}
 The MoonAI platform enables venture capitalists to define their own investment hypotheses. 
@@ -1139,18 +1171,73 @@ The extracted information is used to create an overview memo which grounds the g
 \subsubsection{Competitor Analysis}
 MoonAI uses web embeddings from a 3rd party provider to find startups operating in the same market or with a similar profile. Based on the overview memo, we prompt an LLM to generate queries for startups that could be similar. The web embedding provider embeds that query, and retrieves the most similar results with a matryoshka embedding based approximate nearest neighbour search. In addition, we query the vector store directly to see if url of the company is in their index, and if so, retrieve the nearest neighbours of the startup's embedding, again with approximate matryoshka embedding search, which we find empirically approximates well finding similar startups. 
 
-The schema of a single response is:
-
 We pass all retrieved responses into an LLM and ask the LLM to filter which competitors retrieved are indeed competitors in the same space and are actually companies/startups rather than consultancies or non-profits which should be excluded from the analysis. In addition, we prompt the LLM to generate a concise summary of the startup and synthesise an explanation of the key difference between the competitor and the startup being analysed. This was a key feature request from multiple VCs.
 
 Thus the structured output model of this call to the LLM is:
+
+\begin{verbatim}
+class CompetitorAnalysis(BaseModel):
+    description: str = Field(
+        description="Please create a brief description of the startup/company"
+    )
+    delta: str = Field(
+        description="Please describe concisely the key 
+        differences between the startup and its competitor"
+    )
+    is_startup: bool = Field(
+        description = "Please decide whether the information 
+        shown relates to a startup. 
+        Do not output true for consultancies, charities, NGOs etc"
+    )
+    is_competitor: bool = Field(
+        description="Please decide whether the startup/company we idenitified 
+        is indeed a competitor to the startup we are interested in investing in"
+    )
+
+class Competitors(BaseModel):
+    analyses: list[CompetitorAnalysis] = Field(
+        description="A list of analyses comparing the startup with its competitors.
+         Please output for each competitor, in the order provided."
+    )
+\end{verbatim}
+
 
 \subsubsection{Market Analysis}
 The market analysis component of MoonAI uses advanced web embedding techniques to gather relevant comprehensive market research and synthesise the information. 
 
 Using the same third-party web embedding provider as in the competitor analysis, we generate queries for market research related to the key drivers of a startup's market. These queries are designed to retrieve relevant market research reports, industry analyses, and economic forecasts. We constrain the number of queries for research to 4. This is a hyperparameter of the system that could be tuned further to improve results. 
 
-We use the retreived information to ground the reasoning of an LLM. We also pass the overview memo of the startup and use structured output in order to obtain estimates of market sizes and a memo about the market size all in one LLM call. This strucuted output starts with a thinkpad for the LLM to "think out loud" to improve its reasoning.
+We use the retreived information to ground the reasoning of an LLM. We also pass the overview memo of the startup and use structured output in order to obtain estimates of market sizes and a memo about the market size all in one LLM call. This strucuted output starts with a thinkpad for the LLM to "think out loud" to improve its reasoning. We use a simple prompt to create citations of the research material passed into the context of the prompt. 
+
+The structured output schema for the market analysis is shown below:
+
+\begin{verbatim}
+class MarketAnalysis(BaseModel):
+    thinking: str = Field(
+        description="Think out loud briefly how to achieve the task."
+    )
+    analysis: str = Field(
+        description="Create a brief memo analysing the market of a startup. 
+        Do a step by step analysis of the market sizing. 
+        Please write as if you are being read by the VC, don't think outloud here. 
+        Please add citations for claims, wrapping a citation in [{}]. 
+        To cite the source numbered 1, please output [{1}]. 
+        For instance: The growth of the market is around 23% per annum [{23}]."
+    )
+    tam: str = Field(
+        description="Create an estimate of the TAM. 
+        Only output a headline figure, for example $2bln"
+    )
+    sam: str = Field(
+        description="Create an estimate of the SAM. 
+        Only output a headline figure, for example $250mln"
+    )
+    som: str = Field(
+        description="Create an estimate of the SOM. 
+        Only output a headline figure, for example $50mln"
+    )
+\end{verbatim}
+
 
 \subsubsection{Founder Analysis}
 Analysing founder-market fit is a key part of the due diligence process. MoonAI generates this analysis primarily based on the founders' LinkedIn profiles and other publicly available information. 
@@ -1159,22 +1246,63 @@ We use structured output to summarise each founder's profile (highlighting their
 
 In the future, this will be expanded to automatically potential 'red flags' in a founders background such as frequent job changes, lack of relevant experience, and inconsistencies in the information provided. These red flags could be automatically flagged for the VC's attention, allowing for a quicker evaluation of the founders' backgrounds.
 
+The structured output schema is omitted due to its length and complexity, but in short it provides the information to create a founder profile card for multiple founders and an overview of the founders in markdown as shown in Figure \ref{fig:founder_memo}.
+
 \subsubsection{Product \& Go To Market Analysis}
-These components of the analysis are completed with a simple prompt to an LLM to think out loud about its reasoning and then create the specific memo in markdown.
+These components of the analysis are completed with a simple prompt to an LLM. For each analysis, the structured output consists of a scratchpad for the LLM to think out loud about how to achieve and a field for the memo in markdown. 
 
 \subsubsection{Criteria Compatability}
 Another aspect of our platform designed to free time for VCs is automated compatability extraction. The compatibility analysis component of MoonAI assesses the alignment between a startup and a venture capital firm's investment criteria. MoonAI allows VCs to specify their investment criteria along several dimnesions (geography, stage, industry) each of which is defined in natural language. Again, we use the zero-shot ability of LLMs to make a decision on a startup's criteria compatability by passing the overview memo and the criteria of the VC fund to an LLM asking it to make a decision on the compatability with an explanation. In order to constrain the output to a specific binary, we model the output as an enumeration, whilst also adding output fields for a scrathpad to allow the LLM to "think out loud" and also explain its decision which can be surfaced to the VC in the app. 
 
 This allows a VC to quickly triage their deal flow, removing the need to analyse all inbound startups. Adding an explanation of the LLM's output was helpful to create trust with the product, by allowing the VC to quickly verify the reasoning of the LLM, for example by comparing the explanation with the overview memo. 
 
+The structured output schema for LLM is shown below.
+
+\begin{verbatim}
+class CompatibilityStatus(Enum):
+    Incompatible = "Incompatible"
+    Compatible = "Compatible"
+    Unclear = "Unclear"
+
+
+class StartupCompatibility(BaseModel):
+    thinking: str = Field(
+        description="Please think out loud briefly 
+        about how to achieve this task."
+    )
+    status: CompatibilityStatus = Field(
+        description="The compatibility status of the
+         startup with regards to the VC's investment criteria"
+    )
+    explanation: str = Field(
+        description="A brief explanation of the 
+        decision regarding the startup's compatibility"
+    )
+\end{verbatim}
+
 \subsubsection{Hypothesis Extraction}
 A key aspect of Venture Capital we have touched upon is thesis-driven investing. The MoonAI platforms allows VCs to define hierarchical hypotheses which form a structure akin to a list of trees. To extract the associated hypothesis from a startup's information, we pass the overview memo generated during the intial generation phase and a textual representation of the firms various hypothesis hierarchies, and then prompt the LLM to select if there is a hypothesis which matches the overview memo. Again, we use the zero-shot  ability of LLMs to achieve this and prompt the LLM to make as granular a selection as possible. 
 
+The structured output schema for LLM is shown below.
+
+\begin{verbatim}
+class HypothesisSelectionModel(BaseModel):
+    thinking: str = Field(
+        description="Please think out loud briefly about how to achieve the task".
+    )
+    name: str = Field(
+        description="Please select the title of the matching hypothesis in here"
+    )
+    uuid: str = Field(
+        description="Please write the uuid of the matching hypothesis in here"
+    )
+\end{verbatim}
+
 \subsection{Customer Feedback}
 
-The initial customer feedback for the MoonAI platform has been very positive. Multiple potential clients have expressed interest and are currently in various stages of the onboarding pipeline. This enthusiasm from the venture capital community underscores the perceived value and potential impact of our solution.
+The initial customer feedback for the MoonAI platform has been very positive. Multiple potential clients have expressed interest and are currently in various stages of the onboarding process. This enthusiasm from the venture capital community underscores the perceived value and potential impact of our solution.
 
-Notably, half of our design partners, VCs with whom we have closely collaborated to design the software, have committed to doing a paid trial of the software upon its official launch in September. Their usage and feedback will be invaluable in refining and optimizing the platform for broader market deployment.
+Notably, half of our design partners, VCs with whom we have closely collaborated to design the software, have committed to doing a paid trial of the software upon its official launch in September. Their usage and feedback will be invaluable in refining and optimising the platform for broader market deployment.
 
 \section{Future Work}
 
@@ -1184,19 +1312,19 @@ One of the most promising areas for future development is the creation of a prop
 
 Another crucial area for improvement is the ability to adapt the analysis to a startup's growth over time. Currently analysis is based on a single snapshot of the startup and is not able to respond to getting new information about a startup. This adaptive capability would allow MoonAI to provide more nuanced and relevant insights as startups evolve, which is especially important as speed of iteration is a key indicator to the future success of a startup. 
 
-The goal of MoonAI is to act also as a second brain of a VC, to massively augment what is possible for them. To that extent, activities that aren't necessarily specific to a particular startup can still be interesting to implement as features of the product. For example, a large component of work a VC has to do revolves around maintaining relationships with other VCs who could co-invest. This requires remembering who at which firm is focussed on what kind of deal. This complicated retrieval task is an ideal candidate for an LLM application. The same can be said with helping portfolio companies to hire promising talent or experienced hires. These personal relationships, with investors or people in the startup community, will most likely always be nurtured through non-AI agent communication, but connecting the information around them to an LLM application offers the possibility of augmenting the capabilities of a VC. 
+The goal of MoonAI is to act also as a second brain of a VC, to massively augment what is possible for them. To that extent, activities that aren't necessarily relevant to a funds relationship with a specific startup can still be interesting to implement as features of the product. For example, a large component of work a VC has to do revolves around maintaining relationships with other VCs who could co-invest. This requires remembering who at which firm is focussed on what kind of deal. This complicated retrieval task is an ideal candidate for an LLM application. The same can be said with curating a network to help portfolio companies to hire promising talent or experienced hires. These personal relationships, with investors or people in the startup community, could be nurtured through automated communication, surfacing insights to a VC where necessary (with this judgement carried out by an LLM) to augment the capabilities of a VC. 
 
--integration to become a fully fledged CRM
--ColPali for document processing
--automatically assessing hot deals
+In order to become a comprehensive CRM adopted in enterprise, multiple integrations with tools VCs are already using in their worfklow need to be built and this is the short term goal of MoonAI now. In the short term, we are looking to implement ColPali in the memo generation pipeline due to its ability to perform RAG natively on complex documents at low latency. 
+
+Finally, a key issue with CRMs is that they soon track so many deals that they are hard for a VC to handle. An interesting avenue of research would be to consider how to redesign the structure of a CRM specifically designed for a VC so that it quickly surfaces relevant information. Potentially, this could include using an LLM as a judge of what the hottest deals the fund is currently working on, or using an LLM as a judge of which sourced startups are the most promising for the VC to spend time on. 
 
 \chapter{Conclusion}
 
 This thesis has provided an overview of recent advances in Natural Language Processing (NLP) that have made the development of the MoonAI platform possible. These technological breakthroughs have opened new avenues for automating and enhancing various aspects of the Venture Capital process.
 
-We have examined and clarified the issue of incentive misalignment between Limited Partners (LPs), General Partners (GPs), and founders in the venture capital ecosystem. This misalignment leads to suboptimal outcomes and inefficiencies in the investment process. 
+We have examined and clarified the issue of incentive misalignment between Limited Partners (LPs), General Partners (GPs), and founders in the venture capital ecosystem, taking into account parameters of VC funds that were previously not examined. This misalignment leads to suboptimal outcomes and inefficiencies in the investment process. We have also improved upon existing portfolio performance simulations, taking into account the fact that the vast majority of startups that return less than the capital invested in them actually return nothing.
 
-We presented a detailed outline of the development of MoonAI platform's architecture. This system uses LLMs and other cutting edge aspects of NLP to automate crucial aspects of due diligence and sourcing, with the goal of changing the underlying model VCs use to operate. This development effort has laid the foundation for subsquent research at ETH Zurich to consider how solutions like MoonAI can contribute to democratised access to capital and reduce the role of biases and stereotypes in venture investing. 
+We presented a detailed outline of the development of MoonAI platform's architecture. This system uses LLMs and other cutting edge aspects of NLP to automate crucial aspects of due diligence and sourcing, with the goal of changing the underlying model VCs use to operate. This development effort has garnered commerical interest from funds already and has laid the foundation for subsquent research at ETH Zurich to consider how solutions like MoonAI can contribute to democratised access to capital and reduce the role of biases and stereotypes in venture investing. 
 
 In conclusion, this thesis has highlighted the transformative potential of AI in
 addressing long-standing challenges in the venture capital industry. By leveraging
@@ -1208,7 +1336,6 @@ founders, and the broader innovation ecosystem. Incentivising adoption of such
 technology will no doubt be a challenge, as VCs currently act like incumbents
 with little incentive to change their mode of operating. Perhaps, a startup VC
 fund using this technology is necessary to disrupt them...
-50
 
 
 % This displays the bibliography for all cited external documents. All references have to be defined in the file references.bib and can then be cited from within this document.
